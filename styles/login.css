@@ -1,0 +1,22 @@
+.backgroundImg {
+    background-image: url('../images/ScampTruck.jpg');
+    background-position: right ;
+    background-size: cover;
+}
+
+@media (min-width: 768px) {
+    .gradient-form {
+        height: 100vh !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .backgroundImg {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+    }
+}
+
+html {
+    background-color: #CFE2FF;
+}
