@@ -11,15 +11,45 @@
 </head>
 
 <body>
-    <!--navbar-->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand bg-body-tertiary bg-primary-subtle">
+        <div class="container-fluid">
+            <ul class="container-fluid d-flex justify-content-around justify-content-sm-start navbar-nav">
+                <li class="nav-item">
+                    <a class="d-flex flex-column flex-sm-row nav-link active" aria-current="page" href="#">
+                        <img src="https://dummyimage.com/32/000/fff">
+                        <span>Create Load</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex flex-column flex-sm-row nav-link active" aria-current="page" href="order.html">
+                        <img src="https://dummyimage.com/32/000/fff">
+                        <span>Order History</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex flex-column flex-sm-row nav-link active" aria-current="page"
+                        href="station-info.html">
+                        <img src="https://dummyimage.com/32/000/fff">
+                        <span>Station Info</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex flex-column flex-sm-row nav-link active" aria-current="page" href="#">
+                        <img src="https://dummyimage.com/32/000/fff">
+                        <span>Account</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Order Summary -->
     <section class="vh-100" style="background-color: #CFE2FF;">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12">
+        <div class="container py-5 h-0">
+            <div class="row d-flex justify-content-center align-items-center h-10">
+                <div class="col-11">
                     <div class="card card-stepper" style="border-radius: 16px;">
-
-                        <div class="card-body p-4">
-
+                        <button class="card-body p-4 btn" style="border-radius: 16px;" id="button">
                             <div class="d-flex justify-content-between align-items-center mb-0">
                                 <div>
                                     <h5 class="mb-0">INVOICE <span class="text-primary font-weight-bold">#Y34XDHR</span>
@@ -64,18 +94,103 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-
+                        </button>
                     </div>
                 </div>
             </div>
+        </div>
+        <!-- order details -->
+        <div class="card" id="invoice">
+            <div class="card-body">
+                <div class="container mb-1 mt-3">
+                    <div class="row d-flex align-items-baseline">
+                        <div class="col-xl-9">
+                            <p style="color: #7e8d9f;font-size: 20px;">Invoice >> <strong>ID: #Y34XDHR</strong></p>
+                        </div>
+                        <div class="col-xl-3 float-end">
+                            <a data-mdb-ripple-init class="btn btn-light text-capitalize border-0"
+                                data-mdb-ripple-color="dark"><i class="fas fa-print text-primary"></i> Print</a>
+                            <a data-mdb-ripple-init class="btn btn-light text-capitalize"
+                                data-mdb-ripple-color="dark"><i class="far fa-file-pdf text-danger"></i> Export</a>
+                        </div>
+                        <hr>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-8">
+                                <ul class="list-unstyled">
+                                    <li class="text-muted">To: <span style="color:#5d9fc5 ;">John Lorem</span></li>
+                                    <li class="text-muted">Street, City</li>
+                                    <li class="text-muted">State, Country</li>
+                                    <li class="text-muted"><i class="fas fa-phone"></i> 123-456-789</li>
+                                </ul>
+                            </div>
+                            <div class="col-xl-4">
+                                <p class="text-muted">Invoice</p>
+                                <ul class="list-unstyled">
+                                    <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                                            class="fw-bold">ID:</span>#Y34XDHR</li>
+                                    <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                                            class="fw-bold">Creation Date: </span>Jun 23,2021</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row my-2 mx-1 justify-content-center">
+                            <table class="table table-striped table-borderless">
+                                <thead style="background-color:#84B0CA ;" class="text-white">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Unit Price</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Regular Gas</td>
+                                        <td>1000L</td>
+                                        <td>$1.62</td>
+                                        <td>$1620</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-8">
+                                <p class="ms-3">Add additional notes and payment information</p>
+
+                            </div>
+                            <div class="col-xl-3">
+                                <ul class="list-unstyled">
+                                    <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>$1620</li>
+                                    <li class="text-muted ms-3 mt-2"><span
+                                            class="text-black me-4">Tax(12%)</span>$194.40
+                                    </li>
+                                </ul>
+                                <p class="text-black float-start"><span class="text-black me-3"> Total
+                                        Amount</span><span style="font-size: 25px;">$1814.40</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
         </div>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script src="scripts/order.js"></script>
+
+
 </body>
 
 </html>
