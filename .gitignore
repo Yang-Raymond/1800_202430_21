@@ -4,5 +4,4 @@ node_modules/
 .vscode/
 firebaseAPI.js
 login.js
-scripts/login.js
-/login.js
+/scripts/login.js
