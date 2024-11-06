@@ -7,5 +7,6 @@ function loadSkeleton() {
             data => {document.getElementById("navbar-placeholder").innerHTML = data }
         );
 };
+
 loadSkeleton()
 console.log("Skeleton.js loaded")

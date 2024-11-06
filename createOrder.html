@@ -233,3 +233,235 @@
 </body>
 
 </html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Title bar items-->
+    <title>Create Order</title>
+    <link rel="icon" type="image/x-icon" href="images\ScampLogo.jpg"> 
+
+    <!---------------------------------------------->
+    <!----------- CSS libraries go here ------------>
+    <!---------------------------------------------->
+    <!-- Bootstrap Library CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Other libraries go here -->
+
+    <!-- Link to styles of your own -->
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/createOrder.css">
+    
+</head>
+
+<body>
+    <!--Navbar-->
+    <nav id="navbar-placeholder">test</nav>
+    
+    <section class="order-form m-4">
+        <div class="container pt-4">
+            <div class="row">
+                <div class="col-12 px-4">
+                    <h1>Create Load</h1>
+                    <hr class="mt-1" />
+                </div>
+
+                <div class="col-12">
+                    <div class="row mx-4">
+                        <div class="col-12">
+                            <label class="order-form-label">Delivery Date and Time</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div data-mdb-input-init class="form-outline">
+                                <input type="date" id="form1" class="form-control order-form-input" />
+                                <label class="form-label" for="form1">Date</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-2 mt-sm-0">
+                            <div data-mdb-input-init class="form-outline">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        0:00
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">9:00 - 11:00</a></li>
+                                        <li><a class="dropdown-item" href="#">12:00 - 14:00</a></li>
+                                        <li><a class="dropdown-item" href="#">19:00 - 21:00</a></li>
+                                    </ul>
+                                </div>
+                                <label class="form-label" for="form2">Time</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3 mx-4">
+                        <div class="col-12">
+                            <label class="order-form-label">Trailer Size</label>
+                        </div>
+                        <div class="col-12">
+                            <div data-mdb-input-init class="form-outline">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Size
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Small</a></li>
+                                        <li><a class="dropdown-item" href="#">Medium</a></li>
+                                        <li><a class="dropdown-item" href="#">Large</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3 mx-4">
+                        <div class="col-12">
+                            <label class="order-form-label">Tank order</label>
+                        </div>
+                        <div class="col-12">
+                            <div data-mdb-input-init class="form-outline" id="inline">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Tank 1
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Regular</a></li>
+                                        <li><a class="dropdown-item" href="#">Mid-grade</a></li>
+                                        <li><a class="dropdown-item" href="#">Premium</a></li>
+                                        <li><a class="dropdown-item" href="#">Diesel</a></li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Tank 2
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Regular</a></li>
+                                        <li><a class="dropdown-item" href="#">Mid-grade</a></li>
+                                        <li><a class="dropdown-item" href="#">Premium</a></li>
+                                        <li><a class="dropdown-item" href="#">Diesel</a></li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Tank 3
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Regular</a></li>
+                                        <li><a class="dropdown-item" href="#">Mid-grade</a></li>
+                                        <li><a class="dropdown-item" href="#">Premium</a></li>
+                                        <li><a class="dropdown-item" href="#">Diesel</a></li>
+
+                                    </ul>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Tank 4
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Regular</a></li>
+                                        <li><a class="dropdown-item" href="#">Mid-grade</a></li>
+                                        <li><a class="dropdown-item" href="#">Premium</a></li>
+                                        <li><a class="dropdown-item" href="#">Diesel</a></li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Tank 5
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Regular</a></li>
+                                        <li><a class="dropdown-item" href="#">Mid-grade</a></li>
+                                        <li><a class="dropdown-item" href="#">Premium</a></li>
+                                        <li><a class="dropdown-item" href="#">Diesel</a></li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Tank 6
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Regular</a></li>
+                                        <li><a class="dropdown-item" href="#">Mid-grade</a></li>
+                                        <li><a class="dropdown-item" href="#">Premium</a></li>
+                                        <li><a class="dropdown-item" href="#">Diesel</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3 mx-4">
+                        <div class="col-12">
+                            <label class="order-form-label" for="date-picker-example">Amount (L)</label>
+                        </div>
+                        <div class="col-12">
+                            <div data-mdb-input-init class="form-outline datepicker" data-mdb-toggle-button="false"
+                                id="inline">
+                                <input type="text" class="form-control order-form-input" id="datepicker1"
+                                    data-mdb-toggle="datepicker" placeholder="Tank 1" />
+                                <input type="text" class="form-control order-form-input" id="datepicker1"
+                                    data-mdb-toggle="datepicker" placeholder="Tank 2" />
+                                <input type="text" class="form-control order-form-input" id="datepicker1"
+                                    data-mdb-toggle="datepicker" placeholder="Tank 3" />
+                                <input type="text" class="form-control order-form-input" id="datepicker1"
+                                    data-mdb-toggle="datepicker" placeholder="Tank 4" />
+                                <input type="text" class="form-control order-form-input" id="datepicker1"
+                                    data-mdb-toggle="datepicker" placeholder="Tank 5" />
+                                <input type="text" class="form-control order-form-input" id="datepicker1"
+                                    data-mdb-toggle="datepicker" placeholder="Tank 6" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3 mx-4">
+                        <div class="col-12">
+                            <label class="order-form-label" for="date-picker-example">Requests/Comments</label>
+                        </div>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <button type="submit" data-mdb-button-init id="btnSubmit" data-mdb-ripple-init
+                                class="btn btn-primary d-block mx-auto btn-submit">Submit</button>
+                            <button type="reset" data-mdb-button-init id="btnSubmit" data-mdb-ripple-init
+                                class="btn btn-danger d-block mx-auto mt-1">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!---------------------------------------------->
+    <!------- JavaScript functions go here --------->
+    <!---------------------------------------------->
+    <!-- Boostrap Library JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Other scripts go here-->
+
+    <!-- Link to scripts of your own -->
+     <script src="./scripts/script.js"></script>
+    <script src="./scripts/skeleton.js"></script>
+
+</body>
+
+</html>
