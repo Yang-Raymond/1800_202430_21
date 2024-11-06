@@ -10,6 +10,7 @@
     <title>Scamp Order Portal</title>
     <link rel="icon" type="image/x-icon" href="images\ScampLogo.jpg"> 
 
+    
     <!---------------------------------------------->
     <!----------- CSS libraries go here ------------>
     <!---------------------------------------------->
@@ -40,23 +41,23 @@
 
                 <div class="form-group" >
                     <label>Phone:</label>
-                    <input type="text" id="phoneInput" class="form-control" placeholder="Phone number" disabled>
+                    <input type="text" id="phoneInput" class="form-control changable" placeholder="Phone number" disabled>
                 </div>
                 <div class="form-group" >
                     <label>Email:</label>
-                    <input type="text" id="emailInput" class="form-control" placeholder="Email" disabled>
+                    <input type="email" id="emailInput" class="form-control" placeholder="Email" disabled>
                 </div>  
                 <div class="form-group" >
                     <label>Username:</label>
-                    <input type="text" id="usernameInput" class="form-control" placeholder="Username" disabled>
+                    <input type="text" id="usernameInput" class="form-control changable" placeholder="Username" disabled>
                 </div>  
                 <div class="form-group" >
                     <label>Password:</label>
-                    <input type="text" id="passwordInput" class="form-control" placeholder="Password" disabled>
+                    <input type="password" id="passwordInput" class="form-control" placeholder="Password" disabled>
                 </div>  
                 <div class="form-group" >
                     <label>Billing Adress:</label>
-                    <input type="text" id="billingInput" class="form-control" placeholder="Billing Address" disabled>
+                    <input type="text" id="billingInput" class="form-control changable" placeholder="Billing Address" disabled>
                 </div>     
             </div>   
             <div class="row pt-4">
@@ -64,7 +65,9 @@
                     <a href="login.html"><button class="btn btn-danger" type="button">Logout</button></a>
                 </div>
                 <div class="col-8 text-end">
-                    <button class="btn btn-primary" type="button">Change information</button>
+                    <button id="cancelEditInfoButton" class="btn btn-danger d-none" type="button" onclick="cancelEditUserInfo()">Cancel</button>
+                    <button id="saveInfoButton" class="btn btn-primary d-none" type="button" onclick="saveUserInfo()">Save</button>
+                    <button id="editInfoButton" class="btn btn-primary" type="button" onclick="editUserInfo()">Change information</button>
                 </div>
             </div>
         </div>
@@ -78,10 +81,16 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- Other scripts go here-->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
 
     <!-- Link to scripts of your own -->
+    <script src="./scripts/firebaseAPI.js"></script>
     <script src="./scripts/script.js"></script>
     <script src="./scripts/skeleton.js"></script>
+    <script src="./scripts/account.js"></script>
 
 </body>
 
