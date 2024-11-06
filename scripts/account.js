@@ -1,13 +1,28 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { getFirestore, updateDoc, getDoc, doc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { firebaseConfig } from "./firebaseAPI.js";
+
+//--------------------------------------------
+// initialize the Firebase app
+// initialize Firestore database if using it
+//--------------------------------------------
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
 var currentUser;               //points to the document of the user who is logged in
 function populateUserInfo() {
-            firebase.auth().onAuthStateChanged(user => {
+            onAuthStateChanged(auth, user => {
                 // Check if user is signed in:
                 if (user) {
 
                     //go to the correct user document by referencing to the user uid
-                    currentUser = db.collection("stations").doc(user.uid)
+                    currentUser = doc(db, "stations", user.uid);
+                    
+
                     //get the document for current user.
-                    currentUser.get()
+                    getDoc(currentUser)
                         .then(userDoc => {
                             //get the data fields of the user
                             let stationNum = userDoc.data().station;
@@ -49,23 +64,22 @@ function populateUserInfo() {
             });
         }
 
-//call the function to run it 
-populateUserInfo();
-
-function editUserInfo() {
+document.getElementById("editInfoButton").addEventListener("click", 
+function() {
     //Enable the form fields
     document.getElementById("cancelEditInfoButton").classList.remove("d-none")
     document.getElementById("saveInfoButton").classList.remove("d-none")
     document.getElementById("editInfoButton").classList.add("d-none")
    
-    Inputfields = Array.from(document.getElementsByClassName('changable'));
+    let Inputfields = Array.from(document.getElementsByClassName('changable'));
     Inputfields.forEach(element => {
         element.disabled = false;
     });
 
- }
+ })
 
- function cancelEditUserInfo() {
+ document.getElementById("cancelEditInfoButton").addEventListener("click", 
+    function() {
     // hide buttons
     document.getElementById("cancelEditInfoButton").classList.add("d-none")
     document.getElementById("saveInfoButton").classList.add("d-none")
@@ -73,25 +87,26 @@ function editUserInfo() {
 
     populateUserInfo()
 
-    Inputfields = Array.from(document.getElementsByClassName('changable'));
+    let Inputfields = Array.from(document.getElementsByClassName('changable'));
     Inputfields.forEach(element => {
         element.disabled = true;
     });
- }
+ })
 
- function saveUserInfo() {
+ document.getElementById("saveInfoButton").addEventListener("click", 
+    function() {
     //enter code here
     document.getElementById("cancelEditInfoButton").classList.add("d-none")
     document.getElementById("saveInfoButton").classList.add("d-none")
     document.getElementById("editInfoButton").classList.remove("d-none")
     
     //a) get user entered values
-    stationUsername = document.getElementById('usernameInput').value;       
-    stationBilling = document.getElementById('billingInput').value;    
-    stationPhone = document.getElementById('phoneInput').value;       
+    let stationUsername = document.getElementById('usernameInput').value;       
+    let stationBilling = document.getElementById('billingInput').value;    
+    let stationPhone = document.getElementById('phoneInput').value;       
 
     //b) update user's document in Firestore
-    currentUser.update({
+    updateDoc(currentUser, {
         username: stationUsername,
         billingAddress: stationBilling,
         phone: stationPhone
@@ -101,8 +116,19 @@ function editUserInfo() {
     })
     
     //c) disable edit 
-    Inputfields = Array.from(document.getElementsByClassName('changable'));
+    let Inputfields = Array.from(document.getElementsByClassName('changable'));
     Inputfields.forEach(element => {
         element.disabled = true;
     });
-}
+})
+
+document.getElementById("logoutButton").addEventListener("click", 
+    function() {
+        auth.signOut()
+        console.log("user signed out")
+        window.location.href = "./login.html"
+
+    })
+
+//call the function to run it 
+populateUserInfo();

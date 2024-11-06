@@ -62,12 +62,12 @@
             </div>   
             <div class="row pt-4">
                 <div class="col-4">
-                    <a href="login.html"><button class="btn btn-danger" type="button">Logout</button></a>
+                   <button id="logoutButton" class="btn btn-danger" type="button">Logout</button>
                 </div>
                 <div class="col-8 text-end">
-                    <button id="cancelEditInfoButton" class="btn btn-danger d-none" type="button" onclick="cancelEditUserInfo()">Cancel</button>
-                    <button id="saveInfoButton" class="btn btn-primary d-none" type="button" onclick="saveUserInfo()">Save</button>
-                    <button id="editInfoButton" class="btn btn-primary" type="button" onclick="editUserInfo()">Change information</button>
+                    <button id="cancelEditInfoButton" class="btn btn-danger d-none" type="button">Cancel</button>
+                    <button id="saveInfoButton" class="btn btn-primary d-none" type="button">Save</button>
+                    <button id="editInfoButton" class="btn btn-primary" type="button">Change information</button>
                 </div>
             </div>
         </div>
@@ -81,16 +81,12 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- Other scripts go here-->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
+
 
     <!-- Link to scripts of your own -->
-    <script src="./scripts/firebaseAPI.js"></script>
     <script src="./scripts/script.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/account.js"></script>
+    <script type="module" src="./scripts/account.js"></script>
 
 </body>
 
