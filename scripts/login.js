@@ -26,7 +26,7 @@ loginBtn.addEventListener("click", function (event) {
             // Signed in 
             const user = userCredential.user;
             console.log("userCredential");
-            window.location.href="createOrder.html";
+            window.location.href="welcome.html";
         })
         .catch((error) => {
             const errorCode = error.code;
