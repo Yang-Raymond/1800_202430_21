@@ -2,6 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { firebaseConfig } from "./firebaseAPI.js";
+import {identifyAccType} from "./verification.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,11 +23,9 @@ loginBtn.addEventListener("click", function (event) {
     //authenticates 
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-
             // Signed in 
             const user = userCredential.user;
-            console.log("userCredential");
-            window.location.href="welcome.html";
+            identifyAccType(user.uid);
         })
         .catch((error) => {
             const errorCode = error.code;
