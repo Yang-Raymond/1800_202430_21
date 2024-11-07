@@ -41,7 +41,7 @@
                                     </h5>
                                 </div>
                                 <div class="text-end">
-                                    <p class="mb-0">Expected Arrival <span>01/01/2000</span></p>
+                                    <p class="mb-0">Expected Arrival <span id="expArr">01/01/2000</span></p>
                                 </div>
                             </div>
 
@@ -116,7 +116,7 @@
                                     <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
                                             class="fw-bold">ID:</span>#INVOICEPLACEHOLDER</li>
                                     <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                                            class="fw-bold">Creation Date: </span>01/01/2024</li>
+                                            class="fw-bold">Creation Date: </span><span id="crDate">01/01/2000</span> </li>
                                 </ul>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                                     <tr>
                                         <th scope="row">1</th>
                                         <td>Regular Gas</td>
-                                        <td>0L</td>
+                                        <td><span id="volume">0L</span> </td>
                                         <td>$0</td>
                                         <td>$0</td>
                                     </tr>
@@ -146,7 +146,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xl-8">
-                                <p class="ms-3">Add additional notes and payment information</p>
+                                <p class="ms-3" id="comments">Add additional notes and payment information</p>
 
                             </div>
                             <div class="col-xl-3">
@@ -180,7 +180,7 @@
 
     <!-- Link to scripts of your own -->
      <script src="./scripts/script.js"></script>
-    <script src="scripts/order.js"></script>
+    <script type="module" src="scripts/order.js"></script>
     <script src="scripts/skeleton.js"></script>
 
 </body>

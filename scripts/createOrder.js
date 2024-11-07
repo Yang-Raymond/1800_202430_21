@@ -19,7 +19,7 @@ let t4Amount = document.getElementById("t4Amount");
 let t5Amount = document.getElementById("t5Amount");
 let t6Amount = document.getElementById("t6Amount");
 submitBtn.addEventListener("click", async function () {
-    await setDoc(doc(db, "cities", "LA"), {
+    await setDoc(doc(db, "orders", "order1"), {
         volume: +t1Amount.value + +t2Amount.value + +t3Amount.value + +t4Amount.value + +t5Amount.value + +t6Amount.value,
         requestsComments: requestComments.value,
         date: date.value
