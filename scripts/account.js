@@ -126,8 +126,7 @@ document.getElementById("logoutButton").addEventListener("click",
     function() {
         auth.signOut()
         console.log("user signed out")
-        window.location.href = "./login.html"
-
+        window.location.href = "../pages/login.html"
     })
 
 //call the function to run it 

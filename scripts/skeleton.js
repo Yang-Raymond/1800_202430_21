@@ -1,5 +1,5 @@
 function loadSkeleton() {
-    fetch("./text/navbar.html")
+    fetch("../text/navbar.html")
         .then(
             response => {return response.text()}
         )
