@@ -33,6 +33,7 @@ function populateUserInfo() {
                             //if the data fields are not empty, then write them in to the form.
                             if (stationNum != null && stationCompany != null) {
                                 document.getElementById("stationNumber").innerHTML = stationCompany + stationNum;
+                                document.getElementById("stationNumberSDC").innerHTML = stationCompany + stationNum;
                             }
                             if (stationLocation != null) {
                                 document.getElementById("stationAddress").innerHTML= stationLocation;
