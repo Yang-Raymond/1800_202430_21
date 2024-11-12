@@ -1,45 +1,63 @@
-import { firebaseConfig } from "./firebaseAPI.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { getFirestore, doc, collection, getDocs, setDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { firebaseConfig } from "./firebaseAPI.js";
 
-// Initialize Firebase
+//--------------------------------------------
+// initialize the Firebase app
+// initialize Firestore database if using it
+//--------------------------------------------
 const app = initializeApp(firebaseConfig);
-
-// Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
+const auth = getAuth(app);
 
-//Get data and send to Firestore
-let submitBtn = document.getElementById("btnSubmit");
-let requestComments = document.getElementById("requestsComments");
-let date = document.getElementById("date");
-let t1Amount = document.getElementById("t1Amount");
-let t2Amount = document.getElementById("t2Amount");
-let t3Amount = document.getElementById("t3Amount");
-let t4Amount = document.getElementById("t4Amount");
-let t5Amount = document.getElementById("t5Amount");
-let t6Amount = document.getElementById("t6Amount");
-submitBtn.addEventListener("click", async function () {
-    await setDoc(doc(db, "orders", "order1"), {
-        volume: +t1Amount.value + +t2Amount.value + +t3Amount.value + +t4Amount.value + +t5Amount.value + +t6Amount.value,
-        requestsComments: requestComments.value,
-        date: date.value
+
+export async function sendData(form) {
+    onAuthStateChanged(auth, async function(user) {
+        // Check if user is signed in:
+        if (user) {
+
+            let currentUserLoads = await getDocs(collection(db, "stations", user.uid, "loads"));
+            //go to the correct user document by referencing to the user uid
+            let orderNum = currentUserLoads.size
+
+            let currentUserLoad = doc(db, "stations", user.uid, "loads", orderNum.toString());
+           
+
+            // get the document for current user.
+            setDoc(currentUserLoad, {
+                comments: form.querySelector("#comments").value,
+                dateCreated: new Date(),
+                deliveryWindowFrom: new Date(form.querySelector("#dateFrom").value + "-" 
+                                            + form.querySelector("#timeFrom").value + "-"
+                                            + form.querySelector("#meridiemFrom").value    ),
+                deliveryWindowTo: new Date(form.querySelector("#dateTo").value + "-" 
+                                            + form.querySelector("#timeTo").value + "-"
+                                            + form.querySelector("#meridiemTo").value    ),
+                orderNumber: orderNum,
+                price: 10000,
+                specialRequest: form.querySelector("#specialRequest").checked,
+                status: "pending",
+                totalVolume: 10000,
+                trailerType: form.querySelector("#trailer").value
+            })
+            
+            form.querySelectorAll(".compartment").forEach(function (cur) {
+
+                let currentUserLoadComp = doc(db, "stations", user.uid, "loads", orderNum.toString(), "compartments", cur.querySelector(".compNumber").innerText);
+                setDoc(currentUserLoadComp, {
+                    fuelType: cur.querySelector(".compFuelType").value,
+                    fuelVolume: cur.querySelector(".compVolume").value
+                })
+            })
+
+
+        } else {
+            // No user is signed in.
+            console.log ("No user is signed in");
+        }
     });
-})
-
-//Reset form
-
-let resetBtn = document.getElementById("resetBtn");
-resetBtn.addEventListener("click", function () {
-    t1Amount.value = "";
-    t2Amount.value = "";
-    t3Amount.value = "";
-    t4Amount.value = "";
-    t5Amount.value = "";
-    t6Amount.value = "";
-    date.value = "";
-    requestComments.value = "";
-
-});
+}
 
 
 

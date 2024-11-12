@@ -29,12 +29,12 @@
     <!--Navbar-->
     <nav id="navbar-placeholder">test</nav>
     
-    <div class="mt-4 container-fluid">
+    <div class="mt-4 container">
             <div class="row mx-0 pt-0 " id="header">
                 <h1 class=" px-0 display-5 fw-bold" id="stationNumber">Create Load</h1>
                 <hr class="mt-1" />
             </div>
-        <form class="mx-0 continer-fluid row">
+        <form id="order-form" class="mx-0 continer-fluid row">
             <!-- DATE/TIME -->
             <div class=" container-fluid p-0 row mx-0" id="deliveryWindowDiv">
                 <span class="p-0">Delivery Window:</span>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-sm-3 col-7" id="timeFromDiv">
                         <select class="form-select timeSelect" id="timeFrom">
-                            <option value="1:00">-:--</option>
+                            <option value="">-:--</option>
                             <option value="1:00">1:00</option>
                             <option value="2:00">2:00</option>
                             <option value="3:00">3:00</option>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="col-sm-2 col-5" id="meridemFromDiv">
                     <select class="form-select meridiemSelect" id="meridiemFrom">
-                        <option value="am">--</option>
+                        <option value="">--</option>
                         <option value="am">AM</option>
                         <option value="pm">PM</option>
                     </select>
@@ -75,7 +75,7 @@
                     </div>
                     <div class="col-sm-3 col-7" id="timeToDiv">
                         <select class="form-select timeSelect" id="timeTo">
-                            <option value="1:00">-:--</option>
+                            <option value="">-:--</option>
                             <option value="1:00">1:00</option>
                             <option value="2:00">2:00</option>
                             <option value="3:00">3:00</option>
@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-sm-2 col-5" id="meridemToDiv">
                         <select class="form-select meridiemSelect" id="meridiemTo">
-                            <option value="am">--</option>
+                            <option value="">--</option>
                             <option value="am">AM</option>
                             <option value="pm">PM</option>
                         </select>
@@ -101,7 +101,7 @@
             </div>
 
             <!-- TYPE -->
-            <div class="row m-0 mt-4 mt-sm-3 p-0" id="trailerTypeDiv">
+            <div class="row m-0 mt-4 mt-sm-3 p-0 mx-0" id="trailerTypeDiv">
                 <span class="p-0">Trailer Size</span>
                 <select class="col-12 form-select" id="trailer">
                     <option value="">------------</option>
@@ -117,36 +117,34 @@
             <!-- Loading Pattern -->
             <template id="compTemplate">
                 <div class="compartment col-2">
-                    <div class="border border-2 border-dark">
-                        <div id="compNumber" class="text-center">#</div>
+                    <div class="border border-3 border-dark">
+                        <div class="compNumber text-center">#</div>
                         <div>
-                            <select class="form-select" class="compFuelType">
+                            <select class="form-select compFuelType">
                                 <option value="">----</option>
-                                <option value="">Regular Ethanol</option>
-                                <option value="">Premium Ethanol</option>
-                                <option value="">Diesel</option>
-                                <option value="">Marked Diesel</option>
-                                
-                                
+                                <option value="regular ethanol">Regular Ethanol</option>
+                                <option value="premium ethanol">Premium Ethanol</option>
+                                <option value="diesel">Diesel</option>
+                                <option value="marked diesel">Marked Diesel</option>     
                             </select>
                         </div>
                         <div>
-                            <input type="text" placeholder="volume" name="" class="form-control compVolume">
+                            <input type="text" placeholder="volume" class="compVolume form-control">
                         </div>
                     </div>
                 </div>
             </template>
 
 
-            <div class="row m-0 mt-4 mt-sm-3 p-0 justify-content-center" id="loadingPatternDiv">
-                <div id="compartments" class="row col-lg-6 g-1 compartments justify-content-center justify-content-lg-end">
+            <div class="row m-0 mt-4 mt-sm-3 p-0 mx-0 justify-content-center" id="loadingPatternDiv">
+                <div id="compartments" class="row col-lg-10 g-1 compartments justify-content-center justify-content-lg-end">
 
                 </div>
                 <img id="truckFront" class="col-1 d-none d-lg-inline" src="../images/truckFront.png" alt="">
             </div>
 
             <!-- Comments + special request-->
-            <div class="row" id="CommentsDiv">
+            <div class="row p-0 mx-0" id="CommentsDiv">
                 <label for="comments" class="p-0">Comments:</label>
                 <textarea class="form-control" id="comments"></textarea>
                 
@@ -156,9 +154,9 @@
                 </div>
             </div>
 
-            <div id="formButtons" class="row pt-5">
-                <div class="col-2"><button type="submit" class="btn btn-danger">Reset</button></div>
-                <div class="col-10 text-end"><button type="submit" class="btn btn-primary">Submit</button></div> 
+            <div id="formButtons" class="row p-0 pt-5 mx-0">
+                <div class="col-2 p-0"><button type="submit" class="btn btn-danger">Reset</button></div>
+                <div class="col-10 p-0 text-end"><button id="orderFormSubmit" class="btn btn-primary">Submit</button></div> 
             </div>
 
         </form>
@@ -173,10 +171,9 @@
     <!-- Other scripts go here-->
 
     <!-- Link to scripts of your own -->
-     <script src="../scripts/script.js"></script>
+    <script src="../scripts/script.js"></script>
     <script src="../scripts/skeleton.js"></script>
-    <script src="../scripts/createOrder.js"></script>
-    <script type="module" src="../scripts/addOrderToFirestore.js"></script>
+    <script type="module" src="../scripts/createOrder.js"></script>
 </body>
 
 </html>
