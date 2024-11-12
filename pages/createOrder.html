@@ -28,189 +28,141 @@
 <body>
     <!--Navbar-->
     <nav id="navbar-placeholder">test</nav>
-    <section class="order-form m-4">
-        <div class="container pt-4">
-            <div class="row">
-                <div class="col-12 px-4">
-                    <h1>Create Load</h1>
-                    <hr class="mt-1" />
+    
+    <div class="mt-4 container-fluid">
+            <div class="row mx-0 pt-0 " id="header">
+                <h1 class=" px-0 display-5 fw-bold" id="stationNumber">Create Load</h1>
+                <hr class="mt-1" />
+            </div>
+        <form class="mx-0 continer-fluid row">
+            <!-- DATE/TIME -->
+            <div class=" container-fluid p-0 row mx-0" id="deliveryWindowDiv">
+                <span class="p-0">Delivery Window:</span>
+                <div class="col-lg-6 row g-0" id="deliveryWindowFromDiv">
+                    <label class="col-sm-1 my-auto pe-5" for="dateFrom">From:</label>
+                    <div class="col-sm-5" id="dateFromDiv">            
+                        <input type="date" id="dateFrom" class="form-control" />
+                    </div>
+                    <div class="col-sm-3 col-7" id="timeFromDiv">
+                        <select class="form-select timeSelect" id="timeFrom">
+                            <option value="1:00">-:--</option>
+                            <option value="1:00">1:00</option>
+                            <option value="2:00">2:00</option>
+                            <option value="3:00">3:00</option>
+                            <option value="4:00">4:00</option>
+                            <option value="5:00">5:00</option>
+                            <option value="6:00">6:00</option>
+                            <option value="7:00">7:00</option>
+                            <option value="8:00">8:00</option>
+                            <option value="9:00">9:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 col-5" id="meridemFromDiv">
+                    <select class="form-select meridiemSelect" id="meridiemFrom">
+                        <option value="am">--</option>
+                        <option value="am">AM</option>
+                        <option value="pm">PM</option>
+                    </select>
+                    </div>
                 </div>
-
-                <div class="col-12">
-                    <div class="row mx-4">
-                        <div class="col-12">
-                            <label class="order-form-label">Delivery Date and Time</label>
-                        </div>
-                        <div class="col-sm-6">
-                            <div data-mdb-input-init class="form-outline">
-                                <input type="date" id="date" class="form-control order-form-input" />
-                                <label class="form-label" for="form1" id="date">Date</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 mt-2 mt-sm-0">
-                            <div data-mdb-input-init class="form-outline">
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        0:00
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">9:00 - 11:00</a></li>
-                                        <li><a class="dropdown-item" href="#">12:00 - 14:00</a></li>
-                                        <li><a class="dropdown-item" href="#">19:00 - 21:00</a></li>
-                                    </ul>
-                                </div>
-                                <label class="form-label" for="form2">Time</label>
-                            </div>
-                        </div>
+                <div class="col-lg-6 row g-0 mt-2 mt-sm-0 mt-lg-0" id="deliveryWindowToDiv">
+                    <label class="col-sm-1 my-auto pe-5" for="dateTo">To:</label>
+                    <div class="col-sm-5" id="dateToDiv">            
+                        <input type="date" id="dateTo" class="form-control"/>
                     </div>
-
-                    <div class="row mt-3 mx-4">
-                        <div class="col-12">
-                            <label class="order-form-label">Trailer Size</label>
-                        </div>
-                        <div class="col-12">
-                            <div data-mdb-input-init class="form-outline">
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Size
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Small</a></li>
-                                        <li><a class="dropdown-item" href="#">Medium</a></li>
-                                        <li><a class="dropdown-item" href="#">Large</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-sm-3 col-7" id="timeToDiv">
+                        <select class="form-select timeSelect" id="timeTo">
+                            <option value="1:00">-:--</option>
+                            <option value="1:00">1:00</option>
+                            <option value="2:00">2:00</option>
+                            <option value="3:00">3:00</option>
+                            <option value="4:00">4:00</option>
+                            <option value="5:00">5:00</option>
+                            <option value="6:00">6:00</option>
+                            <option value="7:00">7:00</option>
+                            <option value="8:00">8:00</option>
+                            <option value="9:00">9:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                        </select>
                     </div>
-
-                    <div class="row mt-3 mx-4">
-                        <div class="col-12">
-                            <label class="order-form-label">Tank order</label>
-                        </div>
-                        <div class="col-12">
-                            <div data-mdb-input-init class="form-outline" id="inline">
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Tank 1
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Regular</a></li>
-                                        <li><a class="dropdown-item" href="#">Mid-grade</a></li>
-                                        <li><a class="dropdown-item" href="#">Premium</a></li>
-                                        <li><a class="dropdown-item" href="#">Diesel</a></li>
-                                    </ul>
-                                </div>
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Tank 2
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Regular</a></li>
-                                        <li><a class="dropdown-item" href="#">Mid-grade</a></li>
-                                        <li><a class="dropdown-item" href="#">Premium</a></li>
-                                        <li><a class="dropdown-item" href="#">Diesel</a></li>
-                                    </ul>
-                                </div>
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Tank 3
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Regular</a></li>
-                                        <li><a class="dropdown-item" href="#">Mid-grade</a></li>
-                                        <li><a class="dropdown-item" href="#">Premium</a></li>
-                                        <li><a class="dropdown-item" href="#">Diesel</a></li>
-
-                                    </ul>
-                                </div>
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Tank 4
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Regular</a></li>
-                                        <li><a class="dropdown-item" href="#">Mid-grade</a></li>
-                                        <li><a class="dropdown-item" href="#">Premium</a></li>
-                                        <li><a class="dropdown-item" href="#">Diesel</a></li>
-                                    </ul>
-                                </div>
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Tank 5
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Regular</a></li>
-                                        <li><a class="dropdown-item" href="#">Mid-grade</a></li>
-                                        <li><a class="dropdown-item" href="#">Premium</a></li>
-                                        <li><a class="dropdown-item" href="#">Diesel</a></li>
-                                    </ul>
-                                </div>
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle" id="dropdown" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Tank 6
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Regular</a></li>
-                                        <li><a class="dropdown-item" href="#">Mid-grade</a></li>
-                                        <li><a class="dropdown-item" href="#">Premium</a></li>
-                                        <li><a class="dropdown-item" href="#">Diesel</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-3 mx-4">
-                        <div class="col-12">
-                            <label class="order-form-label" for="date-picker-example">Amount (L)</label>
-                        </div>
-                        <div class="col-12">
-                            <div data-mdb-input-init class="form-outline datepicker" data-mdb-toggle-button="false"
-                                id="inline">
-                                <input type="text" class="form-control order-form-input" id="t1Amount"
-                                    data-mdb-toggle="datepicker" placeholder="Tank 1" />
-                                <input type="text" class="form-control order-form-input" id="t2Amount"
-                                    data-mdb-toggle="datepicker" placeholder="Tank 2" />
-                                <input type="text" class="form-control order-form-input" id="t3Amount"
-                                    data-mdb-toggle="datepicker" placeholder="Tank 3" />
-                                <input type="text" class="form-control order-form-input" id="t4Amount"
-                                    data-mdb-toggle="datepicker" placeholder="Tank 4" />
-                                <input type="text" class="form-control order-form-input" id="t5Amount"
-                                    data-mdb-toggle="datepicker" placeholder="Tank 5" />
-                                <input type="text" class="form-control order-form-input" id="t6Amount"
-                                    data-mdb-toggle="datepicker" placeholder="Tank 6" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-3 mx-4">
-                        <div class="col-12">
-                            <label class="order-form-label" for="date-picker-example">Requests/Comments</label>
-                        </div>
-                        <textarea class="form-control" id="requestsComments" rows="3"></textarea>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <button type="submit" data-mdb-button-init  data-mdb-ripple-init
-                                class="btn btn-primary d-block mx-auto btn-submit" id="btnSubmit">Submit</button>
-                            <button type="reset" data-mdb-button-init id="resetBtn" data-mdb-ripple-init
-                                class="btn btn-danger d-block mx-auto mt-1">Reset</button>
-                        </div>
+                    <div class="col-sm-2 col-5" id="meridemToDiv">
+                        <select class="form-select meridiemSelect" id="meridiemTo">
+                            <option value="am">--</option>
+                            <option value="am">AM</option>
+                            <option value="pm">PM</option>
+                        </select>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+
+            <!-- TYPE -->
+            <div class="row m-0 mt-4 mt-sm-3 p-0" id="trailerTypeDiv">
+                <span class="p-0">Trailer Size</span>
+                <select class="col-12 form-select" id="trailer">
+                    <option value="">------------</option>
+                    <option Axle="3" value="4">3 Axle 4 Comp</option>
+                    <option Axle="3" value="5">3 Axle 5 Comp</option>
+                    <option Axle="6" value="5">6 Axle 5 Comp</option>
+                    <option Axle="6" value="6">7 Axle 6 Comp</option>
+                    <option Axle="8" value="5">8 Axle 5 Comp</option>
+                    <option Axle="8" value="6">8 Axle 6 Comp</option>
+                </select>
+            </div>
+
+            <!-- Loading Pattern -->
+            <template id="compTemplate">
+                <div class="compartment col-2">
+                    <div class="border border-2 border-dark">
+                        <div id="compNumber" class="text-center">#</div>
+                        <div>
+                            <select class="form-select" class="compFuelType">
+                                <option value="">----</option>
+                                <option value="">Regular Ethanol</option>
+                                <option value="">Premium Ethanol</option>
+                                <option value="">Diesel</option>
+                                <option value="">Marked Diesel</option>
+                                
+                                
+                            </select>
+                        </div>
+                        <div>
+                            <input type="text" placeholder="volume" name="" class="form-control compVolume">
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+
+            <div class="row m-0 mt-4 mt-sm-3 p-0 justify-content-center" id="loadingPatternDiv">
+                <div id="compartments" class="row col-lg-6 g-1 compartments justify-content-center justify-content-lg-end">
+
+                </div>
+                <img id="truckFront" class="col-1 d-none d-lg-inline" src="../images/truckFront.png" alt="">
+            </div>
+
+            <!-- Comments + special request-->
+            <div class="row" id="CommentsDiv">
+                <label for="comments" class="p-0">Comments:</label>
+                <textarea class="form-control" id="comments"></textarea>
+                
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="specialRequest">
+                    <label class="form-check-label" for="specialRequest">Special Request?</label>
+                </div>
+            </div>
+
+            <div id="formButtons" class="row pt-5">
+                <div class="col-2"><button type="submit" class="btn btn-danger">Reset</button></div>
+                <div class="col-10 text-end"><button type="submit" class="btn btn-primary">Submit</button></div> 
+            </div>
+
+        </form>
+    </div>
     <!---------------------------------------------->
     <!------- JavaScript functions go here --------->
     <!---------------------------------------------->
@@ -223,7 +175,8 @@
     <!-- Link to scripts of your own -->
      <script src="../scripts/script.js"></script>
     <script src="../scripts/skeleton.js"></script>
-    <script type="module" src="../scripts/createOrder.js"></script>
+    <script src="../scripts/createOrder.js"></script>
+    <script type="module" src="../scripts/addOrderToFirestore.js"></script>
 </body>
 
 </html>

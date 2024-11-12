@@ -1,45 +1,40 @@
-import { firebaseConfig } from "./firebaseAPI.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+console.log("createOrder.js loaded")
+function setUpFields(){
+    let date = new Date();
+    console.log(date, document.querySelectorAll("input[type='date']"))
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+    document.querySelectorAll("input[type='date']").forEach(function(currentElement) {
+        currentElement.addEventListener("change", function() {updateTime(this)})
+        currentElement.setAttribute("min", `${formatDate(date)}`)
+    }
+    )
 
-// Initialize Cloud Firestore and get a reference to the service
-const db = getFirestore(app);
+    document.querySelector("#trailer").addEventListener("change", function() {updateLoadingPattern(this)})
+}
 
-//Get data and send to Firestore
-let submitBtn = document.getElementById("btnSubmit");
-let requestComments = document.getElementById("requestsComments");
-let date = document.getElementById("date");
-let t1Amount = document.getElementById("t1Amount");
-let t2Amount = document.getElementById("t2Amount");
-let t3Amount = document.getElementById("t3Amount");
-let t4Amount = document.getElementById("t4Amount");
-let t5Amount = document.getElementById("t5Amount");
-let t6Amount = document.getElementById("t6Amount");
-submitBtn.addEventListener("click", async function () {
-    await setDoc(doc(db, "orders", "order1"), {
-        volume: +t1Amount.value + +t2Amount.value + +t3Amount.value + +t4Amount.value + +t5Amount.value + +t6Amount.value,
-        requestsComments: requestComments.value,
-        date: date.value
-    });
-})
+setUpFields()
 
-//Reset form
+function formatDate(date) {
+    let currentDate = new Date(date)
+    currentDate.setDate(date.getDate() + 1);
+    let formattedDate = currentDate.getFullYear() + "-";
+    formattedDate += (currentDate.getMonth() + 1) + "-";
+    formattedDate += (currentDate.getDate());
+    return formattedDate;
+}
 
-let resetBtn = document.getElementById("resetBtn");
-resetBtn.addEventListener("click", function () {
-    t1Amount.value = "";
-    t2Amount.value = "";
-    t3Amount.value = "";
-    t4Amount.value = "";
-    t5Amount.value = "";
-    t6Amount.value = "";
-    date.value = "";
-    requestComments.value = "";
+function updateTime() {
+    //add code to prevent selecting times within 24 hours
+}
 
-});
-
-
-
+function updateLoadingPattern(element) {
+    loadingDiv = document.getElementById("compartments")
+    loadingDiv.innerHTML = ""
+    compartment = document.getElementById("compTemplate")
+    console.log(element.value, "\n", loadingDiv)
+    for (let i = 0; i < element.value; i++) {
+        let currentCompartment = compartment.content.cloneNode(true);
+        currentCompartment.querySelector("#compNumber").innerHTML = element.value - i;
+        loadingDiv.appendChild(currentCompartment);
+    }
+}
