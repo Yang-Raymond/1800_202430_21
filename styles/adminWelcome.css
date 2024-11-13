@@ -1,0 +1,65 @@
+body {
+    height: 100vh;
+}
+
+.navbar {
+    padding: 0;
+}
+
+main {
+    display: grid;
+    grid-template-areas: 
+    "orders"
+    "accounts";
+    grid-row-gap: 100px;
+}
+
+.orders {
+    display: grid;
+    grid-area: orders;
+    grid-template-rows: 0.75fr 2fr;
+    margin: 1%;    
+}
+
+header {
+    border-bottom: 1px solid black;
+}
+
+.scrollable {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    overflow-y: auto;
+    border-bottom: black 1px solid;
+}
+
+.accounts {
+    display: grid;
+    grid-area: accounts ;
+    grid-template-areas: 
+    "header header"
+    "links display";
+    grid-template-rows: 1fr 2fr;
+    grid-template-columns: 1fr 2fr;
+    margin: 1%;
+}
+
+.keepText {
+    border: none;
+    background: none;
+}
+
+#accHeader {
+    grid-area: header;
+}
+
+#links {
+    grid-area: links;
+}
+
+#display {
+    grid-area: display;
+}
+
+
+
