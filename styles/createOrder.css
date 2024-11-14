@@ -5,3 +5,7 @@
 #truckFront {
     width: 100px;
 }
+
+option:disabled {
+    background-color: #e9ecef;
+}

@@ -44,8 +44,8 @@
                         <input type="date" id="dateFrom" class="form-control" />
                     </div>
                     <div class="col-sm-3 col-7" id="timeFromDiv">
-                        <select class="form-select timeSelect" id="timeFrom">
-                            <option value="">-:--</option>
+                        <select disabled="true" class="form-select timeSelect fromDisabled" id="timeFrom">
+                            <option disabled="true" value="">-:--</option>
                             <option value="1:00">1:00</option>
                             <option value="2:00">2:00</option>
                             <option value="3:00">3:00</option>
@@ -61,8 +61,8 @@
                         </select>
                     </div>
                     <div class="col-sm-2 col-5" id="meridemFromDiv">
-                    <select class="form-select meridiemSelect" id="meridiemFrom">
-                        <option value="">--</option>
+                    <select disabled="true" class="form-select meridiemSelect fromDisabled" id="meridiemFrom">
+                        <option disabled="true" value="">--</option>
                         <option value="am">AM</option>
                         <option value="pm">PM</option>
                     </select>
@@ -71,11 +71,11 @@
                 <div class="col-lg-6 row g-0 mt-2 mt-sm-0 mt-lg-0" id="deliveryWindowToDiv">
                     <label class="col-sm-1 my-auto pe-5" for="dateTo">To:</label>
                     <div class="col-sm-5" id="dateToDiv">            
-                        <input type="date" id="dateTo" class="form-control"/>
+                        <input disabled="true" type="date" id="dateTo" class="form-control fromDisabled"/>
                     </div>
                     <div class="col-sm-3 col-7" id="timeToDiv">
-                        <select class="form-select timeSelect" id="timeTo">
-                            <option value="">-:--</option>
+                        <select disabled="true" class="form-select timeSelect fromDisabled" id="timeTo">
+                            <option disabled="true" value="">-:--</option>
                             <option value="1:00">1:00</option>
                             <option value="2:00">2:00</option>
                             <option value="3:00">3:00</option>
@@ -91,8 +91,8 @@
                         </select>
                     </div>
                     <div class="col-sm-2 col-5" id="meridemToDiv">
-                        <select class="form-select meridiemSelect" id="meridiemTo">
-                            <option value="">--</option>
+                        <select disabled="true" class="form-select meridiemSelect fromDisabled" id="meridiemTo">
+                            <option disabled="true" value="">--</option>
                             <option value="am">AM</option>
                             <option value="pm">PM</option>
                         </select>
@@ -105,12 +105,12 @@
                 <span class="p-0">Trailer Size</span>
                 <select class="col-12 form-select" id="trailer">
                     <option value="">------------</option>
-                    <option Axle="3" value="4">3 Axle 4 Comp</option>
-                    <option Axle="3" value="5">3 Axle 5 Comp</option>
-                    <option Axle="6" value="5">6 Axle 5 Comp</option>
-                    <option Axle="6" value="6">7 Axle 6 Comp</option>
-                    <option Axle="8" value="5">8 Axle 5 Comp</option>
-                    <option Axle="8" value="6">8 Axle 6 Comp</option>
+                    <option id="3/4" value="4">3 Axle 4 Comp</option>
+                    <option id="3/5" value="5">3 Axle 5 Comp</option>
+                    <option id="6/5" value="5">6 Axle 5 Comp</option>
+                    <option id="7/6" value="6">7 Axle 6 Comp</option>
+                    <option id="8/5" value="5">8 Axle 5 Comp</option>
+                    <option id="8/6" value="6">8 Axle 6 Comp</option>
                 </select>
             </div>
 

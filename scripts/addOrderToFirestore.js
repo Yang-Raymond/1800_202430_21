@@ -59,5 +59,17 @@ export async function sendData(form) {
     });
 }
 
-
+// export function getRestrictions() {
+//     onAuthStateChanged(auth, async function(user) {
+//         return "restrictions";
+//         // Check if user is signed in:
+//         if (user) { 
+            
+//         } else {
+//             // No user is signed in.
+//             console.log ("No user is signed in");
+//         }
+        
+//     })
+// }
 
