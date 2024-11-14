@@ -8,9 +8,9 @@ body {
 
 main {
     display: grid;
-    grid-template-areas: 
-    "orders"
-    "accounts";
+    grid-template-areas:
+        "orders"
+        "accounts";
     grid-row-gap: 100px;
 }
 
@@ -18,7 +18,7 @@ main {
     display: grid;
     grid-area: orders;
     grid-template-rows: 0.75fr 2fr;
-    margin: 1%;    
+    margin: 1%;
 }
 
 header {
@@ -35,18 +35,26 @@ header {
 
 .accounts {
     display: grid;
-    grid-area: accounts ;
-    grid-template-areas: 
-    "header header"
-    "links display";
+    grid-area: accounts;
+    grid-template-areas:
+        "header"
+        "links";
     grid-template-rows: 1fr 2fr;
-    grid-template-columns: 1fr 2fr;
     margin: 1%;
 }
 
 .keepText {
     border: none;
     background: none;
+}
+
+.material-symbols-outlined {
+    display: inline-flex;
+    vertical-align: top;
+}
+
+.close {
+    justify-self: end;
 }
 
 #accHeader {
@@ -60,6 +68,14 @@ header {
 #display {
     grid-area: display;
 }
+
+#onTop {
+    display: flex;
+    position: absolute;
+    justify-self: center;
+    align-self: center;
+}
+
 
 
 

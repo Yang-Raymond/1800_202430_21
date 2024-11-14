@@ -18,6 +18,7 @@ document.getElementById("volume").textContent=data.volume;
 var button = document.getElementById("button");
 
 var invoice = document.getElementById("invoice");
+
 button.addEventListener("click", function () {
     if (invoice.style.display == "none") {
         invoice.style.display = "block";

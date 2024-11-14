@@ -5,10 +5,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- Title bar items-->
     <title>Order</title>
-    <link rel="icon" type="image/x-icon" href="images\ScampLogo.jpg"> 
+    <link rel="icon" type="image/x-icon" href="images\ScampLogo.jpg">
 
     <!---------------------------------------------->
     <!----------- CSS libraries go here ------------>
@@ -37,7 +37,8 @@
                         <button class="card-body p-4 btn" style="border-radius: 16px;" id="button">
                             <div class="d-flex justify-content-between align-items-center mb-0">
                                 <div>
-                                    <h5 class="mb-0">INVOICE <span class="text-primary font-weight-bold">#INVOICEPLACEHOLDER</span>
+                                    <h5 class="mb-0">INVOICE <span
+                                            class="text-primary font-weight-bold">#INVOICEPLACEHOLDER</span>
                                     </h5>
                                 </div>
                                 <div class="text-end">
@@ -84,18 +85,18 @@
             </div>
         </div>
         <!-- order details -->
-        <div class="card" id="invoice" style="display: none;">
+        <div class="card" id="invoice" style="display: block;">
             <div class="card-body">
                 <div class="container mb-1 mt-3">
                     <div class="row d-flex align-items-baseline">
                         <div class="col-xl-9">
-                            <p style="color: #7e8d9f;font-size: 20px;">Invoice >> <strong>ID: #INVOICEPLACEHOLDER</strong></p>
+                            <p style="color: #7e8d9f;font-size: 20px;">Invoice >> <strong>ID:
+                                    #INVOICEPLACEHOLDER</strong></p>
                         </div>
-                        <div class="col-xl-3 float-end">
+                        <div class="col-xl-3 float-end justify-content-end mb-2 text-end">
                             <a data-mdb-ripple-init class="btn btn-light text-capitalize border-0"
-                                data-mdb-ripple-color="dark"><i class="fas fa-print text-primary"></i> Print</a>
-                            <a data-mdb-ripple-init class="btn btn-light text-capitalize"
-                                data-mdb-ripple-color="dark"><i class="far fa-file-pdf text-danger"></i> Export</a>
+                                data-mdb-ripple-color="dark" id="printBtn"><i class="fas fa-print text-primary"></i>
+                                Print</a>
                         </div>
                         <hr>
                     </div>
@@ -116,7 +117,8 @@
                                     <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
                                             class="fw-bold">ID:</span>#INVOICEPLACEHOLDER</li>
                                     <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                                            class="fw-bold">Creation Date: </span><span id="crDate">01/01/2000</span> </li>
+                                            class="fw-bold">Creation Date: </span><span id="crDate">01/01/2000</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -151,9 +153,10 @@
                             </div>
                             <div class="col-xl-3">
                                 <ul class="list-unstyled">
-                                    <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>$0</li>
-                                    <li class="text-muted ms-3 mt-2"><span
-                                            class="text-black me-4">Tax(12%)</span>$0
+                                    <li class="text-muted ms-3"><span class="text-black me-4">Delivery Fee:</span>$0
+                                    </li>
+                                    <li class="text-muted ms-3"><span class="text-black me-4">SubTotal:</span>$0</li>
+                                    <li class="text-muted ms-3"><span class="text-black me-4">Tax(12%):</span>$0
                                     </li>
                                 </ul>
                                 <p class="text-black float-start"><span class="text-black me-3"> Total
@@ -173,13 +176,14 @@
     <!------- JavaScript functions go here --------->
     <!---------------------------------------------->
     <!-- Boostrap Library JS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 
     <!-- Other scripts go here-->
 
     <!-- Link to scripts of your own -->
-     <script src="../scripts/script.js"></script>
+    <script src="../scripts/script.js"></script>
     <script type="module" src="../scripts/orderHistory.js"></script>
     <script src="../scripts/skeleton.js"></script>
 
