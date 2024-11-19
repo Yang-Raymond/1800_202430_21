@@ -57,6 +57,22 @@ header {
     justify-self: end;
 }
 
+.split {
+    display: grid;
+    grid-column-gap: 5px;
+    grid-template-areas:
+        "left right";
+    grid-template-columns: 1fr 1fr;
+}
+
+.left {
+    grid-area: left;
+}
+
+.right {
+    grid-area: right;
+}
+
 #accHeader {
     grid-area: header;
 }
@@ -75,7 +91,3 @@ header {
     justify-self: center;
     align-self: center;
 }
-
-
-
-
