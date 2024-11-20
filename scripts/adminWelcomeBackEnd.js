@@ -1,11 +1,13 @@
 import { firebaseConfig } from "./firebaseAPI.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, getDoc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
 // Gets order template
 const orderTemplate = document.getElementById("orderTemplate");
 const orderContainer = document.getElementById("orderContainer");
 const productTemplate = document.getElementById("productTemplate");
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -95,7 +97,9 @@ mainCollection.forEach(async (station) => {
                     });
                 }
                 updateStatus();
-                invoice.style.display = "none";
+                setTimeout(()=> {
+                    location.reload();
+                },1000);
             }
 
             clone.querySelector("#approveBtn").onclick = () => {
@@ -106,7 +110,9 @@ mainCollection.forEach(async (station) => {
                     });
                 }
                 updateStatus();
-                invoice.style.display = "none";
+                setTimeout(()=> {
+                    location.reload();
+                },1000);
             }
             orderContainer.appendChild(clone);
         }
@@ -125,4 +131,45 @@ function convertTimestamp(timestamp) {
     return date;
 }
 
+// Initalize firebase authentication
+const auth = getAuth();
 
+// When button is clicked, a new station account is created
+document.getElementById("nextBtn").addEventListener("click", () => {
+    const email = document.getElementById("stationEmail");
+    const password = document.getElementById("stationPassword");
+    const password2 = document.getElementById("stationPassword2");
+    const companyName = document.getElementById("companyName");
+    const newStationAddress = document.getElementById("stationAddress");
+    const stationPhoneNumber = document.getElementById("phoneNum");
+    const newStationNum = document.getElementById("stationNum");
+    if (password.value == password2.value) {
+        createUserWithEmailAndPassword(auth, email.value, password.value)
+            .then(async (userCredential)=> {
+                const user = userCredential.user;
+                await setDoc(doc(db, "stations", user.uid), {
+                    comapny: companyName.value,
+                    email: email.value,
+                    location: newStationAddress.value,
+                    phone: stationPhoneNumber.value,
+                    role: "station",
+                    station: "#"+newStationNum.value,
+                    username: companyName.value + "#" + newStationNum.value
+                });
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+              });
+        setTimeout(()=>{
+            email.value="";
+            password.value="";
+            password2.value="";
+            companyName.value="";
+            newStationAddress.value="";
+            stationPhoneNumber.value="";
+            newStationNum.value="";
+        },1000);
+    }
+
+});
