@@ -4,8 +4,10 @@ document.getElementById("createStationBtn").addEventListener("click", () => {
     document.getElementById("createStation").style.display = "block";
     if (document.getElementById("editStation").style.display == "block") {
         document.getElementById("editStation").style.display = "none";
-    } else if (document.getElementById("editAcc").style.display == "block"){
+    } else if (document.getElementById("editAcc").style.display == "block") {
         document.getElementById("editAcc").style.display = "none";
+    } else if (document.getElementById("editStationForm").style.display == "block") {
+        document.getElementById("editStationForm").style.display = "none";
     }
 });
 
@@ -15,8 +17,10 @@ document.getElementById("editStationBtn").addEventListener("click", () => {
     document.getElementById("editStation").style.display = "block";
     if (document.getElementById("createStation").style.display == "block") {
         document.getElementById("createStation").style.display = "none";
-    } else if (document.getElementById("editAcc").style.display == "block"){
+    } else if (document.getElementById("editAcc").style.display == "block") {
         document.getElementById("editAcc").style.display = "none";
+    } else if (document.getElementById("editStationForm").style.display == "block") {
+        document.getElementById("editStationForm").style.display = "none";
     }
 });
 
@@ -26,8 +30,10 @@ document.getElementById("editAccBtn").addEventListener("click", () => {
     document.getElementById("editAcc").style.display = "block";
     if (document.getElementById("createStation").style.display == "block") {
         document.getElementById("createStation").style.display = "none";
-    } else if (document.getElementById("editStation").style.display == "block"){
+    } else if (document.getElementById("editStation").style.display == "block") {
         document.getElementById("editStation").style.display = "none";
+    } else if (document.getElementById("editStationForm").style.display == "block") {
+        document.getElementById("editStationForm").style.display = "none";
     }
 });
 
@@ -42,7 +48,13 @@ close[1].addEventListener("click", () => {
     document.getElementById("editStation").style.display = "none";
 });
 
-//close the edit account window if x is clicked
+//close the edit station form window if x is clicked
 close[2].addEventListener("click", () => {
+    document.getElementById("editStationForm").style.display = "none";
+    document.getElementById("editStation").style.display = "block";
+});
+
+//close the edit account window if x is clicked
+close[3].addEventListener("click", () => {
     document.getElementById("editAcc").style.display = "none";
 });

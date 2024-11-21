@@ -73,6 +73,10 @@ header {
     grid-area: right;
 }
 
+.displayNone {
+    display: none;
+}
+
 #accHeader {
     grid-area: header;
 }
