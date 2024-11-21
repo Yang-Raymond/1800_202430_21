@@ -22,6 +22,7 @@
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/createOrder.css">
+    <link rel="stylesheet" href="../styles/calendar.css">
     
 </head>
 
@@ -40,63 +41,19 @@
                 <span class="p-0">Delivery Window:</span>
                 <div class="col-lg-6 row g-0" id="deliveryWindowFromDiv">
                     <label class="col-sm-1 my-auto pe-5" for="dateFrom">From:</label>
-                    <div class="col-sm-5" id="dateFromDiv">            
-                        <input type="date" id="dateFrom" class="form-control" />
-                    </div>
-                    <div class="col-sm-3 col-7" id="timeFromDiv">
-                        <select disabled="true" class="form-select timeSelect fromDisabled" id="timeFrom">
-                            <option disabled="true" value="">-:--</option>
-                            <option value="1:00">1:00</option>
-                            <option value="2:00">2:00</option>
-                            <option value="3:00">3:00</option>
-                            <option value="4:00">4:00</option>
-                            <option value="5:00">5:00</option>
-                            <option value="6:00">6:00</option>
-                            <option value="7:00">7:00</option>
-                            <option value="8:00">8:00</option>
-                            <option value="9:00">9:00</option>
-                            <option value="10:00">10:00</option>
-                            <option value="11:00">11:00</option>
-                            <option value="12:00">12:00</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-2 col-5" id="meridemFromDiv">
-                    <select disabled="true" class="form-select meridiemSelect fromDisabled" id="meridiemFrom">
-                        <option disabled="true" value="">--</option>
-                        <option value="am">AM</option>
-                        <option value="pm">PM</option>
-                    </select>
-                    </div>
+
+                    <a data-bs-toggle="popover" data-bs-placement="bottom" tabindex="0" role="button">
+                        <input type="text" calendar readonly class="form-control">
+                    </a>
+
                 </div>
                 <div class="col-lg-6 row g-0 mt-2 mt-sm-0 mt-lg-0" id="deliveryWindowToDiv">
                     <label class="col-sm-1 my-auto pe-5" for="dateTo">To:</label>
-                    <div class="col-sm-5" id="dateToDiv">            
-                        <input disabled="true" type="date" id="dateTo" class="form-control fromDisabled"/>
-                    </div>
-                    <div class="col-sm-3 col-7" id="timeToDiv">
-                        <select disabled="true" class="form-select timeSelect fromDisabled" id="timeTo">
-                            <option disabled="true" value="">-:--</option>
-                            <option value="1:00">1:00</option>
-                            <option value="2:00">2:00</option>
-                            <option value="3:00">3:00</option>
-                            <option value="4:00">4:00</option>
-                            <option value="5:00">5:00</option>
-                            <option value="6:00">6:00</option>
-                            <option value="7:00">7:00</option>
-                            <option value="8:00">8:00</option>
-                            <option value="9:00">9:00</option>
-                            <option value="10:00">10:00</option>
-                            <option value="11:00">11:00</option>
-                            <option value="12:00">12:00</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-2 col-5" id="meridemToDiv">
-                        <select disabled="true" class="form-select meridiemSelect fromDisabled" id="meridiemTo">
-                            <option disabled="true" value="">--</option>
-                            <option value="am">AM</option>
-                            <option value="pm">PM</option>
-                        </select>
-                    </div>
+
+                    <a data-bs-toggle="popover" data-bs-placement="bottom" tabindex="0" role="button">
+                        <input type="text" calendar readonly class="form-control">
+                    </a>
+
                 </div>
             </div>
 
@@ -176,6 +133,7 @@
     <script src="../scripts/script.js"></script>
     <script src="../scripts/skeleton.js"></script>
     <script type="module" src="../scripts/createOrder.js"></script>
+    <script src="../scripts/calendar.js"></script>
 </body>
 
 </html>
