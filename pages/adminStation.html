@@ -86,11 +86,14 @@
         <div class="alert alert-success" id="sucessAlert" role="alert" style="display: none;">
           Station account created!
         </div>
+        <div class="alert alert-success" id="updateSucessAlert" role="alert" style="display: none;">
+          Station account updated!
+        </div>
         <div class="alert alert-danger" id="errorAlert"role="alert" style="display: none;">
           Error in creating station account. Check if fields are all filled in correctly. 
         </div>
         <!-- Create Station Form -->
-        <div class="card shadow-lg p-4 rounded" id="createStationForm" style="display: none; z-index: 1050;">
+        <div class="card shadow-lg p-4 rounded ontop" id="createStationForm" style="display: none; z-index: 1050;">
           <div>
             <h5 class="mb-4">Create Station Account</h5>
           </div>
@@ -130,13 +133,52 @@
                   placeholder="Re-type password">
               </div>
               <div class="d-flex justify-content-end gap-2">
-                <button type="button" class="btn btn-outline-secondary px-4" id="cancelBtn">Cancel</button>
+                <button type="button" class="btn btn-outline-secondary px-4 cancelBtn">Cancel</button>
                 <button type="button" class="btn btn-primary px-4" id="createAccBtn">Create Account</button>
               </div>
             </form>
           </div>
         </div>
-        
+        <!-- Edit station account form -->
+        <div class="card shadow-lg p-4 rounded ontop" id="editStationAccForm" style="display: none; z-index: 1050;">
+          <div>
+            <h5 class="mb-4">Editing <span id="formTitle">Station Account</span></h5>
+          </div>
+          <div>
+            <form>
+              <div class="mb-3">
+                <p><span id="stationID"> StationID</span></p>
+              </div>
+              <div class="mb-3">
+                <label for="brandUpdate" class="form-label fw-semibold">Brand</label>
+                <input type="text" class="form-control form-control" placeholder="Enter station brand" id="brandUpdate">
+              </div>
+              <div class="mb-3">
+                <label for="stationNumUpdate" class="form-label fw-semibold">Station number</label>
+                <input type="text" class="form-control form-control" id="stationNumUpdate"
+                  placeholder="Enter station number">
+              </div>
+              <div class="mb-3">
+                <label for="stationAddressUpdate" class="form-label fw-semibold">Station Address</label>
+                <input type="email" class="form-control form-control" id="stationAddressUpdate"
+                  placeholder="Enter station address">
+              </div>
+              <div class="mb-3">
+                <label for="stationPhoneNumUpdate" class="form-label fw-semibold">Station phone number</label>
+                <input type="text" class="form-control form-control" id="stationPhoneNumUpdate"
+                  placeholder="Enter station phone number">
+              </div>
+              <div class="mb-3">
+                <label for="emailUpdate" class="form-label fw-semibold">Station email</label>
+                <input type="email" class="form-control form-control" id="emailUpdate" placeholder="Enter station email">
+              </div>
+              <div class="d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-outline-secondary px-4 cancelBtn">Cancel</button>
+                <button type="button" class="btn btn-primary px-4" id="updateBtn">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>

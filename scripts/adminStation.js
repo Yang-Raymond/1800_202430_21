@@ -12,6 +12,7 @@ const auth = getAuth();
 const createStationForm = document.getElementById("createStationForm");
 const stationTemplate = document.getElementById("stationTemplate").content;
 const stationContainer = document.getElementById("stationContainer");
+const cancelBtn = document.getElementsByClassName("cancelBtn");
 
 //Logout user if logout button is clicked
 document.getElementById("logoutBtn").addEventListener("click", () => {
@@ -26,15 +27,21 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
 //Display create station form if button is clicked
 document.getElementById("createStationAccBtn").addEventListener("click", () => {
     createStationForm.style.display = "block";
-    document.getElementById("overlay").style.display="block";
-})
+    document.getElementById("overlay").style.display = "block";
+});
 
 //Close create station form if button is clicked
-document.getElementById("cancelBtn").addEventListener("click", () => {
+cancelBtn[0].addEventListener("click", () => {
     createStationForm.style.display = "none";
-    document.getElementById("overlay").style.display="none";
-})
+    document.getElementById("overlay").style.display = "none";
+});
 
+cancelBtn[1].addEventListener("click", () => {
+    document.getElementById("editStationAccForm").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+});
+
+//Account is created when button is clicked
 document.getElementById("createAccBtn").addEventListener("click", () => {
     const brandInput = document.getElementById("brandInput");
     const stationNumInput = document.getElementById("stationNumInput");
@@ -89,9 +96,10 @@ document.getElementById("createAccBtn").addEventListener("click", () => {
     }
 });
 
+//Gets all stations and displays them
 const mainCollection = await getDocs(collection(db, "stations"));
 mainCollection.forEach(async (station) => {
-    if(station.data().role != "Admin"){
+    if (station.data().role != "Admin") {
         const clone = stationTemplate.cloneNode(true);
         const stationFields = await doc(db, "stations", station.id);
         const stationFieldsSnap = await getDoc(stationFields);
@@ -103,7 +111,31 @@ mainCollection.forEach(async (station) => {
         clone.querySelector("#stationNum").innerText = number;
         clone.querySelector("#email").innerText = email;
         clone.querySelector("#address").innerText = address;
+        clone.querySelector("button").onclick = () => {
+            document.getElementById("formTitle").innerText = brand + " #" + number;
+            document.getElementById("stationID").innerText = station.id;
+            document.getElementById("editStationAccForm").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("brandUpdate").value = brand;
+            document.getElementById("stationNumUpdate").value = number;
+            document.getElementById("stationAddressUpdate").value = address;
+            document.getElementById("stationPhoneNumUpdate").value = stationFieldsSnap.data().phone;
+            document.getElementById("emailUpdate").value = email;
+            document.getElementById("updateBtn").addEventListener("click", async ()=>{
+                await updateDoc(doc(db,"stations",station.id),{
+                    brand: document.getElementById("brandUpdate").value,
+                    number: document.getElementById("stationNumUpdate").value,
+                    address: document.getElementById("stationAddressUpdate").value,
+                    phone: document.getElementById("stationPhoneNumUpdate").value,
+                    email: document.getElementById("emailUpdate").value
+    
+                });
+                document.getElementById("updateSucessAlert").style.display = "block";
+                setTimeout(()=>{
+                    document.getElementById("updateSucessAlert").style.display = "none";
+                },1500);
+            });
+        }
         stationContainer.appendChild(clone);
     }
-
 });

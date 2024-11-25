@@ -51,61 +51,38 @@ body {
     vertical-align: top;
 }
 
-#createStationForm {
+.ontop {
     display: none;
-    /* Initially hidden */
     position: fixed;
-    /* Makes it appear on top of other content */
     top: 50%;
-    /* Center vertically */
     left: 50%;
-    /* Center horizontally */
     transform: translate(-50%, -50%);
-    /* Adjust for perfect centering */
     width: 90%;
-    /* Adjust width for responsiveness */
     max-width: 500px;
-    /* Limit max width */
     z-index: 1050;
-    /* Ensure it appears above other elements */
     background-color: #fff;
-    /* Ensure a white background */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    /* Subtle shadow */
     border-radius: 12px;
-    /* Smooth corners */
 }
 
 #overlay {
     display: none;
-    /* Initially hidden */
     position: fixed;
-    /* Covers the entire screen */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent black overlay */
     z-index: 1040;
-    /* Below the form but above other content */
 }
 
 .alert {
     position: fixed;
-    /* Makes the alert fixed on the screen */
     top: 20px;
-    /* Position at the top of the viewport */
     left: 50%;
-    /* Center horizontally */
     transform: translateX(-50%);
-    /* Center align horizontally */
     z-index: 1100;
-    /* Ensure it's above other elements, including the form and overlay */
     width: auto;
-    /* Adjust width to fit the content */
     max-width: 90%;
-    /* Responsive adjustment */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    /* Add shadow for depth */
 }
