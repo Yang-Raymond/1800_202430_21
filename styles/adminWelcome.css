@@ -1,97 +1,13 @@
-body {
+body{
     height: 100vh;
+    align-content: center;
 }
 
-.navbar {
-    padding: 0;
+.button-square-200 {
+    width: 200px;
+    height: 200px;
 }
 
-main {
-    display: grid;
-    grid-template-areas:
-        "orders"
-        "accounts";
-    grid-row-gap: 50px;
-}
-
-.orders {
-    display: grid;
-    grid-area: orders;
-    grid-template-rows: 0.75fr 2fr;
-    margin: 1%;
-}
-
-header {
-    border-bottom: 1px solid black;
-}
-
-.scrollable {
-    display: flex;
-    flex-direction: column;
-    height: 430px;
-    overflow-y: auto;
-    border-bottom: black 1px solid;
-}
-
-.accounts {
-    display: grid;
-    grid-area: accounts;
-    grid-template-areas:
-        "header"
-        "links";
-    grid-template-rows: 1fr 2fr;
-    margin: 1%;
-}
-
-.keepText {
-    border: none;
-    background: none;
-}
-
-.material-symbols-outlined {
-    display: inline-flex;
-    vertical-align: top;
-}
-
-.close {
-    justify-self: end;
-}
-
-.split {
-    display: grid;
-    grid-column-gap: 5px;
-    grid-template-areas:
-        "left right";
-    grid-template-columns: 1fr 1fr;
-}
-
-.left {
-    grid-area: left;
-}
-
-.right {
-    grid-area: right;
-}
-
-.displayNone {
-    display: none;
-}
-
-#accHeader {
-    grid-area: header;
-}
-
-#links {
-    grid-area: links;
-}
-
-#display {
-    grid-area: display;
-}
-
-#onTop {
-    display: flex;
-    position: absolute;
-    justify-self: center;
-    align-self: center;
+.button-hover-blue:hover{
+    background-color: #106EFD    ;
 }
