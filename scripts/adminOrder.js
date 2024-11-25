@@ -7,6 +7,7 @@ import { getFirestore, collection, getDocs, doc, getDoc, updateDoc, setDoc, quer
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+//Get order template and locate the order container
 const orderTemplate = document.getElementById("orderTemplate");
 const orderContainer = document.getElementById("ordersContainer");
 

@@ -1,0 +1,109 @@
+import { getAuth, signOut, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import { firebaseConfig } from "./firebaseAPI.js";
+import { getFirestore, collection, getDocs, doc, getDoc, updateDoc, setDoc, query, where } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+//Initalize Firebase, Firebase authentication and Firestore
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth();
+
+//Finds createStation form, stationTemplate, stationContainer
+const createStationForm = document.getElementById("createStationForm");
+const stationTemplate = document.getElementById("stationTemplate").content;
+const stationContainer = document.getElementById("stationContainer");
+
+//Logout user if logout button is clicked
+document.getElementById("logoutBtn").addEventListener("click", () => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+        window.location.href = "./login.html";
+    }).catch((error) => {
+        console.log(error);
+    })
+});
+
+//Display create station form if button is clicked
+document.getElementById("createStationAccBtn").addEventListener("click", () => {
+    createStationForm.style.display = "block";
+    document.getElementById("overlay").style.display="block";
+})
+
+//Close create station form if button is clicked
+document.getElementById("cancelBtn").addEventListener("click", () => {
+    createStationForm.style.display = "none";
+    document.getElementById("overlay").style.display="none";
+})
+
+document.getElementById("createAccBtn").addEventListener("click", () => {
+    const brandInput = document.getElementById("brandInput");
+    const stationNumInput = document.getElementById("stationNumInput");
+    const stationAddressInput = document.getElementById("stationAddressInput");
+    const stationPhoneNumInput = document.getElementById("stationPhoneNumInput");
+    const emailInput = document.getElementById("emailInput");
+    const passwordInput = document.getElementById("passwordInput");
+    const repeatPasswordInput = document.getElementById("repeatPasswordInput");
+
+    if (brandInput.value && stationNumInput.value && stationAddressInput.value && stationPhoneNumInput.value && emailInput.value && passwordInput.value && passwordInput.value == repeatPasswordInput.value) {
+        createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
+            .then(async (userCredential) => {
+                const user = userCredential.user;
+                await setDoc(doc(db, "stations", user.uid), {
+                    brand: brandInput.value,
+                    email: emailInput.value,
+                    address: stationAddressInput.value,
+                    phone: stationPhoneNumInput.value,
+                    role: "station",
+                    number: stationNumInput.value,
+                    username: brandInput.value + "#" + stationNumInput.value
+                });
+                document.getElementById("sucessAlert").style.display = "block";
+                setTimeout(() => {
+                    brandInput.value = "";
+                    stationNumInput.value = "";
+                    stationAddressInput.value = "";
+                    stationPhoneNumInput.value = "";
+                    emailInput.value = "";
+                    passwordInput.value = "";
+                    repeatPasswordInput.value = "";
+                    document.getElementById("sucessAlert").style.display = "none";
+                }, 1500)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log("Error: " + errorCode + " " + errorMessage);
+                document.getElementById("errorAlert").style.display = "block";
+                if (error.code || error.message) {
+                    document.getElementById("errorAlert").innerText = "Error: " + errorCode + " " + errorMessage;
+                }
+                setTimeout(() => {
+                    document.getElementById("errorAlert").style.display = "none";
+                }, 1500)
+            });
+    } else {
+        document.getElementById("errorAlert").style.display = "block";
+        setTimeout(() => {
+            document.getElementById("errorAlert").style.display = "none";
+        }, 1500)
+    }
+});
+
+const mainCollection = await getDocs(collection(db, "stations"));
+mainCollection.forEach(async (station) => {
+    if(station.data().role != "Admin"){
+        const clone = stationTemplate.cloneNode(true);
+        const stationFields = await doc(db, "stations", station.id);
+        const stationFieldsSnap = await getDoc(stationFields);
+        const brand = stationFieldsSnap.data().brand;
+        const number = stationFieldsSnap.data().number;
+        const address = stationFieldsSnap.data().address;
+        const email = stationFieldsSnap.data().email;
+        clone.querySelector("#brand").innerText = brand;
+        clone.querySelector("#stationNum").innerText = number;
+        clone.querySelector("#email").innerText = email;
+        clone.querySelector("#address").innerText = address;
+        stationContainer.appendChild(clone);
+    }
+
+});
