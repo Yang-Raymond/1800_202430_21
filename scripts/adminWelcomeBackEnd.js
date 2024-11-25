@@ -1,7 +1,7 @@
 import { firebaseConfig } from "./firebaseAPI.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, getDoc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { getFirestore, collection, getDocs, doc, getDoc, updateDoc, setDoc, query, where } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword, updatePassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
 // Gets order template
 const orderTemplate = document.getElementById("orderTemplate");
@@ -23,9 +23,9 @@ mainCollection.forEach(async (station) => {
 
     const stationFields = await doc(db, "stations", station.id);
     const stationFieldsSnap = await getDoc(stationFields);
-    const company = stationFieldsSnap.data().company;
-    const stationNum = stationFieldsSnap.data().station;
-    const stationAddress = stationFieldsSnap.data().location;
+    const company = stationFieldsSnap.data().brand;
+    const stationNum = stationFieldsSnap.data().number;
+    const stationAddress = stationFieldsSnap.data().address;
     const phoneNumber = stationFieldsSnap.data().phone;
 
     // For each station, get loads
@@ -97,9 +97,9 @@ mainCollection.forEach(async (station) => {
                     });
                 }
                 updateStatus();
-                setTimeout(()=> {
+                setTimeout(() => {
                     location.reload();
-                },1000);
+                }, 1000);
             }
 
             clone.querySelector("#approveBtn").onclick = () => {
@@ -110,9 +110,9 @@ mainCollection.forEach(async (station) => {
                     });
                 }
                 updateStatus();
-                setTimeout(()=> {
+                setTimeout(() => {
                     location.reload();
-                },1000);
+                }, 1000);
             }
             orderContainer.appendChild(clone);
         }
@@ -145,31 +145,95 @@ document.getElementById("nextBtn").addEventListener("click", () => {
     const newStationNum = document.getElementById("stationNum");
     if (password.value == password2.value) {
         createUserWithEmailAndPassword(auth, email.value, password.value)
-            .then(async (userCredential)=> {
+            .then(async (userCredential) => {
                 const user = userCredential.user;
                 await setDoc(doc(db, "stations", user.uid), {
-                    comapny: companyName.value,
+                    brand: companyName.value,
                     email: email.value,
-                    location: newStationAddress.value,
+                    address: newStationAddress.value,
                     phone: stationPhoneNumber.value,
                     role: "station",
-                    station: "#"+newStationNum.value,
+                    station: "#" + newStationNum.value,
                     username: companyName.value + "#" + newStationNum.value
                 });
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-              });
-        setTimeout(()=>{
-            email.value="";
-            password.value="";
-            password2.value="";
-            companyName.value="";
-            newStationAddress.value="";
-            stationPhoneNumber.value="";
-            newStationNum.value="";
-        },1000);
+            });
+        setTimeout(() => {
+            email.value = "";
+            password.value = "";
+            password2.value = "";
+            companyName.value = "";
+            newStationAddress.value = "";
+            stationPhoneNumber.value = "";
+            newStationNum.value = "";
+        }, 1000);
     }
+
+});
+
+document.getElementById("searchBtn").addEventListener("click", async () => {
+    const searchBox = document.getElementById("searchBox");
+    const stationBtn = document.getElementById("stationBtn");
+    const stationUsername = document.getElementsByClassName("stationUsername");
+    const UID = document.getElementById("UID");
+    const stationUsernameRef = collection(db, "stations");
+    const stationUsernameQuery = query(stationUsernameRef, where("username", "==", searchBox.value));
+    const stationUsernameSnapshot = await getDocs(stationUsernameQuery);
+    stationUsernameSnapshot.forEach((d) => {
+        stationBtn.style.display = "block";
+        stationUsername[0].innerText = d.data().username;
+        stationUsername[1].innerText = d.data().username;
+        document.getElementById("compNam").placeholder = d.data().brand;
+        document.getElementById("staNum").placeholder = d.data().number;
+        document.getElementById("staEmail").placeholder = d.data().email;
+        document.getElementById("staAdd").placeholder = d.data().address;
+        document.getElementById("pNum").placeholder = d.data().phone;
+        UID.innerText = d.id;
+        document.getElementById("update").addEventListener("click", async () => {
+            if (document.getElementById("compNam").value) {
+                await updateDoc(doc(db, "stations", d.id), {
+                    brand: document.getElementById("compNam").value
+                });
+            }
+            if (document.getElementById("staNum").value) {
+                await updateDoc(doc(db, "stations", d.id), {
+                    number: document.getElementById("staNum").value
+                });
+            }
+            if (document.getElementById("staEmail").value) {
+                await updateDoc(doc(db, "stations", d.id), {
+                    email: document.getElementById("staEmail").value
+                });
+            }
+            if (document.getElementById("staAdd").value) {
+                await updateDoc(doc(db, "stations", d.id), {
+                    address: document.getElementById("staAdd").value
+                });
+            }
+            if (document.getElementById("pNum").value) {
+                await updateDoc(doc(db, "stations", d.id), {
+                    phone: document.getElementById("pNum").value
+                });
+            }
+        });
+    });
+    stationBtn.addEventListener("click", () => {
+        document.getElementById("editStation").style.display = "none";
+        document.getElementById("editStationForm").style.display = "block";
+    });
+
+    // Delete inputs and close form if cancel is clicked
+    document.getElementById("cancel").addEventListener("click", () => {
+        document.getElementById("compNam").value = "";
+        document.getElementById("staNum").value = "";
+        document.getElementById("staEmail").value = "";
+        document.getElementById("staAdd").value = "";
+        document.getElementById("pNum").value = "";
+        document.getElementById("editStationForm").style.display = "none";
+        document.getElementById("editStation").style.display = "block";
+    });
 
 });

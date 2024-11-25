@@ -155,7 +155,7 @@
     </div>
   </nav>
   <!-- welcome message-->
-  <h1 class="ms-2 mt-4">Welcome <span>username</span></h1>
+  <h1 class="ms-2 mt-4">Welcome <span>Admin</span></h1>
   <main>
     <!-- Shows all unapproved orders -->
     <section class="orders">
@@ -178,7 +178,7 @@
     </section>
     <section id="onTop">
       <!-- create station account form-->
-      <div id="createStation" style="display: none;">
+      <div id="createStation" class="displayNone">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5 pt-3">
@@ -223,15 +223,49 @@
               </div>
 
               <div class="d-flex justify-content-center">
-                <button type="button" data-mdb-button-init data-mdb-ripple-init
-                  class="btn btn-success btn-block btn-lg" id="nextBtn">Next</button>
+                <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg"
+                  id="nextBtn">Next</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- edit station account form-->
-      <div id="editStation" style="display: none;">
+      <!-- edit station account search-->
+      <div id="editStation" class="displayNone">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-3">
+              <button class="keepText row pb-3 p-0 row justify-content-end close"><span
+                  class="material-symbols-outlined text-end p-0">
+                  close
+                </span></button>
+              <div class="input-group justify-content-center">
+                <div class="form-outline" data-mdb-input-init>
+                  <input type="search" id="searchBox" class="form-control" placeholder="Station number" />
+                </div>
+                <button type="button" class="btn btn-primary" id="searchBtn" data-mdb-ripple-init>
+                  <span class="material-symbols-outlined">
+                    search
+                  </span>
+                </button>
+              </div>
+              <div class="d-flex mt-2 justift-self-center">
+                <button class="card-body p-4 btn" style="border-radius: 16px; display: none;" id="stationBtn">
+                  <div class="d-flex justify-content-center align-items-center mb-0">
+                    <div class="col">
+                      <h5 class="mb-0 stationUsername">Station username</h5>
+                      <p class="mb-0" id="UID">UID</p>
+                    </div>
+
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- edit station account form -->
+      <div id="editStationForm" class="displayNone">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5 pt-3">
@@ -239,25 +273,43 @@
                   class="material-symbols-outlined text-end p-0">
                   close
                 </span></button>
-              <div class="input-group">
-                <div class="form-outline" data-mdb-input-init>
-                  <input type="search" id="form1" class="form-control" placeholder="Station number" />
-                </div>
-                <button type="button" class="btn btn-primary" data-mdb-ripple-init>
-                  <span class="material-symbols-outlined">
-                    search
-                  </span>
-                </button>
+              <h2 class="text-uppercase text-center mb-5 stationUsername">Create an account</h2>
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" id="compNam" class="form-control form-control-lg" />
+                <label class="form-label" for="compNam">Company name</label>
               </div>
-              <div id="editStationContainer">
 
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" id="staNum" class="form-control form-control-lg" />
+                <label class="form-label" for="staNum">Station number</label>
+              </div>
+
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="email" id="staEmail" class="form-control form-control-lg" />
+                <label class="form-label" for="staEmail">Email</label>
+              </div>
+
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" id="staAdd" class="form-control form-control-lg" />
+                <label class="form-label" for="staAdd">Station address</label>
+              </div>
+
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" id="pNum" class="form-control form-control-lg" />
+                <label class="form-label" for="pNum">Phone number</label>
+              </div>
+              <div class="d-flex justify-content-center">
+                <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg btn-danger me-1"
+                  id="cancel">Cancel</button>
+                <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg btn-success ms-1"
+                  id="update">Update</button>
               </div>
             </div>
           </div>
         </div>
       </div>
       <!-- edit account form-->
-      <div id="editAcc" style="display: none;">
+      <div id="editAcc" class="displayNone">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5 pt-3">
@@ -280,7 +332,6 @@
                   <label class="form-label" for="lName">Last name</label>
                   <input type="text" id="accPhoneNum" class="form-control form-control-lg" />
                   <label class="form-label" for="accPhoneNum">Phone number</label>
-
                   <input type="password" id="accPassword2" class="form-control form-control-lg" />
                   <label class="form-label" for="accPassword2">Repeat password</label>
                 </div>
@@ -297,6 +348,7 @@
   </main>
   <script src="../scripts/adminWelcome.js"></script>
   <script type="module" src="../scripts/adminWelcomeBackEnd.js"></script>
+  <script type="module" src="../scripts/adminWelcomeAdmin.js"></script>
 </body>
 
 </html>
