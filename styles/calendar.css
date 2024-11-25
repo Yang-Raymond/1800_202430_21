@@ -12,13 +12,18 @@
 
 @media only screen and (min-width: 576px) {
     .popover {
-        max-width: 556px;
+        max-width: 576px;
         background-color: rgb(250, 250, 250)
     }
 
     #dateTimeWidget {
-        width: 516px;
+        width: 536px;
     }
+
+    #timeSelectorDiv {
+        width: 276px
+    }
+
 }
 
 .popover-body {
@@ -31,29 +36,44 @@
     font: bold 14px monospace; 
 }
 
-#dateTimeWidget #dateSelectorDiv .btn-outline-primary:not(.outline) {
+#dateTimeWidget #dateSelectorDiv {
+    width: 284px;
+}
+
+#dateTimeWidget #dateSelectorDiv label {
     border: 0;
+    font-weight: bold;
+}
+
+#dateTimeWidget #dateSelectorDiv label:has(input.today) {
+    color: red;
 }
 
 #dateTimeWidget .calendarDay label:has(input.notInMonth) {
     opacity: .50;
 }
 
-#dateTimeWidget label:has(input[disabled]) {
-    pointer-events: none;
-    filter: none;
-    opacity: .65;
-}
-
 #dateTimeWidget .calendarDay label:has(input:checked) {
+    border: solid 1px #0d6efd !important;
     color: white;
     background-color: #0d6efd;
 }
 
 #dateTimeWidget .calendarDay label:has(input:disabled) {
     background-color: rgb(200, 200, 200);
+    pointer-events: none;
+    filter: none;
+    color: #0d6efd;
 }
 
+#dateTimeWidget #monthSelector option:disabled {
+    background-color: rgb(200, 200, 200);
+}
+
+
+#dateTimeWidget #monthSelector:has(option:disabled:checked) {
+    background-color: rgb(200, 200, 200);
+}
 
 
 
@@ -90,4 +110,19 @@
 #dateTimeWidget #timeSelectorDiv label:has(input:checked) {
     color: white;
     background-color: #0d6efd;
+}
+
+#dateTimeWidget #timeSelectorDiv label:has(input:disabled) {
+    border: 0;
+    background-color: rgb(200, 200, 200);
+    pointer-events: none;
+    filter: none;
+}
+
+#dateTimeWidget #timeSelectorDiv label:has(input:disabled:checked) {
+    border: 1px solid #0d6efd;
+    color: #0d6efd;
+    background-color: rgb(200, 200, 200);
+    pointer-events: none;
+    filter: none;
 }

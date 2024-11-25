@@ -41,19 +41,11 @@
                 <span class="p-0">Delivery Window:</span>
                 <div class="col-lg-6 row g-0" id="deliveryWindowFromDiv">
                     <label class="col-sm-1 my-auto pe-5" for="dateFrom">From:</label>
-
-                    <a data-bs-toggle="popover" data-bs-placement="bottom" tabindex="0" role="button">
-                        <input type="text" calendar readonly class="form-control">
-                    </a>
-
+                    <input id="dateTimeFrom" type="text" data-bs-placement="bottom" calendar class="form-control">
                 </div>
                 <div class="col-lg-6 row g-0 mt-2 mt-sm-0 mt-lg-0" id="deliveryWindowToDiv">
                     <label class="col-sm-1 my-auto pe-5" for="dateTo">To:</label>
-
-                    <a data-bs-toggle="popover" data-bs-placement="bottom" tabindex="0" role="button">
-                        <input type="text" calendar readonly class="form-control">
-                    </a>
-
+                    <input id="dateTimeTo" type="text" calendar readonly class="form-control">
                 </div>
             </div>
 
@@ -114,8 +106,8 @@
             </div>
 
             <div id="formButtons" class="row p-0 pt-5 mx-0">
-                <div class="col-2 p-0"><button type="submit" class="btn btn-danger">Reset</button></div>
-                <div class="col-10 p-0 text-end"><button id="orderFormSubmit" class="btn btn-primary">Submit</button></div> 
+                <div class="col-2 p-0"><button type="button" id="resetButton" class="btn btn-danger">Reset</button></div>
+                <div class="col-10 p-0 text-end"><button  type="button" id="orderFormSubmit" class="btn btn-primary">Submit</button></div> 
             </div>
 
         </form>
@@ -133,7 +125,6 @@
     <script src="../scripts/script.js"></script>
     <script src="../scripts/skeleton.js"></script>
     <script type="module" src="../scripts/createOrder.js"></script>
-    <script src="../scripts/calendar.js"></script>
 </body>
 
 </html>
