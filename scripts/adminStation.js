@@ -1,14 +1,11 @@
 import { getAuth, signOut, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { firebaseConfig } from "./firebaseAPI.js";
-import { getFirestore, collection, getDocs, doc, getDoc, updateDoc, setDoc, query, where } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, getDoc, updateDoc, setDoc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-//Initalize Firebase, Firebase authentication and Firestore
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
-
-//Finds createStation form, stationTemplate, stationContainer
 const createStationForm = document.getElementById("createStationForm");
 const stationTemplate = document.getElementById("stationTemplate").content;
 const stationContainer = document.getElementById("stationContainer");
@@ -97,45 +94,48 @@ document.getElementById("createAccBtn").addEventListener("click", () => {
 });
 
 //Gets all stations and displays them
-const mainCollection = await getDocs(collection(db, "stations"));
-mainCollection.forEach(async (station) => {
-    if (station.data().role != "Admin") {
-        const clone = stationTemplate.cloneNode(true);
-        const stationFields = await doc(db, "stations", station.id);
-        const stationFieldsSnap = await getDoc(stationFields);
-        const brand = stationFieldsSnap.data().brand;
-        const number = stationFieldsSnap.data().number;
-        const address = stationFieldsSnap.data().address;
-        const email = stationFieldsSnap.data().email;
-        clone.querySelector("#brand").innerText = brand;
-        clone.querySelector("#stationNum").innerText = number;
-        clone.querySelector("#email").innerText = email;
-        clone.querySelector("#address").innerText = address;
-        clone.querySelector("button").onclick = () => {
-            document.getElementById("formTitle").innerText = brand + " #" + number;
-            document.getElementById("stationID").innerText = station.id;
-            document.getElementById("editStationAccForm").style.display = "block";
-            document.getElementById("overlay").style.display = "block";
-            document.getElementById("brandUpdate").value = brand;
-            document.getElementById("stationNumUpdate").value = number;
-            document.getElementById("stationAddressUpdate").value = address;
-            document.getElementById("stationPhoneNumUpdate").value = stationFieldsSnap.data().phone;
-            document.getElementById("emailUpdate").value = email;
-            document.getElementById("updateBtn").addEventListener("click", async ()=>{
-                await updateDoc(doc(db,"stations",station.id),{
-                    brand: document.getElementById("brandUpdate").value,
-                    number: document.getElementById("stationNumUpdate").value,
-                    address: document.getElementById("stationAddressUpdate").value,
-                    phone: document.getElementById("stationPhoneNumUpdate").value,
-                    email: document.getElementById("emailUpdate").value
-    
+const q = query(collection(db, "stations"));
+const unsubscribe = onSnapshot(q, (querySnapshot) => { 
+    stationContainer.innerHTML ="";
+    querySnapshot.forEach(async (station) => {
+        if (station.data().role != "Admin") {
+            const clone = stationTemplate.cloneNode(true);
+            const stationFields = await doc(db, "stations", station.id);
+            const stationFieldsSnap = await getDoc(stationFields);
+            const brand = stationFieldsSnap.data().brand;
+            const number = stationFieldsSnap.data().number;
+            const address = stationFieldsSnap.data().address;
+            const email = stationFieldsSnap.data().email;
+            clone.querySelector("#brand").innerText = brand;
+            clone.querySelector("#stationNum").innerText = number;
+            clone.querySelector("#email").innerText = email;
+            clone.querySelector("#address").innerText = address;
+            clone.querySelector("button").onclick = () => {
+                document.getElementById("formTitle").innerText = brand + " #" + number;
+                document.getElementById("stationID").innerText = station.id;
+                document.getElementById("editStationAccForm").style.display = "block";
+                document.getElementById("overlay").style.display = "block";
+                document.getElementById("brandUpdate").value = brand;
+                document.getElementById("stationNumUpdate").value = number;
+                document.getElementById("stationAddressUpdate").value = address;
+                document.getElementById("stationPhoneNumUpdate").value = stationFieldsSnap.data().phone;
+                document.getElementById("emailUpdate").value = email;
+                document.getElementById("updateBtn").addEventListener("click", async ()=>{
+                    await updateDoc(doc(db,"stations",station.id),{
+                        brand: document.getElementById("brandUpdate").value,
+                        number: document.getElementById("stationNumUpdate").value,
+                        address: document.getElementById("stationAddressUpdate").value,
+                        phone: document.getElementById("stationPhoneNumUpdate").value,
+                        email: document.getElementById("emailUpdate").value
+        
+                    });
+                    document.getElementById("updateSucessAlert").style.display = "block";
+                    setTimeout(()=>{
+                        document.getElementById("updateSucessAlert").style.display = "none";
+                    },1500);
                 });
-                document.getElementById("updateSucessAlert").style.display = "block";
-                setTimeout(()=>{
-                    document.getElementById("updateSucessAlert").style.display = "none";
-                },1500);
-            });
+            }
+            stationContainer.appendChild(clone);
         }
-        stationContainer.appendChild(clone);
-    }
+    });
 });
