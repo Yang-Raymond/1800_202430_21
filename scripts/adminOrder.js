@@ -1,7 +1,7 @@
 import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { firebaseConfig } from "./firebaseAPI.js";
-import { getFirestore, collection, getDocs, doc, getDoc, updateDoc, setDoc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, getDoc, updateDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -80,7 +80,7 @@ async function getOrders(filter) {
         const number = stationFieldsSnap.data().number;
         const address = stationFieldsSnap.data().address;
         const phone = stationFieldsSnap.data().phone;
-        const q = query(collection(db, "stations", station.id, "loads"));
+        const q = query(collection(db, "stations", station.id, "loads"),orderBy("deliveryWindowFrom"));
         onSnapshot(q, (querySnapshot) => {
             orderContainer.innerHTML = "";
             querySnapshot.forEach(async (load) => {

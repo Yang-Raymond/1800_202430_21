@@ -95,8 +95,8 @@ document.getElementById("createAccBtn").addEventListener("click", () => {
 
 //Gets all stations and displays them
 const q = query(collection(db, "stations"));
-const unsubscribe = onSnapshot(q, (querySnapshot) => { 
-    stationContainer.innerHTML ="";
+onSnapshot(q, (querySnapshot) => {
+    stationContainer.innerHTML = "";
     querySnapshot.forEach(async (station) => {
         if (station.data().role != "Admin") {
             const clone = stationTemplate.cloneNode(true);
@@ -120,19 +120,19 @@ const unsubscribe = onSnapshot(q, (querySnapshot) => {
                 document.getElementById("stationAddressUpdate").value = address;
                 document.getElementById("stationPhoneNumUpdate").value = stationFieldsSnap.data().phone;
                 document.getElementById("emailUpdate").value = email;
-                document.getElementById("updateBtn").addEventListener("click", async ()=>{
-                    await updateDoc(doc(db,"stations",station.id),{
+                document.getElementById("updateBtn").addEventListener("click", async () => {
+                    await updateDoc(doc(db, "stations", station.id), {
                         brand: document.getElementById("brandUpdate").value,
                         number: document.getElementById("stationNumUpdate").value,
                         address: document.getElementById("stationAddressUpdate").value,
                         phone: document.getElementById("stationPhoneNumUpdate").value,
                         email: document.getElementById("emailUpdate").value
-        
+
                     });
                     document.getElementById("updateSucessAlert").style.display = "block";
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         document.getElementById("updateSucessAlert").style.display = "none";
-                    },1500);
+                    }, 1500);
                 });
             }
             stationContainer.appendChild(clone);
