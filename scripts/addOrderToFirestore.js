@@ -11,6 +11,22 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+/* fields 
+
+order number
+order created date
+delivery window (to and from)
+fuel types and volumes
+comments
+special request
+invoice number
+
+
+
+
+
+
+*/
 
 export async function sendData(form) {
     onAuthStateChanged(auth, async function(user) {
@@ -28,12 +44,8 @@ export async function sendData(form) {
             setDoc(currentUserLoad, {
                 comments: form.querySelector("#comments").value,
                 dateCreated: new Date(),
-                deliveryWindowFrom: new Date(form.querySelector("#dateFrom").value + "-" 
-                                            + form.querySelector("#timeFrom").value + "-"
-                                            + form.querySelector("#meridiemFrom").value    ),
-                deliveryWindowTo: new Date(form.querySelector("#dateTo").value + "-" 
-                                            + form.querySelector("#timeTo").value + "-"
-                                            + form.querySelector("#meridiemTo").value    ),
+                deliveryWindowFrom: new Date(form.querySelector("#dateTimeFrom").value),
+                deliveryWindowTo: new Date(form.querySelector("#dateTimeTo").value),
                 orderNumber: orderNum,
                 price: 10000,
                 specialRequest: form.querySelector("#specialRequest").checked,
