@@ -71,17 +71,41 @@ export async function sendData(form) {
     });
 }
 
-// export function getRestrictions() {
-//     onAuthStateChanged(auth, async function(user) {
-//         return "restrictions";
-//         // Check if user is signed in:
-//         if (user) { 
-            
-//         } else {
-//             // No user is signed in.
-//             console.log ("No user is signed in");
-//         }
-        
-//     })
-// }
+export function getData() {
+    return new Promise(function(pass, reject) {
+    onAuthStateChanged(auth, async function(user) {
+        if (user) { 
+            let data = {}
+            let rawData = await getDocs(collection(db, "scampData"))
 
+            rawData.forEach(function(doc) {
+                console.log(doc.id)
+                data[`${doc.id}`] = doc.data()
+            })
+            pass(data)
+        } else {
+            reject("failed to fetch data")
+        }
+        
+    })
+})}
+
+export function getRestrictions() {
+    return new Promise(function(pass, reject) {
+        onAuthStateChanged(auth, async function(user) {
+            if (user) { 
+                let data = {}
+                let rawData = await getDocs(collection(db, "stations", user.uid, "restrictions"))
+
+                rawData.forEach(function(doc) {
+                    console.log(doc.id)
+                    data[`${doc.id}`] = doc.data()
+                })
+                pass(data)
+            
+            } else {
+                reject("user not authenticated")
+            }
+            
+        })
+    })}

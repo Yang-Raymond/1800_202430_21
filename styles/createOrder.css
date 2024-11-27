@@ -1,5 +1,8 @@
 .compartment {
+    min-width: 96px;
     max-width: 120px;
+    position: relative;
+    
 }
 
 #truckFront {
@@ -9,3 +12,17 @@
 option:disabled {
     background-color: #e9ecef;
 }
+
+.fuelTypeText  {
+    text-align: justify;
+    font-weight: bold;
+    font-size: max(min(12px, 3vw), 11px);
+    height: 40px;
+    background-color: #b5b5b58e;
+    
+}
+/*   
+.compartment [marked="true"]::after {
+    content : "<div></div>";
+    position: absolute;
+} */

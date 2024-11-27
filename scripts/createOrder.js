@@ -1,12 +1,53 @@
-import { sendData } from "./addOrderToFirestore.js";
+import { sendData, getData, getRestrictions } from "./addOrderToFirestore.js";
 import { addCalendar } from "./calendar.js";
 
-const test = [
-    "(b)()()()()(7)"
-]
+const data = await getData()
+const restrictions = await getRestrictions()
+
+console.log(data, restrictions)
+
 
 // used to set up the input fields on the create order page
 async function setUpFields(){
+
+    let trailerSelector = document.getElementById("trailer")
+
+    for (let key of Object.keys(data["trailerTypes"]).sort()) {
+        let trailerData = data["trailerTypes"][key]
+
+        let trailerOption = document.createElement("option")
+        trailerOption.setAttribute("value", key);
+        trailerOption.innerHTML = key;
+
+        if (Object.values(restrictions["trailer"]).includes(key)) {
+            trailerOption.disabled = true;
+            trailerOption.classList.add("specialRequestDisabled");
+        }
+
+        trailerSelector.appendChild(trailerOption)
+    }
+
+    trailerSelector.addEventListener("input", function() {updateLoadingPattern(this)})
+
+    let fuelSelector = document.querySelector("#compTemplate").content.querySelector(".compFuelType")
+
+    console.log(fuelSelector)
+
+    for (let key of Object.keys(data["fuelTypes"]).sort()) {
+        let fuelOption = document.createElement("option");
+        fuelOption.setAttribute("value", key)
+        fuelOption.innerHTML = key;
+
+        
+        if (Object.values(restrictions["fuel"]).includes(key)) {
+            console.log(fuelOption)
+            fuelOption.disabled = true;
+            fuelOption.classList.add("specialRequestDisabled");
+        }
+
+        fuelSelector.appendChild(fuelOption)
+    }
+
 
     let today = new Date()
     today.setDate(today.getDate() + 1)
@@ -14,8 +55,8 @@ async function setUpFields(){
     let fromCalendar = await addCalendar(document.querySelector("#dateTimeFrom"));
     let toCalendar = await addCalendar(document.querySelector("#dateTimeTo"));
 
-    fromCalendar.updateRestrictions(test)
-    toCalendar.updateRestrictions(test)
+    fromCalendar.updateRestrictions(Object.values(restrictions["time"]))
+    toCalendar.updateRestrictions(Object.values(restrictions["time"]))
 
     fromCalendar.setMin(today)
     fromCalendar.setPeriod(6)
@@ -34,48 +75,73 @@ async function setUpFields(){
         }
     })
 
+    specialRequest = document.querySelector("#specialRequest")
 
-    // document.querySelector("#dateTimeFrom").addEventListener("input", function() {setTimeToAvailibility(this)})
-
-    document.querySelector("#trailer").addEventListener("change", function() {updateLoadingPattern(this)})
+    specialRequest.addEventListener("change", function() {
+        handleSpecialRequest(this)
+    })
 
     document.querySelector("#order-form")
+    fromCalendar.active(true)
+    trailerSelector.disabled = false;
+    document.querySelector("#comments").disabled = false;
+    specialRequest.disabled = false;
+    
+
 }
 
 setUpFields()
 
 
-
-    
-// }
-
-// function setTimeToAvailibility(date, dateChosen) {
-
-// }
-
-// used to update the loading pattern when a trailer type is selected
 function updateLoadingPattern(element) {
     let loadingDiv = document.getElementById("compartments")
     loadingDiv.innerHTML = ""
     let compartment = document.getElementById("compTemplate")
     console.log(element.value, "\n", loadingDiv)
-    for (let i = 0; i < element.value; i++) {
+    for (let i = 1; i <= +data["trailerTypes"][element.value]["compartments"]; i++) {
         let currentCompartment = compartment.content.cloneNode(true);
-        currentCompartment.querySelector(".compNumber").innerHTML = element.value - i;
+        currentCompartment.querySelector(".volume").innerHTML = data["trailerTypes"][element.value]["volumes"][i - 1] + "L"
+        currentCompartment.querySelector(".compNumber").innerHTML = i;
+        currentCompartment.querySelector(".compFuelType").addEventListener("input", function() {updateCompartment(this)})
         loadingDiv.appendChild(currentCompartment);
     }
 }
 
+function updateCompartment(element) {
+
+    let optionStyle
+    
+    if (data["fuelTypes"][element.value]["marked"]) {
+        optionStyle = `background: linear-gradient(${data["fuelTypes"][element.value]["colour"]} 24%, #00ff00 25%, #00ff00 75%, ${data["fuelTypes"][element.value]["colour"]} 76%);`
+    } else {
+        optionStyle = `background: ${data["fuelTypes"][element.value]["colour"]};`
+    }
+
+    console.log(element)
+    let fuelText = element.parentNode.nextElementSibling;
+    fuelText.innerHTML = element.value
+    fuelText.setAttribute("style", optionStyle)
+}
+
 
 document.getElementById("orderFormSubmit").addEventListener("click", function() {
+    
+
+
     console.log("order-form")
     console.log(document.querySelector("#order-form"))
     sendData(document.querySelector("#order-form"))
 });
 
-async function restrictFormDetails(checked) {
-    if (!checked) {
-        
-        console.log(getRestrictions())
+
+function handleSpecialRequest(checkbox) {
+    if (checkbox.checked) {
+        document.querySelectorAll(".specialRequestDisabled").forEach(function(cur) {
+            cur.disabled = false
+        })
+    } else {
+        document.querySelectorAll(".specialRequestDisabled").forEach(function(cur) {
+            cur.disabled = true
+        })
     }
 }

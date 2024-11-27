@@ -31,76 +31,69 @@
     <nav id="navbar-placeholder">test</nav>
     
     <div class="mt-4 container">
-            <div class="row mx-0 pt-0 " id="header">
-                <h1 class=" px-0 display-5 fw-bold" id="stationNumber">Create Load</h1>
-                <hr class="mt-1" />
-            </div>
-        <form id="order-form" class="mx-0 continer-fluid row">
+        <div class="row mx-0 pt-0 " id="header">
+            <h1 class=" px-0 display-5 fw-bold" id="stationNumber">Create Load</h1>
+            <hr class="mt-1" />
+        </div>
+        <form id="order-form" class="continer-fluid">
             <!-- DATE/TIME -->
-            <div class=" container-fluid p-0 row mx-0" id="deliveryWindowDiv">
+            <div class="container-fluid row" id="deliveryWindowDiv">
                 <span class="p-0">Delivery Window:</span>
                 <div class="col-lg-6 row g-0" id="deliveryWindowFromDiv">
                     <label class="col-sm-1 my-auto pe-5" for="dateFrom">From:</label>
-                    <input id="dateTimeFrom" type="text" data-bs-placement="bottom" calendar class="form-control">
+                    <input id="dateTimeFrom" type="text" disabled data-bs-placement="bottom" calendar class="form-control">
                 </div>
                 <div class="col-lg-6 row g-0 mt-2 mt-sm-0 mt-lg-0" id="deliveryWindowToDiv">
                     <label class="col-sm-1 my-auto pe-5" for="dateTo">To:</label>
-                    <input id="dateTimeTo" type="text" calendar readonly class="form-control">
+                    <input id="dateTimeTo" type="text" disabled calendar readonly class="form-control">
                 </div>
             </div>
 
             <!-- TYPE -->
             <div class="row m-0 mt-4 mt-sm-3 p-0 mx-0" id="trailerTypeDiv">
                 <span class="p-0">Trailer Size</span>
-                <select class="col-12 form-select" id="trailer">
-                    <option value="">------------</option>
-                    <option id="3/4" value="4">3 Axle 4 Comp</option>
-                    <option id="3/5" value="5">3 Axle 5 Comp</option>
-                    <option id="6/5" value="5">6 Axle 5 Comp</option>
-                    <option id="7/6" value="6">7 Axle 6 Comp</option>
-                    <option id="8/5" value="5">8 Axle 5 Comp</option>
-                    <option id="8/6" value="6">8 Axle 6 Comp</option>
+                <select disabled class="col-12 form-select" id="trailer">
+                    <option disabled selected value="">------------</option>
                 </select>
             </div>
 
             <!-- Loading Pattern -->
             <template id="compTemplate">
-                <div class="compartment col-2">
+                <div class="compartment col-4 col-md-2">
                     <div class="border border-3 border-dark">
                         <div class="compNumber text-center">#</div>
                         <div>
-                            <select class="form-select compFuelType">
-                                <option value="">----</option>
-                                <option value="regular ethanol">Regular Ethanol</option>
-                                <option value="premium ethanol">Premium Ethanol</option>
-                                <option value="diesel">Diesel</option>
-                                <option value="marked regular ethanol">Marked Regular Ethanol</option>
-                                <option value="marked premium ethanol">Marked Premium Ethanol</option>
-                                <option value="marked diesel">Marked Diesel</option>     
+                            <select class="form-control form-control-sm compFuelType">
+                                <option value="" disabled selected>-------</option>
                             </select>
                         </div>
-                        <div>
-                            <input type="text" placeholder="volume" class="compVolume form-control">
+                        <div class="text-center fuelTypeText">
+
+                        </div>
+                        <div class="text-center volume">
+                            
                         </div>
                     </div>
                 </div>
             </template>
 
 
-            <div class="row m-0 mt-4 mt-sm-3 p-0 mx-0 justify-content-center" id="loadingPatternDiv">
-                <div id="compartments" class="row col-lg-10 g-1 compartments justify-content-center justify-content-lg-end">
-
+            <div class="row mt-4 mt-sm-3 justify-content-center" id="loadingPatternDiv">
+                <div class="col-12 d-flex justify-content-start">
+                    <div id="compartments" class="row g-1 flex-fill flex-row-reverse compartments justify-content-center justify-content-lg-start">
+                      
+                    </div>
+                    <img id="truckFront" class="col-1 d-none d-lg-inline" src="../images/truckFront.png" alt="">
                 </div>
-                <img id="truckFront" class="col-1 d-none d-lg-inline" src="../images/truckFront.png" alt="">
             </div>
 
             <!-- Comments + special request-->
             <div class="row p-0 mx-0" id="CommentsDiv">
                 <label for="comments" class="p-0">Comments:</label>
-                <textarea class="form-control" id="comments"></textarea>
+                <textarea class="form-control" disabled id="comments"></textarea>
                 
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="specialRequest">
+                    <input class="form-check-input" disabled type="checkbox" id="specialRequest">
                     <label class="form-check-label" for="specialRequest">Special Request?</label>
                 </div>
             </div>

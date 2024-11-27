@@ -17,13 +17,13 @@ function hideCalendars() {
 
 //Initalizes a calendar on an input with the calendar attribute
 export async function addCalendar(inputElement) {
-    console.log(inputElement)
+    //console.log(inputElement)
     if (inputElement.nodename = "inputElement" && inputElement.hasAttribute("calendar")) {
         inputElement.setAttribute("widget-bs-toggle", "popover" );
         inputElement.setAttribute("widget-bs-placement", "bottom");
         return await initalizeWidget(inputElement)
     } else {
-        console.log("can't assign calendar to: ", inputElement)
+        //console.log("can't assign calendar to: ", inputElement)
     }
 } 
 
@@ -557,8 +557,8 @@ async function initalizeWidget(originInput) {
 
 
 
-    console.log(content)
-    console.log(widget)
+    //console.log(content)
+    //console.log(widget)
     initalizedWidgets.push(widget)
 
     //Refreshes the associated input field to reflect the selected values
@@ -863,34 +863,34 @@ async function initalizeWidget(originInput) {
     widget.findNearestRestriction = function(date) {
         // return false;
         let restrictions = Object.values(widget.restrictions).flat()
-        console.log("find nearest", date)
+        //console.log("find nearest", date)
         let monthDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours())
         let answer = null;
         let count = 0;
 
         while (restrictions.length > 0 && answer == null) {
-            console.log("monthDay", monthDate)
+            //console.log("monthDay", monthDate)
             restrictions = restrictions.filter(cur => (cur[2].length == 0) || ((cur[2].length == 1 && date.getFullYear() < cur[2][0]) || (cur[2].length == 2 && date.getFullYear() < cur[2][1])))
-            console.log(restrictions)
+            //console.log(restrictions)
             let curYearRestrictions = restrictions.filter(cur => (handleRestrictionPart(monthDate.getFullYear(), cur[2], "b")))
             curYearRestrictions.every(function(cur) {
-                console.log(cur, monthDate.getMonth())
+                //console.log(cur, monthDate.getMonth())
                 if (handleRestrictionPart(monthDate.getMonth() + 1, cur[3], "b")) {
 
                     let dayDate = new Date(monthDate.getFullYear(), monthDate.getMonth(), monthDate.getDate(), monthDate.getHours())
-                    console.log("dayDate", dayDate)
+                    //console.log("dayDate", dayDate)
                     while (dayDate.getMonth() == monthDate.getMonth()) {
-                        console.log(dayDate.getDate(), cur[4])
-                        console.log(dayDate.getDay() + 1, cur[5])
+                        //console.log(dayDate.getDate(), cur[4])
+                        //console.log(dayDate.getDay() + 1, cur[5])
                         if (handleRestrictionPart(dayDate.getDate(), cur[4], "b") 
                             && handleRestrictionPart(dayDate.getDay() + 1, cur[5], "b")) {
 
                             let timeDate = new Date(dayDate.getFullYear(), dayDate.getMonth(), dayDate.getDate(), dayDate.getHours())
-                            console.log("timeDate", timeDate)
+                            //console.log("timeDate", timeDate)
                             while (timeDate.getDate() == dayDate.getDate()) {
-                                console.log(timeDate.getHours(), cur[6])
+                                //console.log(timeDate.getHours(), cur[6])
                                 if (handleRestrictionPart(timeDate.getHours(), cur[6], cur[0])) { 
-                                    console.log("pass")
+                                    //console.log("pass")
                                     answer = timeDate
                                     return false;
                                 } else {
