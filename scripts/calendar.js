@@ -578,10 +578,44 @@ async function initalizeWidget(originInput) {
 
         widget["_element"].value = `${year}-${month}-${day} ${hour}`
 
+        let validDateCheck = new Date(widget["_element"].value)
+
+        if (validDateCheck.valueOf() && widget.checkIfRestricted(validDateCheck)) {
+            console.log("invalid")
+            console.log(widget["_element"])
+            widget["_element"].setCustomValidity("Restricted field.");
+        } else {
+            console.log("valid")
+            widget["_element"].setCustomValidity("");
+        }
+
+
         widget.onChangeFunc.forEach(function(func) {
             func(`${year}-${month}-${day} ${hour}`)
         })
         
+
+    }
+
+    widget.getValue = function() {
+        let validDateCheck = new Date(widget["_element"].value)
+        return (validDateCheck.valueOf()) ? validDateCheck : null;
+    }
+
+    widget.resetFields = function() {
+        widget["selectedValues"] = {
+            year: null,
+            month: null,
+            day: null,
+            hour: null,
+        }
+    
+        widget["currentView"] = {
+            year: null, //for year, month, and day selector
+            month: null, //for month and day selector
+            day: null, //for time selector
+        }
+        widget.refreshInput()
     }
 
     //regenerates the value and the styling for the day buttons
@@ -783,6 +817,57 @@ async function initalizeWidget(originInput) {
         }
     }
 
+    widget.checkIfRestricted = function(date) {
+        console.log("checking", date)
+        //check max
+        if ((widget.max instanceof Date && date > widget.max)
+        || (widget.min instanceof Date  && date < widget.min)) {
+                return true
+        } else {
+            //check restrictions
+            let activeHourRestrictions = widget.restrictions.hour
+            .filter(x => handleRestrictionPart(date.getFullYear(), x[2], "b"))
+            .filter(x => handleRestrictionPart(date.getMonth() + 1, x[3], "b"))
+            .filter(x => handleRestrictionPart(date.getDate(), x[4], "b"))
+            .filter(x => handleRestrictionPart(date.getDay() + 1, x[5], "b"))
+
+            let result = false;
+            activeHourRestrictions.every(function(cur) {
+                if (handleRestrictionPart(date.getHours(), cur[6], cur[0])) {
+                    result = true;
+                    return false;
+                }
+                return true;
+            })
+            if (result) return result
+        }
+
+        if (widget.period != 1) {
+            //Next day disabled code
+            if ((date.getHours() + widget.drag) > 24 && widget.checkDayRestrictions(new Date(new Date(date.getTime()).setDate(date.getDate() + 1)))) {
+                return true;
+            } else {
+                let firstRestriction = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + 1)
+                let found = false;
+                for (let q = 1; q < widget.period && found == false; q++) {
+                    let activeFirstRestrictions = widget.restrictions.hour
+                        .filter(x => handleRestrictionPart(firstRestriction.getFullYear(), x[2], "b"))
+                        .filter(x => handleRestrictionPart(firstRestriction.getMonth() + 1, x[3], "b"))
+                        .filter(x => handleRestrictionPart(firstRestriction.getDate(), x[4], "b"))
+                        .filter(x => handleRestrictionPart(firstRestriction.getDay() + 1, x[5], "b"))
+                    activeFirstRestrictions.every(function(cur) {    
+                        if (handleRestrictionPart(firstRestriction.getHours(), cur[6], cur[0])) {
+                            found = true;
+                            return false;
+                        }
+                        return true;
+                })
+                firstRestriction.setHours(firstRestriction.getHours() + 1)
+                }
+            }    
+        }
+        return false;
+    }
     
     widget.active = function(bool) {
         widget["_element"].disabled = !bool;

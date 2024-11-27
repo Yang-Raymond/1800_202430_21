@@ -28,7 +28,8 @@ invoice number
 
 */
 
-export async function sendData(form) {
+export function sendData(form) {
+    return new Promise(function(pass) {
     onAuthStateChanged(auth, async function(user) {
         // Check if user is signed in:
         if (user) {
@@ -41,16 +42,17 @@ export async function sendData(form) {
            
 
             // get the document for current user.
+            console.log(form)
             setDoc(currentUserLoad, {
                 comments: form.querySelector("#comments").value,
-                dateCreated: new Date(),
+                dateCreated: new Date(),       
                 deliveryWindowFrom: new Date(form.querySelector("#dateTimeFrom").value),
                 deliveryWindowTo: new Date(form.querySelector("#dateTimeTo").value),
                 orderNumber: orderNum,
-                price: 10000,
+                // price: 10000,
                 specialRequest: form.querySelector("#specialRequest").checked,
                 status: "pending",
-                totalVolume: 10000,
+                // totalVolume: 10000,
                 trailerType: form.querySelector("#trailer").value
             })
             
@@ -59,16 +61,17 @@ export async function sendData(form) {
                 let currentUserLoadComp = doc(db, "stations", user.uid, "loads", orderNum.toString(), "compartments", cur.querySelector(".compNumber").innerText);
                 setDoc(currentUserLoadComp, {
                     fuelType: cur.querySelector(".compFuelType").value,
-                    fuelVolume: cur.querySelector(".compVolume").value
+                    fuelVolume: cur.querySelector(".volume").innerText
                 })
             })
-
+            pass()
 
         } else {
             // No user is signed in.
             console.log ("No user is signed in");
         }
     });
+    })
 }
 
 export function getData() {

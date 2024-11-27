@@ -2,7 +2,8 @@
     min-width: 96px;
     max-width: 120px;
     position: relative;
-    
+    padding: 0;
+    margin: 0 1px;
 }
 
 #truckFront {
@@ -26,3 +27,13 @@ option:disabled {
     content : "<div></div>";
     position: absolute;
 } */
+
+#trailer:has(option:disabled:checked:not(:default)) {
+    /* background-color: #fff4f496; */
+    box-shadow: 0 0 5px red;
+}
+
+.compartment:has(option:disabled:checked:not(:default)) {
+    /* background-color: #fff4f496; */
+    box-shadow: 0 0 5px red;
+}

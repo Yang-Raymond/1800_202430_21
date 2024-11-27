@@ -3,6 +3,8 @@ import { addCalendar } from "./calendar.js";
 
 const data = await getData()
 const restrictions = await getRestrictions()
+let fromCalendar = await addCalendar(document.querySelector("#dateTimeFrom"));
+let toCalendar = await addCalendar(document.querySelector("#dateTimeTo"));
 
 console.log(data, restrictions)
 
@@ -52,9 +54,6 @@ async function setUpFields(){
     let today = new Date()
     today.setDate(today.getDate() + 1)
 
-    let fromCalendar = await addCalendar(document.querySelector("#dateTimeFrom"));
-    let toCalendar = await addCalendar(document.querySelector("#dateTimeTo"));
-
     fromCalendar.updateRestrictions(Object.values(restrictions["time"]))
     toCalendar.updateRestrictions(Object.values(restrictions["time"]))
 
@@ -100,7 +99,7 @@ function updateLoadingPattern(element) {
     console.log(element.value, "\n", loadingDiv)
     for (let i = 1; i <= +data["trailerTypes"][element.value]["compartments"]; i++) {
         let currentCompartment = compartment.content.cloneNode(true);
-        currentCompartment.querySelector(".volume").innerHTML = data["trailerTypes"][element.value]["volumes"][i - 1] + "L"
+        currentCompartment.querySelector(".volume").innerHTML = data["trailerTypes"][element.value]["volumes"][i - 1]
         currentCompartment.querySelector(".compNumber").innerHTML = i;
         currentCompartment.querySelector(".compFuelType").addEventListener("input", function() {updateCompartment(this)})
         loadingDiv.appendChild(currentCompartment);
@@ -124,15 +123,41 @@ function updateCompartment(element) {
 }
 
 
-document.getElementById("orderFormSubmit").addEventListener("click", function() {
+document.getElementById("orderFormSubmit").addEventListener("click", async function() {
     
+    console.log(document.querySelector("input:invalid, select:has(option:checked:disabled)") == null 
+    , fromCalendar.getValue() != null , toCalendar.getValue() != null)
+    if (document.querySelector("input:invalid, select:has(option:checked:disabled)") == null 
+    && fromCalendar.getValue() != null && toCalendar.getValue() != null) {
+        document.querySelector("#resultModal .modal-title").innerHTML = "Success!"
+        document.querySelector("#resultModal .modal-body p").innerHTML = "Order was successfully created"
+        await sendData(document.querySelector("#order-form"))
+        resetForm()
+        
+        
+    } else {
+        document.querySelector("#resultModal .modal-title").innerHTML = "Failure"
+        document.querySelector("#resultModal .modal-body p").innerHTML ="Required fields are blank or invalid"
+    }
 
-
-    console.log("order-form")
-    console.log(document.querySelector("#order-form"))
-    sendData(document.querySelector("#order-form"))
+    let resultModal = new bootstrap.Modal(document.getElementById('resultModal'), {keyboard:true})
+    resultModal.show()
 });
 
+
+document.getElementById("resetButton").addEventListener("click", function() {
+    resetForm()
+})
+
+function resetForm() {
+    fromCalendar.resetFields()
+    toCalendar.resetFields()
+    document.querySelector("#trailer").children[0].selected = true;
+    document.querySelector("#compartments").innerHTML = "";
+    document.querySelector("#specialRequest").checked = false;
+    handleSpecialRequest(document.querySelector("#specialRequest"))
+    document.querySelector("#comments").value = ""
+}
 
 function handleSpecialRequest(checkbox) {
     if (checkbox.checked) {

@@ -37,7 +37,7 @@
         </div>
         <form id="order-form" class="continer-fluid">
             <!-- DATE/TIME -->
-            <div class="container-fluid row" id="deliveryWindowDiv">
+            <div class="m-0 row" id="deliveryWindowDiv">
                 <span class="p-0">Delivery Window:</span>
                 <div class="col-lg-6 row g-0" id="deliveryWindowFromDiv">
                     <label class="col-sm-1 my-auto pe-5" for="dateFrom">From:</label>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-lg-6 row g-0 mt-2 mt-sm-0 mt-lg-0" id="deliveryWindowToDiv">
                     <label class="col-sm-1 my-auto pe-5" for="dateTo">To:</label>
-                    <input id="dateTimeTo" type="text" disabled calendar readonly class="form-control">
+                    <input id="dateTimeTo" type="text" disabled calendar class="form-control">
                 </div>
             </div>
 
@@ -70,8 +70,8 @@
                         <div class="text-center fuelTypeText">
 
                         </div>
-                        <div class="text-center volume">
-                            
+                        <div class="text-center">
+                            <span class="volume"></span>L
                         </div>
                     </div>
                 </div>
@@ -103,6 +103,23 @@
                 <div class="col-10 p-0 text-end"><button  type="button" id="orderFormSubmit" class="btn btn-primary">Submit</button></div> 
             </div>
 
+            <div id="resultModal" class="modal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Modal title</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
         </form>
     </div>
     <!---------------------------------------------->
