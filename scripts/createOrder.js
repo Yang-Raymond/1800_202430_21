@@ -21,6 +21,7 @@ async function setUpFields(){
         trailerOption.setAttribute("value", key);
         trailerOption.innerHTML = key;
 
+        // console.log(key, restrictions["trailer"])
         if (Object.values(restrictions["trailer"]).includes(key)) {
             trailerOption.disabled = true;
             trailerOption.classList.add("specialRequestDisabled");
@@ -74,7 +75,7 @@ async function setUpFields(){
         }
     })
 
-    specialRequest = document.querySelector("#specialRequest")
+    let specialRequest = document.querySelector("#specialRequest")
 
     specialRequest.addEventListener("change", function() {
         handleSpecialRequest(this)
@@ -118,7 +119,7 @@ function updateCompartment(element) {
 
     console.log(element)
     let fuelText = element.parentNode.nextElementSibling;
-    fuelText.innerHTML = element.value
+    fuelText.innerHTML = `<span>${element.value}</span>`
     fuelText.setAttribute("style", optionStyle)
 }
 
