@@ -14,9 +14,10 @@ let onTop = document.getElementsByClassName("ontop");
 let sidebar = document.getElementsByClassName("sidebar");
 let filter = "pending";
 
-
+//Checks if user is signed in
 onAuthStateChanged(auth, async (user) => {
     if (user) {
+
         //Logout user if logout button is clicked
         document.getElementById("logoutBtn").addEventListener("click", () => {
             signOut(auth).then(() => {
@@ -121,7 +122,6 @@ onAuthStateChanged(auth, async (user) => {
                                     onTop[0].style.display = "none";
                                     document.getElementById("overlay").style.display = "none";
                                 }, 1500);
-
                             };
                             document.getElementById("approveBtn").onclick = async () => {
                                 const statusRef = doc(db, "stations", station.id, "loads", load.id);
@@ -144,10 +144,6 @@ onAuthStateChanged(auth, async (user) => {
                             } else if (load.data().status == "rejected") {
                                 document.getElementById("productRejectedBadge").style.display = "inline-flex";
                                 document.getElementById("actionBtn").style.display = "block";
-                            } else if (load.data().status == "dispatched") {
-                                document.getElementById("productDispatchedBadge").style.display = "inline-flex";
-                            } else {
-                                document.getElementById("productCompletedBadge").style.display = "inline-flex";
                             }
                             orderNum.forEach((order) => {
                                 order.innerText = station.id + load.id;
@@ -197,6 +193,7 @@ onAuthStateChanged(auth, async (user) => {
             }
         });
 
+        //If firebase detects an update, it grabs the new data and displays it
         const mainCollection = await getDocs(collection(db, "stations"));
         mainCollection.forEach(async (station) => {
             const stationFields = await doc(db, "stations", station.id);
@@ -221,6 +218,7 @@ onAuthStateChanged(auth, async (user) => {
                         const products = await getDocs(collection(db, "stations", station.id, "loads", load.id, "compartments"));
                         dropdown.addEventListener("click", () => {
                             productContainer.innerHTML = "";
+                            
                             //Gets each product in an order and displays it
                             products.forEach((product) => {
                                 const cloneProduct = productTemplate.content.cloneNode(true);
@@ -258,12 +256,11 @@ onAuthStateChanged(auth, async (user) => {
                                     status: "rejected"
                                 });
                                 document.getElementById("errorAlert").style.display = "block";
+                                onTop[0].style.display = "none";
+                                document.getElementById("overlay").style.display = "none";
                                 setTimeout(() => {
                                     document.getElementById("errorAlert").style.display = "none";
-                                    onTop[0].style.display = "none";
-                                    document.getElementById("overlay").style.display = "none";
                                 }, 1500);
-
                             };
                             document.getElementById("approveBtn").onclick = async () => {
                                 const statusRef = doc(db, "stations", station.id, "loads", load.id);
@@ -271,10 +268,10 @@ onAuthStateChanged(auth, async (user) => {
                                     status: "approved"
                                 });
                                 document.getElementById("updateSucessAlert").style.display = "block";
+                                onTop[0].style.display = "none";
+                                document.getElementById("overlay").style.display = "none";
                                 setTimeout(() => {
                                     document.getElementById("updateSucessAlert").style.display = "none";
-                                    onTop[0].style.display = "none";
-                                    document.getElementById("overlay").style.display = "none";
                                 }, 1500);
                             };
                             if (load.data().status == "pending") {
@@ -299,8 +296,6 @@ onAuthStateChanged(auth, async (user) => {
                     }
                 });
             });
-
-
         });
     } else {
         console.log("User not signed in");
