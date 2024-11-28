@@ -22,6 +22,7 @@
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/account.css">
 
 </head>
 
@@ -32,7 +33,39 @@
     <!-- Stuff for body goes here -->
     <nav id="navbar-placeholder">test</nav>
 
-    <div class="m-4">
+    <div class="background">
+    <div class="form-container">
+      <h1>Station Name</h1>
+      <form>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required disabled>
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required disabled>
+        </div>
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Choose a username" required disabled>
+        </div>
+        <div class="input-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required disabled>
+        </div>
+        <div class="input-group">
+          <label for="billing-address">Billing Address</label>
+          <input type="text" id="billing-address" name="billing-address" placeholder="Enter your billing address" required disabled>
+        </div>
+        <div class="button-group" id="button-group">
+          <button type="button" class="btn-blue" id="change-btn" id="editInfoButton" onclick="enterEditMode()">Change Information</button>
+          <button type="button" class="btn-red" id="logout-btn" id="logoutButton">Logout</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+    <!--<div class="m-4">
         <div class="row">
             <div class="row">
                 <div><h1 class="display-5 fw-bold" id="stationNumber">Station name</h1></div>
@@ -70,7 +103,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!---------------------------------------------->
     <!------- JavaScript functions go here --------->
@@ -86,6 +119,7 @@
     <script src="../scripts/script.js"></script>
     <script src="../scripts/skeleton.js"></script>
     <script type="module" src="../scripts/account.js"></script>
+    <script src="../scripts/accountButtons.js"></script>
 
 </body>
 
