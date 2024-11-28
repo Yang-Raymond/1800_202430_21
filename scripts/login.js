@@ -28,8 +28,9 @@ loginBtn.addEventListener("click", function (event) {
             identifyAccType(user.uid);
         })
         .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorMessage);
+            document.getElementById("alert").style.display="block";
+            setTimeout(()=>{
+                document.getElementById("alert").style.display="none";
+            },2000);
         });
 });
