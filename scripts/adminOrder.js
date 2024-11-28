@@ -10,6 +10,7 @@ const orderContainer = document.getElementById("ordersContainer");
 const productTemplate = document.getElementById("productTemplate");
 const productContainer = document.getElementById("productContainer");
 let onTop = document.getElementsByClassName("ontop");
+let sidebar = document.getElementsByClassName("sidebar");
 
 //Logout user if logout button is clicked
 document.getElementById("logoutBtn").addEventListener("click", () => {
@@ -80,7 +81,7 @@ async function getOrders(filter) {
         const number = stationFieldsSnap.data().number;
         const address = stationFieldsSnap.data().address;
         const phone = stationFieldsSnap.data().phone;
-        const q = query(collection(db, "stations", station.id, "loads"),orderBy("deliveryWindowFrom"));
+        const q = query(collection(db, "stations", station.id, "loads"), orderBy("deliveryWindowFrom"));
         onSnapshot(q, (querySnapshot) => {
             orderContainer.innerHTML = "";
             querySnapshot.forEach(async (load) => {
@@ -93,11 +94,10 @@ async function getOrders(filter) {
                     clone.querySelector("#stationAddress").innerText = address;
                     clone.querySelector("#ETA").innerText = convertTimestamp(load.data().deliveryWindowFrom) + " - " + convertTimestamp(load.data().deliveryWindowTo);
                     clone.querySelector("#price").innerText = load.data().price;
-                    clone.querySelector("#" + filter + "Badge").style.display = "block";
+                    clone.querySelector("#" + filter + "Badge").style.display = "";
                     const products = await getDocs(collection(db, "stations", station.id, "loads", load.id, "compartments"));
                     dropdown.addEventListener("click", () => {
                         productContainer.innerHTML = "";
-
                         //Gets each product in an order and displays it
                         products.forEach((product) => {
                             const cloneProduct = productTemplate.content.cloneNode(true);
@@ -127,27 +127,42 @@ async function getOrders(filter) {
                         document.getElementById("subtotal").innerText = subtotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                         document.getElementById("tax").innerText = (subtotal * 0.12).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                         document.getElementById("total").innerText = (subtotal * 1.12).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
+                        
                         //Updates order status if button is pressed
                         document.getElementById("rejectBtn").addEventListener("click", async () => {
                             const statusRef = doc(db, "stations", station.id, "loads", load.id);
                             await updateDoc(statusRef, {
-                                status: "rejected",
+                                status: "rejected"
                             });
+                            document.getElementById("errorAlert").style.display = "block";
+                            setTimeout(() => {
+                                document.getElementById("errorAlert").style.display = "none";
+                                onTop[0].style.display = "none";
+                                document.getElementById("overlay").style.display = "none";
+                            }, 1500);
+                            
                         });
                         document.getElementById("approveBtn").addEventListener("click", async () => {
                             const statusRef = doc(db, "stations", station.id, "loads", load.id);
                             await updateDoc(statusRef, {
-                                status: "approved",
+                                status: "approved"
                             });
+                            document.getElementById("updateSucessAlert").style.display = "block";
+                            setTimeout(() => {
+                                document.getElementById("updateSucessAlert").style.display = "none";
+                                onTop[0].style.display = "none";
+                                document.getElementById("overlay").style.display = "none";
+                            }, 1500);
                         });
                         if (load.data().status == "pending") {
                             document.getElementById("productPendingBadge").style.display = "inline-flex";
                             document.getElementById("actionBtn").style.display = "block";
                         } else if (load.data().status == "approved") {
                             document.getElementById("productApprovedBadge").style.display = "inline-flex";
+                            document.getElementById("actionBtn").style.display = "block";
                         } else if (load.data().status == "rejected") {
                             document.getElementById("productRejectedBadge").style.display = "inline-flex";
+                            document.getElementById("actionBtn").style.display = "block";
                         } else if (load.data().status == "dispatched") {
                             document.getElementById("productDispatchedBadge").style.display = "inline-flex";
                         } else {
@@ -176,7 +191,32 @@ function convertTimestamp(timestamp) {
     return date;
 }
 
+//If close button is pressed, invoice close
 document.getElementById("closeBtn").addEventListener("click", () => {
     onTop[0].style.display = "none";
     document.getElementById("overlay").style.display = "none"
 });
+
+//If on desktop, sidebar displays. If on mobile, sidebar hides.
+window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768) {
+        sidebar[0].style.display = "block";
+    }
+    else if (window.innerWidth <= 767) {
+        sidebar[0].style.display = "none";
+    }
+});
+
+//Display sidebar if menu button is clicked on mobile.
+document.getElementById("menu").addEventListener("click", () => {
+    if (sidebar[0].style.display == "block") {
+        sidebar[0].style.display = "none";
+    } else {
+        sidebar[0].style.display = "block";
+    }
+});
+
+
+
+
+

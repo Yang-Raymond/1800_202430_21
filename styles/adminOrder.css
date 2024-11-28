@@ -1,15 +1,35 @@
-body {
-    background-color: #f8f9fa;
+@media (max-width: 767px){
+    .sidebar{
+        min-height: none;
+        display: none;
+    }
+    .margin-left {
+        margin: 0 0 0 0.7rem;
+    }
+
+    #menu{
+        display: block;
+    }
+    
 }
 
-.sidebar {
-    min-height: 100vh;
+@media (min-width: 768px){
+    .sidebar {
+        min-height: 100vh;
+    }
+    #menu {
+        display: none;
+    }
+    
+}
+
+body {
+    background-color: #f8f9fa;
 }
 
 .nav-link {
     font-weight: bold;
 }
-
 
 .table-hover tbody tr:hover {
     background-color: #f2f2f2;
@@ -23,7 +43,6 @@ body {
     padding: 0.5em 0.75em;
     font-size: 0.9rem;
     border-radius: 0.25rem;
-    margin-bottom: 25px;
 }
 
 .pagination .page-link {
@@ -64,5 +83,22 @@ body {
     border-radius: 12px;
 }
 
+.badge {
+    height: 100%;
+    margin-bottom: 100%;
+}
 
+.margin-left {
+    margin: 0 0 0 0;
+}
 
+.alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1100;
+    width: auto;
+    max-width: 90%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

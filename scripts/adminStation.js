@@ -10,6 +10,7 @@ const createStationForm = document.getElementById("createStationForm");
 const stationTemplate = document.getElementById("stationTemplate").content;
 const stationContainer = document.getElementById("stationContainer");
 const cancelBtn = document.getElementsByClassName("cancelBtn");
+let sidebar = document.getElementsByClassName("sidebar");
 
 //Logout user if logout button is clicked
 document.getElementById("logoutBtn").addEventListener("click", () => {
@@ -138,4 +139,23 @@ onSnapshot(q, (querySnapshot) => {
             stationContainer.appendChild(clone);
         }
     });
+});
+
+//If on desktop, sidebar displays. If on mobile, sidebar hides.
+window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768) {
+        sidebar[0].style.display = "block";
+    }
+    else if(window.innerWidth<=767) {
+        sidebar[0].style.display = "none";
+    }
+});
+
+//Display sidebar if menu button is clicked on mobile.
+document.getElementById("menu").addEventListener("click", () => {
+    if (sidebar[0].style.display == "block") {
+        sidebar[0].style.display = "none";
+    } else {
+        sidebar[0].style.display = "block";
+    }
 });

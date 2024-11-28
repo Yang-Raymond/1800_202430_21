@@ -24,7 +24,7 @@
       <td id="approvedBadge" style="display: none;"><span class="badge bg-success">Approved</span></td>
       <td id="dispatchedBadge" style="display: none;"><span class="badge bg-secondary">Dispatched</span></td>
       <td id="rejectedBadge" style="display: none;"><span class="badge bg-danger">Rejected</span></td>
-      <td id="completedBadge" style="display: none;"><span class="badge bg-primary">Completed</span></td>
+      <td id="completedBadge" style="display: none; "><span class="badge bg-primary">Completed</span></td>
       <td>
         <button class="btn btn-outline-none btn-sm" id="dropdown">
           <span class="material-symbols-outlined">
@@ -47,7 +47,14 @@
   <!-- Navbar-->
   <nav class="navbar bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="./adminWelcome.html">
+      <div id="menu">
+        <a>
+          <span class="material-symbols-outlined">
+            menu
+          </span>
+        </a>
+      </div>
+      <a class="navbar-brand margin-left" href="./adminWelcome.html">
         <img src="../images/ScampLogo.jpg" alt="Logo" width="40px" height="40px" class="d-inline-block align-text-top">
       </a>
       <div class="relative d-flex justify-content-end">
@@ -61,7 +68,7 @@
   <div class="container-fluid bg-light min-vh-100">
     <div class="row">
       <!-- Sidebar -->
-      <div class="col-md-3 col-lg-2 bg-primary text-white sidebar p-3 ">
+      <div class="col-md-3 col-lg-2 bg-primary text-white sidebar p-3">
         <ul class="nav flex-column mt-4">
           <li class="nav-item">
             <a href="./adminWelcome.html" class="nav-link text-white">
@@ -128,6 +135,13 @@
             <tbody id="ordersContainer" class="table-group-divider">
             </tbody>
           </table>
+        </div>
+        <!-- Alerts-->
+        <div class="alert alert-success" id="updateSucessAlert" role="alert" style="display: none;">
+          Order Approved
+        </div>
+        <div class="alert alert-danger" id="errorAlert" role="alert" style="display: none;">
+          Order Rejected
         </div>
         <!-- Order invoice-->
         <div class="card ontop">
