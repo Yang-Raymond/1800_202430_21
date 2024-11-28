@@ -1,4 +1,4 @@
-import { getAuth, signOut, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { getAuth, signOut, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { firebaseConfig } from "./firebaseAPI.js";
 import { getFirestore, collection, doc, getDoc, updateDoc, setDoc, query, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
@@ -12,6 +12,8 @@ const stationContainer = document.getElementById("stationContainer");
 const cancelBtn = document.getElementsByClassName("cancelBtn");
 let sidebar = document.getElementsByClassName("sidebar");
 
+onAuthStateChanged(auth, (user) => {
+    if(user){
 //Logout user if logout button is clicked
 document.getElementById("logoutBtn").addEventListener("click", () => {
     const auth = getAuth();
@@ -158,4 +160,10 @@ document.getElementById("menu").addEventListener("click", () => {
     } else {
         sidebar[0].style.display = "block";
     }
+});
+    }else{
+        console.log("User not logged in");
+    }
+
+    
 });
