@@ -13,7 +13,7 @@ export async function identifyAccType(accountID) {
     const docRef = doc(db, "stations", accountID);
     const docSnap = await getDoc(docRef);
     const data = docSnap.data();
-    if(data.role == "admin") {
+    if(data.role == "Admin") {
         document.location.href="../pages/adminWelcome.html"
     }
     else {

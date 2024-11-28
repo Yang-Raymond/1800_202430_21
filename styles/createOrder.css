@@ -33,7 +33,7 @@ option:disabled {
     box-shadow: 0 0 5px red;
 }
 
-.compartment:has(option:disabled:checked:not(:default)) {
+.compartment:has(option:disabled:checked:not(:default))>div {
     /* background-color: #fff4f496; */
     box-shadow: 0 0 5px red;
 }
