@@ -1,0 +1,45 @@
+#indexNavbar span{
+    color: rgb(0, 0, 0);
+}
+
+@media only screen and (max-width: 570px) {
+
+    #text {
+        font-size: 15px;
+    }
+
+    #indexNavbar {
+        justify-content: flex-start !important;
+    }
+
+    #indexNavbar li{
+        flex-basis: auto;
+        flex-grow: 0;
+    }
+    #indexNavbar img {
+        width: 100%;
+        max-width: 30px;
+    }
+}
+
+@media only screen and (min-width: 570px) {
+
+    #text {
+        font-size: 30px; 
+    }
+
+    #indexNavbar {
+        justify-content: flex-start !important;
+    }
+
+    #indexNavbar li{
+        flex-basis: auto;
+        flex-grow: 0;
+    }
+
+    #indexNavbar img {
+        height: 100%;
+        max-height: 48px;
+        padding-right: 10px;
+    }
+}
