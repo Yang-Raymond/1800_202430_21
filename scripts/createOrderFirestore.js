@@ -34,7 +34,7 @@ export function sendData(form) {
                     fuelVolume: cur.querySelector(".volume").innerText
                 })
 
-                totalVolume += cur.querySelector(".volume").innerText
+                totalVolume += +cur.querySelector(".volume").innerText
                 price += cur.querySelector(".volume").innerText * 1.42;
             })         
 

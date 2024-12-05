@@ -9,4 +9,4 @@ function loadSkeleton() {
 };
 
 loadSkeleton()
-console.log("Skeleton.js loaded")
+//console.log("Skeleton.js loaded")

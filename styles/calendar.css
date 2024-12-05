@@ -71,7 +71,7 @@
 }
 
 #dateTimeWidget .calendarDay label:has(input:disabled:checked) {
-    border: 1px solid red;
+    box-shadow: 0 0 5px red;
 }
 
 #dateTimeWidget #monthSelector option:disabled {
@@ -80,7 +80,7 @@
 
 
 #dateTimeWidget #monthSelector:has(option:disabled:checked) {
-    border: 1px solid red;
+    box-shadow: 0 0 5px red;
     background-color: rgb(200, 200, 200);
 }
 
@@ -129,7 +129,7 @@
 }
 
 #dateTimeWidget #timeSelectorDiv label:has(input:disabled:checked) {
-    border: 1px solid red;
+    box-shadow: 0 0 5px red;
     color: #0d6efd;
     background-color: rgb(200, 200, 200);
     pointer-events: none;
