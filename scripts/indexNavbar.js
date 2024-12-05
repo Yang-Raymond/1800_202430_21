@@ -1,5 +1,5 @@
 function loadindexNavbar() {
-    fetch("../text/indexNavbar.html")
+    fetch("/1800_202430_21/text/indexNavbar.html")
         .then(
             response => {return response.text()}
         )
@@ -10,3 +10,4 @@ function loadindexNavbar() {
 
 loadindexNavbar()
 console.log("indexNavbar.js loaded")
+
