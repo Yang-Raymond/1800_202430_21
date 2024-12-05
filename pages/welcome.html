@@ -16,6 +16,7 @@
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/welcome.css">
 
 </head>
 <body>
@@ -24,14 +25,20 @@
     <nav id="navbar-placeholder">Navbar didn't load</nav>
 
     <!-- Station Welcome -->
-    <div class="px-4 py-5 my-5 text-center">
-        <h1 class="display-5 fw-bold">Welcome! <small id = "stationNumber"></small></h1>
+    <div class="px-4 py-5 my-5 text-center" id="container">
+        <div class="slideshow">
+            <!-- Background images -->
+            <div class="slide" style="background-image: url('../images/ScampOffice.jpg');"></div>
+            <div class="slide" style="background-image: url('../images/Scamp-Station.jpg');"></div>
+            <div class="slide" style="background-image: url('../images/SCAMP-Trans.png');"></div>
+        </div>
+        <h1 class="display-5 fw-bold">Welcome, <small id = "stationNumber"></small></h1>
         <h3></small><small id = "stationAddress"></small></h3>
         <div class="col-lg-6 mx-auto">
-            <a  href="createOrder.html" type="button" class="btn btn-primary btn-lg px-4 gap-3">Create load here</a>
-          </div>
+            <hr>
+            <a  href="createOrder.html" type="button" class="btn btn-primary btn-lg px-4 gap-3" id="create">Create load here</a>
         </div>
-      </div>
+    </div>
     
     <!-- Boostrap Library JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
