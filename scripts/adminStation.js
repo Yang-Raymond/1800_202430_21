@@ -98,6 +98,8 @@ onAuthStateChanged(auth, (user) => {
                 toHour = "";
             }
             if (brandInput.value && stationNumInput.value && stationAddressInput.value && stationPhoneNumInput.value && emailInput.value && passwordInput.value && passwordInput.value == repeatPasswordInput.value && !isNaN(stationNumInput.value)) {
+
+                //Creates station account
                 const userCredential = await createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
                     .catch((error) => {
                         const errorCode = error.code;
@@ -274,16 +276,16 @@ onSnapshot(q, (querySnapshot) => {
     });
 });
 
+
+//If button is clicked -> something happens
 document.getElementById("back").onclick = () => {
     document.getElementById("createStationForm").style.display = "block";
     document.getElementById("createStationRestrictionForm").style.display = "none";
 }
-
 document.getElementById("nextBtn").onclick = () => {
     document.getElementById("createStationForm").style.display = "none";
     document.getElementById("createStationRestrictionForm").style.display = "block";
 }
-
 dropdownToggle[0].onclick = () => {
     if (dropdownMenu[0].style.display == "block") {
         dropdownMenu[0].style.display = "none";
@@ -294,7 +296,6 @@ dropdownToggle[0].onclick = () => {
         dropdownMenu[3].style.display = "none";
     }
 }
-
 dropdownToggle[1].onclick = () => {
     if (dropdownMenu[1].style.display == "block") {
         dropdownMenu[1].style.display = "none";
@@ -305,7 +306,6 @@ dropdownToggle[1].onclick = () => {
         dropdownMenu[3].style.display = "none";
     }
 }
-
 dropdownToggle[2].onclick = () => {
     if (dropdownMenu[2].style.display == "block") {
         dropdownMenu[2].style.display = "none";
@@ -316,7 +316,6 @@ dropdownToggle[2].onclick = () => {
         dropdownMenu[3].style.display = "none";
     }
 }
-
 dropdownToggle[3].onclick = () => {
     if (dropdownMenu[3].style.display == "block") {
         dropdownMenu[3].style.display = "none";
@@ -327,7 +326,6 @@ dropdownToggle[3].onclick = () => {
         dropdownMenu[2].style.display = "none";
     }
 }
-
 disel.onclick = () => {
     if (fuel[0] == true) {
         fuel[0] = false;
@@ -339,7 +337,6 @@ disel.onclick = () => {
         fuel[0] = true;
     }
 }
-
 markedDisel.onclick = () => {
     if (fuel[1] == true) {
         fuel[1] = false;
@@ -351,7 +348,6 @@ markedDisel.onclick = () => {
         fuel[1] = true;
     }
 }
-
 markedPremiesel.onclick = () => {
     if (fuel[2] == true) {
         fuel[2] = false;
@@ -363,7 +359,6 @@ markedPremiesel.onclick = () => {
         fuel[2] = true;
     }
 }
-
 markedRegEthanol.onclick = () => {
     if (fuel[3] == true) {
         fuel[3] = false;
@@ -375,7 +370,6 @@ markedRegEthanol.onclick = () => {
         fuel[3] = true;
     }
 }
-
 premEthanol.onclick = () => {
     if (fuel[4] == true) {
         fuel[4] = false;
@@ -387,7 +381,6 @@ premEthanol.onclick = () => {
         fuel[4] = true;
     }
 }
-
 regEthanol.onclick = () => {
     if (fuel[5] == true) {
         fuel[5] = false;
@@ -399,7 +392,6 @@ regEthanol.onclick = () => {
         fuel[5] = true;
     }
 }
-
 threeAxle4comp.onclick = () => {
     if (truck[0] == true) {
         truck[0] = false;
@@ -411,7 +403,6 @@ threeAxle4comp.onclick = () => {
         truck[0] = true;
     }
 }
-
 threeAxle5comp.onclick = () => {
     if (truck[1] == true) {
         truck[1] = false;
@@ -423,7 +414,6 @@ threeAxle5comp.onclick = () => {
         truck[1] = true;
     }
 }
-
 sixAxle5comp.onclick = () => {
     if (truck[2] == true) {
         truck[2] = false;
@@ -435,7 +425,6 @@ sixAxle5comp.onclick = () => {
         truck[2] = true;
     }
 }
-
 sevenAxle6comp.onclick = () => {
     if (truck[3] == true) {
         truck[3] = false;
@@ -447,7 +436,6 @@ sevenAxle6comp.onclick = () => {
         truck[3] = true;
     }
 }
-
 eightAxle5comp.onclick = () => {
     if (truck[4] == true) {
         truck[4] = false;
@@ -459,7 +447,6 @@ eightAxle5comp.onclick = () => {
         truck[4] = true;
     }
 }
-
 eightAxle6comp.onclick = () => {
     if (truck[5] == true) {
         truck[5] = false;
