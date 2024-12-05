@@ -60,10 +60,13 @@ body {
     0% {
         opacity: 1;
     }
+    25% {
+        opacity: 1;
+    }
     33.33% {
         opacity: 0;
     }
-    66.66% {
+    91.67% {
         opacity: 0;
     }
     100% {
