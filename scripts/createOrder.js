@@ -1,27 +1,29 @@
-import { sendData, getData, getRestrictions } from "./addOrderToFirestore.js";
+/* Handles the interactivity and visuals of the create load/order page. */
+import { sendData, getData, getRestrictions } from "./createOrderFirestore.js";
 import { addCalendar } from "./calendar.js";
 
+/* Grabs the restrictions and data. */
 const data = await getData()
 const restrictions = await getRestrictions()
+
+/* Initializes the to calendars. */
 let fromCalendar = await addCalendar(document.querySelector("#dateTimeFrom"));
 let toCalendar = await addCalendar(document.querySelector("#dateTimeTo"));
 
-console.log(data, restrictions)
-
-
-// used to set up the input fields on the create order page
+/* Sets up the fields */
 async function setUpFields(){
 
+    //Sets up the trailer selector with the data from getData()
     let trailerSelector = document.getElementById("trailer")
 
     for (let key of Object.keys(data["trailerTypes"]).sort()) {
-        let trailerData = data["trailerTypes"][key]
 
         let trailerOption = document.createElement("option")
         trailerOption.setAttribute("value", key);
-        trailerOption.innerHTML = key;
+        trailerOption.innerText = key;
 
-        // console.log(key, restrictions["trailer"])
+        // Disable restricted trailers
+        console.log(restrictions["trailer"])
         if (Object.values(restrictions["trailer"]).includes(key)) {
             trailerOption.disabled = true;
             trailerOption.classList.add("specialRequestDisabled");
@@ -32,18 +34,17 @@ async function setUpFields(){
 
     trailerSelector.addEventListener("input", function() {updateLoadingPattern(this)})
 
-    let fuelSelector = document.querySelector("#compTemplate").content.querySelector(".compFuelType")
 
-    console.log(fuelSelector)
+    // Sets up the fuel selector template with date from getData()
+    let fuelSelector = document.querySelector("#compTemplate").content.querySelector(".compFuelType")
 
     for (let key of Object.keys(data["fuelTypes"]).sort()) {
         let fuelOption = document.createElement("option");
         fuelOption.setAttribute("value", key)
         fuelOption.innerHTML = key;
 
-        
+        //Disable restricted fuels
         if (Object.values(restrictions["fuel"]).includes(key)) {
-            console.log(fuelOption)
             fuelOption.disabled = true;
             fuelOption.classList.add("specialRequestDisabled");
         }
@@ -51,48 +52,58 @@ async function setUpFields(){
         fuelSelector.appendChild(fuelOption)
     }
 
-
+    //Set up delivery window to/from
     let today = new Date()
     today.setDate(today.getDate() + 1)
 
+    //add station restrictions to each calendar
     fromCalendar.updateRestrictions(Object.values(restrictions["time"]))
-    toCalendar.updateRestrictions(Object.values(restrictions["time"]))
+    //toCalendar.updateRestrictions(Object.values(restrictions["time"]))
 
+    //set the minimum date to 24 hours in the future and set the delivery window to 6 hours
     fromCalendar.setMin(today)
     fromCalendar.setPeriod(6)
  
+    //Disable to calendar (for later)
     toCalendar.active(false)
 
+    //Enable the to calendar if the from calendar has a valid date selected
     fromCalendar.onChange(function(date) {
         if (new Date(date).valueOf()) {
-            let min = new Date(new Date(date).setHours(new Date(date).getHours() + 5))
             toCalendar.active(true)
+
+            //Set the minimum date selectable to 6 hours after the time selected
+            let min = new Date(new Date(date).setHours(new Date(date).getHours() + 6))    
             toCalendar.setMin(min)
-            console.log(toCalendar.findNearestRestriction(min))
-            toCalendar.setMax(toCalendar.findNearestRestriction(min))
+
+            //Set the macimum date selecatable to the closest restriction
+            let max = (fromCalendar.findNearestRestriction(min))
+            if (max instanceof Date) {
+                toCalendar.setMax(max)
+            }
+            
         } else {
             toCalendar.active(false)
         }
     })
 
-    let specialRequest = document.querySelector("#specialRequest")
 
+    let specialRequest = document.querySelector("#specialRequest")
     specialRequest.addEventListener("change", function() {
         handleSpecialRequest(this)
     })
 
+    //Enable all froms now that data has loaded in
     document.querySelector("#order-form")
     fromCalendar.active(true)
     trailerSelector.disabled = false;
     document.querySelector("#comments").disabled = false;
     specialRequest.disabled = false;
-    
-
 }
 
 setUpFields()
 
-
+//Handles dynamically loading in compartmnets based on the size of trailer selected
 function updateLoadingPattern(element) {
     let loadingDiv = document.getElementById("compartments")
     loadingDiv.innerHTML = ""
@@ -107,6 +118,7 @@ function updateLoadingPattern(element) {
     }
 }
 
+//Handles dynamically colouring compartments based on the fuel selected
 function updateCompartment(element) {
 
     let optionStyle
@@ -123,7 +135,7 @@ function updateCompartment(element) {
     fuelText.setAttribute("style", optionStyle)
 }
 
-
+//Sets up the submit button and input validation
 document.getElementById("orderFormSubmit").addEventListener("click", async function() {
     
     console.log(document.querySelector("input:invalid, select:has(option:checked:disabled)") == null 

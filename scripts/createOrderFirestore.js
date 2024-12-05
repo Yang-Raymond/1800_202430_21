@@ -1,61 +1,31 @@
+/* Holds all of the code involving sending/reciving data from the firebase for the create load/order page */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getFirestore, doc, collection, getDocs, setDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 import { firebaseConfig } from "./firebaseAPI.js";
 
-//--------------------------------------------
-// initialize the Firebase app
-// initialize Firestore database if using it
-//--------------------------------------------
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-/* fields 
-
-order number
-order created date
-delivery window (to and from)
-fuel types and volumes
-comments
-special request
-invoice number
-
-
-
-
-
-
-*/
-
+/*
+ * Handles uploading the form details to firebase
+ * 
+ * Takes the "#order-form" element and passes it's input fields into the firebase.
+ */
 export function sendData(form) {
+
     return new Promise(function(pass) {
     onAuthStateChanged(auth, async function(user) {
-        // Check if user is signed in:
         if (user) {
 
             let currentUserLoads = await getDocs(collection(db, "stations", user.uid, "loads"));
-            //go to the correct user document by referencing to the user uid
             let orderNum = currentUserLoads.size
 
-            let currentUserLoad = doc(db, "stations", user.uid, "loads", orderNum.toString());
-           
-
-            // get the document for current user.
-            console.log(form)
-            setDoc(currentUserLoad, {
-                comments: form.querySelector("#comments").value,
-                dateCreated: new Date(),       
-                deliveryWindowFrom: new Date(form.querySelector("#dateTimeFrom").value),
-                deliveryWindowTo: new Date(form.querySelector("#dateTimeTo").value),
-                orderNumber: orderNum,
-                // price: 10000,
-                specialRequest: form.querySelector("#specialRequest").checked,
-                status: "pending",
-                // totalVolume: 10000,
-                trailerType: form.querySelector("#trailer").value
-            })
+            let price = 0;
+            let totalVolume = 0;
             
+            //Add the compartments first (So I can grab the total price after)
             form.querySelectorAll(".compartment").forEach(function (cur) {
 
                 let currentUserLoadComp = doc(db, "stations", user.uid, "loads", orderNum.toString(), "compartments", cur.querySelector(".compNumber").innerText);
@@ -63,17 +33,36 @@ export function sendData(form) {
                     fuelType: cur.querySelector(".compFuelType").value,
                     fuelVolume: cur.querySelector(".volume").innerText
                 })
+
+                totalVolume += cur.querySelector(".volume").innerText
+                price += cur.querySelector(".volume").innerText * 1.42;
+            })         
+
+            let currentUserLoad = doc(db, "stations", user.uid, "loads", orderNum.toString());
+
+            setDoc(currentUserLoad, {
+                comments: form.querySelector("#comments").value,
+                dateCreated: new Date(),       
+                deliveryWindowFrom: new Date(form.querySelector("#dateTimeFrom").value),
+                deliveryWindowTo: new Date(form.querySelector("#dateTimeTo").value),
+                orderNumber: orderNum,
+                price: price,
+                specialRequest: form.querySelector("#specialRequest").checked,
+                status: "pending",
+                totalVolume: totalVolume,
+                trailerType: form.querySelector("#trailer").value
             })
+
             pass()
 
         } else {
-            // No user is signed in.
             console.log ("No user is signed in");
         }
     });
     })
 }
 
+//Returns a promise which resolves with the Scamp data
 export function getData() {
     return new Promise(function(pass, reject) {
     onAuthStateChanged(auth, async function(user) {
@@ -82,7 +71,6 @@ export function getData() {
             let rawData = await getDocs(collection(db, "scampData"))
 
             rawData.forEach(function(doc) {
-                console.log(doc.id)
                 data[`${doc.id}`] = doc.data()
             })
             pass(data)
@@ -93,6 +81,7 @@ export function getData() {
     })
 })}
 
+//Returns a promise which returns the logged in stations restrictions
 export function getRestrictions() {
     return new Promise(function(pass, reject) {
         onAuthStateChanged(auth, async function(user) {
@@ -101,7 +90,6 @@ export function getRestrictions() {
                 let rawData = await getDocs(collection(db, "stations", user.uid, "restrictions"))
 
                 rawData.forEach(function(doc) {
-                    console.log(doc.id)
                     data[`${doc.id}`] = doc.data()
                 })
                 pass(data)
