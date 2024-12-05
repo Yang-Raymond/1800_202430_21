@@ -70,15 +70,14 @@ onAuthStateChanged(auth, async (user) => {
                     if (load.data().status == filter) {
                         const clone = orderTemplate.content.cloneNode(true);
                         const dropdown = clone.querySelector("#dropdown");
-                        let subtotal = 0;
                         clone.querySelector("#station").innerText = brand + " #" + number;
                         clone.querySelector("#invoiceNum").innerText = station.id + load.id;
                         clone.querySelector("#stationAddress").innerText = address;
                         clone.querySelector("#ETA").innerText = convertTimestamp(load.data().deliveryWindowFrom) + " - " + convertTimestamp(load.data().deliveryWindowTo);
-                        clone.querySelector("#price").innerText = load.data().price;
                         clone.querySelector("#" + filter + "Badge").style.display = "";
                         const products = await getDocs(collection(db, "stations", station.id, "loads", load.id, "compartments"));
                         dropdown.addEventListener("click", () => {
+                            let subtotal = 0;
                             productContainer.innerHTML = "";
                             //Gets each product in an order and displays it
                             products.forEach((product) => {
@@ -208,15 +207,14 @@ onAuthStateChanged(auth, async (user) => {
                     if (load.data().status == filter) {
                         const clone = orderTemplate.content.cloneNode(true);
                         const dropdown = clone.querySelector("#dropdown");
-                        let subtotal = 0;
                         clone.querySelector("#station").innerText = brand + " #" + number;
                         clone.querySelector("#invoiceNum").innerText = station.id + load.id;
                         clone.querySelector("#stationAddress").innerText = address;
                         clone.querySelector("#ETA").innerText = convertTimestamp(load.data().deliveryWindowFrom) + " - " + convertTimestamp(load.data().deliveryWindowTo);
-                        clone.querySelector("#price").innerText = load.data().price;
                         clone.querySelector("#" + filter + "Badge").style.display = "";
                         const products = await getDocs(collection(db, "stations", station.id, "loads", load.id, "compartments"));
                         dropdown.addEventListener("click", () => {
+                            let subtotal = 0;
                             productContainer.innerHTML = "";
                             
                             //Gets each product in an order and displays it

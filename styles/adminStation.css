@@ -103,3 +103,8 @@ body {
 .nav-link {
     font-weight: bold;
 }
+
+.scrollable {
+    height: 250px;
+    overflow-y: scroll;
+}

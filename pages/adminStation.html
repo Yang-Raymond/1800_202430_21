@@ -94,6 +94,9 @@
         <div class="alert alert-success" id="updateSucessAlert" role="alert" style="display: none;">
           Station account updated!
         </div>
+        <div class="alert alert-success" id="deleteSucessAlert" role="alert" style="display: none;">
+          Station account deleted!
+        </div>
         <div class="alert alert-danger" id="errorAlert" role="alert" style="display: none;">
           Error in creating station account. Check if fields are all filled in correctly.
         </div>
@@ -139,7 +142,7 @@
               </div>
               <div class="d-flex justify-content-end gap-2">
                 <button type="button" class="btn btn-outline-secondary px-4 cancelBtn">Cancel</button>
-                <button type="button" class="btn btn-primary px-4" id="createAccBtn">Next</button>
+                <button type="button" class="btn btn-primary px-4" id="nextBtn">Next</button>
               </div>
             </form>
           </div>
@@ -153,105 +156,132 @@
           <div>
             <form>
               <div class="mb-3">
-                <label for="brandInput" class="form-label fw-semibold">Restricted gasoline type</label>
                 <div class="dropdown">
                   <button class="btn btn-outline-secondary dropdown-toggle" type="button">
-                    Dropdown button
+                    Restricted gasoline type
                   </button>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Diesel</a></li>
-                    <li><a class="dropdown-item" href="#">Marked diesel</a></li>
-                    <li><a class="dropdown-item" href="#">Marked Premium diesel</a></li>
-                    <li><a class="dropdown-item" href="#">Marked Regular Ethanol</a></li>
-                    <li><a class="dropdown-item" href="#">Premium Ethanol</a></li>
-                    <li><a class="dropdown-item" href="#">Regular Ethanol</a></li>
+                    <li><a class="dropdown-item" href="#" id="diesel">Diesel</a></li>
+                    <li><a class="dropdown-item" href="#" id="markedDisel">Marked diesel</a></li>
+                    <li><a class="dropdown-item" href="#" id="markedPremiesel">Marked premium ethanol</a></li>
+                    <li><a class="dropdown-item" href="#" id="markedRegEthanol">Marked regular ethanol</a></li>
+                    <li><a class="dropdown-item" href="#" id="premEthanol">Premium ethanol</a></li>
+                    <li><a class="dropdown-item" href="#" id="regEthanol">Regular ethanol</a></li>
                   </ul>
                 </div>
               </div>
               <div class="mb-3">
-                <label for="stationNumInput" class="form-label fw-semibold">Restricted trailer</label>
                 <div class="dropdown">
                   <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    Dropdown button
+                    Restricted trailer
                   </button>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">3 axle comp</a></li>
-                    <li><a class="dropdown-item" href="#">3 axle 5 comp</a></li>
-                    <li><a class="dropdown-item" href="#">6 axle 5 comp</a></li>
-                    <li><a class="dropdown-item" href="#">7 axle 6 comp</a></li>
-                    <li><a class="dropdown-item" href="#">8 axle 5 comp</a></li>
-                    <li><a class="dropdown-item" href="#">8 axle 6 comp</a></li>
+                    <li><a class="dropdown-item" href="#" id="3axle4comp">3 axle 4 comp</a></li>
+                    <li><a class="dropdown-item" href="#" id="3axle5comp">3 axle 5 comp</a></li>
+                    <li><a class="dropdown-item" href="#" id="6axle5comp">6 axle 5 comp</a></li>
+                    <li><a class="dropdown-item" href="#" id="7axle6comp">7 axle 6 comp</a></li>
+                    <li><a class="dropdown-item" href="#" id="8axle5comp">8 axle 5 comp</a></li>
+                    <li><a class="dropdown-item" href="#" id="8axle6comp">8 axle 6 comp</a></li>
                   </ul>
                 </div>
               </div>
-              <div class="mb-3">
-                <label for="stationNumInput" class="form-label fw-semibold">Restricted trailer</label>
-                <div class="dropdown">
-                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Dropdown button
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">3 axle comp</a></li>
-                    <li><a class="dropdown-item" href="#">3 axle 5 comp</a></li>
-                    <li><a class="dropdown-item" href="#">6 axle 5 comp</a></li>
-                    <li><a class="dropdown-item" href="#">7 axle 6 comp</a></li>
-                    <li><a class="dropdown-item" href="#">8 axle 5 comp</a></li>
-                    <li><a class="dropdown-item" href="#">8 axle 6 comp</a></li>
-                  </ul>
+              <label class="form-label fw-semibold">Time Restriction</label>
+              <div class="dropdown">
+                <button type="button" class="btn btn-outline-secondary dropdown-toggle">
+                  From
+                </button>
+                <div class="dropdown-menu">
+                  <h5 class="m-3">From</h5>
+                  <div class="m-3 scrollable">
+                    <label for="fromYear" class="form-label">Year</label>
+                    <input type="number" class="form-control" id="fromYear" placeholder="Ex. 2024" min="2024"
+                      max="2030">
+                    <label for="fromMonth" class="form-label">Month</label>
+                    <input type="number" class="form-control" id="fromMonth" placeholder="Ex. January = 1" min="1"
+                      max="12">
+                    <label for="fromDay" class="form-label">Day</label>
+                    <input type="number" class="form-control" id="fromDay" placeholder="Ex. 4" min="1" max="31">
+                    <label for="fromWeekday" class="form-label">Weekday</label>
+                    <input type="number" class="form-control" id="fromWeekday" placeholder="Ex. Sunday = 0" min="0"
+                      max="6">
+                    <label for="fromHour" class="form-label">Hour</label>
+                    <input type="number" class="form-control" id="fromHour" placeholder="Ex. 2pm = 14" min="0" max="23">
+                  </div>
+                </div>
+                <button type="button" class="btn btn-outline-secondary dropdown-toggle">
+                  To
+                </button>
+                <div class="dropdown-menu">
+                  <h5 class="m-3">To</h5>
+                  <div class="m-3 scrollable">
+                    <label for="toYear" class="form-label">Year</label>
+                    <input type="number" class="form-control" id="toYear" placeholder="Ex. 2024" min="2024"
+                      max="2030">
+                    <label for="toMonth" class="form-label">Month</label>
+                    <input type="number" class="form-control" id="toMonth" placeholder="Ex. January = 1" min="1"
+                      max="12">
+                    <label for="fromDay" class="form-label">Day</label>
+                    <input type="number" class="form-control" id="toDay" placeholder="Ex. 4" min="1" max="31">
+                    <label for="toWeekday" class="form-label">Weekday</label>
+                    <input type="number" class="form-control" id="toWeekday" placeholder="Ex. Sunday = 0" min="0"
+                      max="6">
+                    <label for="toHour" class="form-label">Hour</label>
+                    <input type="number" class="form-control" id="toHour" placeholder="Ex. 2pm = 14" min="0" max="23">
+                  </div>
                 </div>
               </div>
-              <div class="d-flex justify-content-end gap-2">
-                <button type="button" class="btn btn-outline-secondary px-4 cancelBtn">Cancel</button>
-                <button type="button" class="btn btn-primary px-4" id="">Create Account</button>
-              </div>
-            </form>
           </div>
+          <div class="d-flex justify-content-end gap-2">
+            <button type="button" class="btn btn-outline-secondary px-4" id="back">Back</button>
+            <button type="button" class="btn btn-primary px-4" id="createAccBtn">Create Account</button>
+          </div>
+          </form>
         </div>
-        <!-- Edit station account form -->
-        <div class="card shadow-lg p-4 rounded ontop" id="editStationAccForm" style="display: none; z-index: 1050;">
-          <div>
-            <h5 class="mb-4">Editing <span id="formTitle">Station Account</span></h5>
-          </div>
-          <div>
-            <form>
-              <div class="mb-3">
-                <p><span id="stationID"> StationID</span></p>
-              </div>
-              <div class="mb-3">
-                <label for="brandUpdate" class="form-label fw-semibold">Brand</label>
-                <input type="text" class="form-control form-control" placeholder="Enter station brand" id="brandUpdate">
-              </div>
-              <div class="mb-3">
-                <label for="stationNumUpdate" class="form-label fw-semibold">Station number</label>
-                <input type="text" class="form-control form-control" id="stationNumUpdate"
-                  placeholder="Enter station number">
-              </div>
-              <div class="mb-3">
-                <label for="stationAddressUpdate" class="form-label fw-semibold">Station Address</label>
-                <input type="email" class="form-control form-control" id="stationAddressUpdate"
-                  placeholder="Enter station address">
-              </div>
-              <div class="mb-3">
-                <label for="stationPhoneNumUpdate" class="form-label fw-semibold">Station phone number</label>
-                <input type="text" class="form-control form-control" id="stationPhoneNumUpdate"
-                  placeholder="Enter station phone number">
-              </div>
-              <div class="mb-3">
-                <label for="emailUpdate" class="form-label fw-semibold">Station email</label>
-                <input type="email" class="form-control form-control" id="emailUpdate"
-                  placeholder="Enter station email">
-              </div>
-              <div class="d-flex justify-content-end gap-2">
-                <button type="button" class="btn btn-outline-secondary px-4 cancelBtn">Cancel</button>
-                <button type="button" class="btn btn-primary px-4" id="updateBtn">Update</button>
-              </div>
-            </form>
-          </div>
+      </div>
+      <!-- Edit station account form -->
+      <div class="card shadow-lg p-4 rounded ontop" id="editStationAccForm" style="display: none; z-index: 1050;">
+        <div>
+          <h5 class="mb-4">Editing <span id="formTitle">Station Account</span></h5>
+        </div>
+        <div>
+          <form>
+            <div class="mb-3">
+              <p><span id="stationID"> StationID</span></p>
+            </div>
+            <div class="mb-3">
+              <label for="brandUpdate" class="form-label fw-semibold">Brand</label>
+              <input type="text" class="form-control form-control" placeholder="Enter station brand" id="brandUpdate">
+            </div>
+            <div class="mb-3">
+              <label for="stationNumUpdate" class="form-label fw-semibold">Station number</label>
+              <input type="text" class="form-control form-control" id="stationNumUpdate"
+                placeholder="Enter station number">
+            </div>
+            <div class="mb-3">
+              <label for="stationAddressUpdate" class="form-label fw-semibold">Station Address</label>
+              <input type="email" class="form-control form-control" id="stationAddressUpdate"
+                placeholder="Enter station address">
+            </div>
+            <div class="mb-3">
+              <label for="stationPhoneNumUpdate" class="form-label fw-semibold">Station phone number</label>
+              <input type="text" class="form-control form-control" id="stationPhoneNumUpdate"
+                placeholder="Enter station phone number">
+            </div>
+            <div class="mb-3">
+              <label for="emailUpdate" class="form-label fw-semibold">Station email</label>
+              <input type="email" class="form-control form-control" id="emailUpdate" placeholder="Enter station email">
+            </div>
+            <div class="d-flex justify-content-end gap-2">
+              <button type="button" class="btn btn-outline-secondary px-4 cancelBtn">Cancel</button>
+              <button type="button" class="btn btn-danger px-4" id="deleteBtn">Delete</button>
+              <button type="button" class="btn btn-primary px-4" id="updateBtn">Update</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <script type="module" src="../scripts/adminStation.js"></script>
