@@ -60,7 +60,7 @@ What we'd like to build in the future:
 * The ability to change restrictions for each station using the Admin page.
 * The ability to have an order input into Scamps dispatching program called "SAFE" once it has been approved on the Manage Orders page.
 * A filter system for the "orderHistory.html" page. We had attempted to make a calendar that only shows orders between a selected date window but removed it as it was not functional. Additionally, maybe make a way to filter orders by product types.
-* Further develop the billing process. We had planned to carry this out on the "account.html" page but stopped as the billing process is very confusing in the fuel industry in general.
+* Further develop the billing process. We had planned to carry this out on an Account page but stopped as the billing process is very confusing in the fuel industry in general.
 * Further develop the "contactUs.html" page so that there is a real-time chat with a Scamp employee. Designed for future potential dealers to get in contact with Scamp.
 	
 ## 7. Contents of Folder
@@ -68,14 +68,13 @@ Content of the project folder:
 
 ```
  Top level of project folder: 
-├── .gitignore               # Git ignore file
-├── index.html               # landing HTML file, this is what users see when you come to url - it is the Home page
+├── .gitignore               # Git ignore file.
+├── index.html               # landing HTML file, this is what users see when you come to url - it is the Home page.
 └── README.md
 
 It has the following subfolders and files:
 ├── .git                     # Folder for git repo.
 ├── images                   # Folder for all images and icons.
-    /account-icon.png        # 
     /Account.jpeg            # https://media.licdn.com/dms/image/C5622AQFauv6ChJHeLg/feedshare-shrink_800/0/1656110853375?e=2147483647&v=beta&t=cnUShwznzhlhpg4ynkE67HQ97jUVRcfOEOudC02hDqU
     /create-load-icon.png    # 
     /order-history-icon.png  # 
@@ -90,7 +89,6 @@ It has the following subfolders and files:
     /truckFront.png          # 
 ├── pages                    # Folder for each viewable page.
     /aboutUs.html            # Briefly explains our services to prevent confusion as Scamp has three other websites.
-    /account.html            # Innactive - was to show the dealer their account information and billing.
     /adminOrder.html         # Shows a list of all orders - for dispatch to review, then either approve or reject.
     /adminStation.html       # Shows a list of all stations - for dispatch to edit accounts or make new ones.
     /adminWelcome.html       # Welcome page for dispatchers - they are to select either Manage Orders or Mange Stations.
@@ -101,8 +99,6 @@ It has the following subfolders and files:
     /stationInfo.html        # Displays basic information for that particular station such as restrictions or documentation.
     /welcome.html            # Welcome page for dealers - they can navigate the navbar or select the "Create Load Here" button.
 ├── scripts                  # Folder for scripts.
-    /account.js              # Script for the "account.html" page.
-    /accountButtons.js       # Script for the "account.html" page, particularly for the buttons.
     /adminOrder.js           # Script for the "adminOrder.html" page.
     /adminStation.js         # Script for the "adminStation.html" page.
     /adminWelcome.js         # Script for the "adminWelcome.html" page.
@@ -119,7 +115,6 @@ It has the following subfolders and files:
     /welcome.html            # Script for the "welcome.html" page.
 ├── styles                   # Folder for styles.
     /aboutUs.css             # Style for the "aboutUs.html" page.
-    /account.css             # Style for the "account.html" page.
     /adminOrder.css          # Style for the "adminOrder.html" page.
     /adminStation.css        # Style for the "adminStation.html" page.
     /adminWelcome.css        # Style for the "adminWelcome.html" page.
