@@ -113,7 +113,6 @@ It has the following subfolders and files:
     /indexNavbar.js          #
     /login.js                #
     /orderHistory.js         #
-    /script.js               #
     /skeleton.js             #
     /stationInfo.js          #
     /userVerification.js     #
