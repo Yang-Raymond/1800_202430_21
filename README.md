@@ -75,19 +75,19 @@ Content of the project folder:
 It has the following subfolders and files:
 ├── .git                     # Folder for git repo.
 ├── images                   # Folder for all images and icons.
-    /account-icon.png        # Acknowledge source
-    /Account.jpeg            #
-    /create-load-icon.png    #
-    /order-history-icon.png  #
-    /SCAMP-Mech.jpg          #
-    /Scamp-Station.jpg       #
-    /SCAMP-Tech-3.jpg        #
-    /SCAMP-Trans.png         #
-    /ScampLogo.jpg           #
-    /ScampOffice.jpg         #
-    /ScampTruck.jpg          #
-    /station-info-icon.png   #
-    /truckFront.png          #
+    /account-icon.png        # 
+    /Account.jpeg            # https://media.licdn.com/dms/image/C5622AQFauv6ChJHeLg/feedshare-shrink_800/0/1656110853375?e=2147483647&v=beta&t=cnUShwznzhlhpg4ynkE67HQ97jUVRcfOEOudC02hDqU
+    /create-load-icon.png    # 
+    /order-history-icon.png  # 
+    /SCAMP-Mech.jpg          # https://scamptransport.com/wp-content/uploads/2022/05/3-980x567.jpg
+    /Scamp-Station.jpg       # https://media.licdn.com/dms/image/v2/D5622AQEHUWHU_IUaSA/feedshare-shrink_800/feedshare-shrink_800/0/1730845658106?e=2147483647&v=beta&t=FKeP2qVE3Pijgzh5l-DTLFKzkxCIOjQWOHnIG0KnVoU
+    /SCAMP-Tech-3.jpg        # https://scamptransport.com/wp-content/uploads/2022/05/18-3.png
+    /SCAMP-Trans.png         # https://scamptransport.com/wp-content/uploads/2022/05/1-980x551.png
+    /ScampLogo.jpg           # https://scamptransport.com/wp-content/uploads/2022/06/cropped-scamp_transport_favicon-300x300.png
+    /ScampOffice.jpg         # https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPY3-F63zdlThNH59NoNutYNagoxm5Ov4Dew&s
+    /ScampTruck.jpg          # https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBejHY6INcJcCaWZ4hENrRMegF_3ZBzq57Pg&s
+    /station-info-icon.png   # 
+    /truckFront.png          # 
 ├── pages                    # Folder for each viewable page.
     /aboutUs.html            # Briefly explains our services to prevent confusion as Scamp has three other websites.
     /account.html            # Innactive - was to show the dealer their account information and billing.
