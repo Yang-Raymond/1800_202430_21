@@ -76,7 +76,6 @@ It has the following subfolders and files:
     /account-icon.png        # Acknowledge source
     /Account.jpeg            #
     /create-load-icon.png    #
-    /Helijet.jpg             #
     /order-history-icon.png  #
     /SCAMP-Mech.jpg          #
     /Scamp-Station.jpg       #
@@ -84,7 +83,6 @@ It has the following subfolders and files:
     /SCAMP-Trans.png         #
     /ScampLogo.jpg           #
     /ScampOffice.jpg         #
-    /ScampTablet.jpg         #
     /ScampTruck.jpg          #
     /station-info-icon.png   #
     /truckFront.png          #
