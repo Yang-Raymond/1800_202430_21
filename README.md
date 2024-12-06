@@ -59,7 +59,9 @@ Here are some known bugs:
 What we'd like to build in the future:
 * The ability to change restrictions for each station using the Admin page.
 * The ability to have an order input into Scamps dispatching program called "SAFE" once it has been approved on the Manage Orders page.
-* ...
+* A filter system for the "orderHistory.html" page. We had attempted to make a calendar that only shows orders between a selected date window but removed it as it was not functional. Additionally, maybe make a way to filter orders by product types.
+* Further develop the billing process. We had planned to carry this out on the "account.html" page but stopped as the billing process is very confusing in the fuel industry in general.
+* Further develop the "contactUs.html" page so that there is a real-time chat with a Scamp employee. Designed for future potential dealers to get in contact with Scamp.
 	
 ## 7. Contents of Folder
 Content of the project folder:
@@ -87,56 +89,51 @@ It has the following subfolders and files:
     /station-info-icon.png   #
     /truckFront.png          #
 ├── pages                    # Folder for each viewable page.
-    /aboutUs.html            # 
-    /account.html            #
-    /adminOrder.html         #
-    /adminStation.html       #
-    /adminWelcome.html       #
-    /contactUs.html          #
-    /createOrder.html        #
-    /login.html              #
-    /orderHistory.html       #
-    /stationInfo.html        #
-    /welcome.html            #
+    /aboutUs.html            # Briefly explains our services to prevent confusion as Scamp has three other websites.
+    /account.html            # Innactive - was to show the dealer their account information and billing.
+    /adminOrder.html         # Shows a list of all orders - for dispatch to review, then either approve or reject.
+    /adminStation.html       # Shows a list of all stations - for dispatch to edit accounts or make new ones.
+    /adminWelcome.html       # Welcome page for dispatchers - they are to select either Manage Orders or Mange Stations.
+    /contactUs.html          # A prompt that recieves an email with a message.
+    /createOrder.html        # Order page with multiple fields to be filled out.
+    /login.html              # Login page for both dealers and dispatchers.
+    /orderHistory.html       # Allows users to view their past orders sorted by the order's status.
+    /stationInfo.html        # Displays basic information for that particular station such as restrictions or documentation.
+    /welcome.html            # Welcome page for dealers - they can navigate the navbar or select the "Create Load Here" button.
 ├── scripts                  # Folder for scripts.
-    /account.js              #
-    /accountButtons.js       #
-    /adminOrder.js           #
-    /adminStation.js         #
-    /adminWelcome.js         #
-    /calendar.js             #
-    /createOrder.js          #
-    /createOrderFirestore.js #
-    /firebaseAPI.js          #
-    /indexNavbar.js          #
-    /login.js                #
-    /orderHistory.js         #
-    /skeleton.js             #
-    /stationInfo.js          #
-    /userVerification.js     #
-    /welcome.html            #
+    /account.js              # Script for the "account.html" page.
+    /accountButtons.js       # Script for the "account.html" page, particularly for the buttons.
+    /adminOrder.js           # Script for the "adminOrder.html" page.
+    /adminStation.js         # Script for the "adminStation.html" page.
+    /adminWelcome.js         # Script for the "adminWelcome.html" page.
+    /calendar.js             # Script for the "createOrder.html" page, particularly for the delivery window.
+    /createOrder.js          # Script for the "createOrder.html" page.
+    /createOrderFirestore.js # Script for the "createOrder.html" page, particulary for storing a submitted order.
+    /firebaseAPI.js          # Script for the firebase API.
+    /indexNavbar.js          # Script for the "indexNavbar.html" page within the "text" folder (For one of our navbars).
+    /login.js                # Script for the "login.html" page.
+    /orderHistory.js         # Script for the "orderHistory.html" page.
+    /skeleton.js             # Script for the "navbar.html" page within the "text" folder (For the other navbar).
+    /stationInfo.js          # Script for the "stationInfo.html" page.
+    /userVerification.js     # Script for the user's verification.
+    /welcome.html            # Script for the "welcome.html" page.
 ├── styles                   # Folder for styles.
-    /aboutUs.css             # 
-    /account.css             #
-    /adminOrder.css          #
-    /adminStation.css        #
-    /adminWelcome.css        #
-    /calendar.css            #
-    /contactUs.css           #
-    /createOrder.css         #
-    /indexNavbar.css         #
-    /login.css               #
-    /orderHistory.css        #
-    /stationInfo.css         #
-    /style.css               #
-    /welcome.html            #
+    /aboutUs.css             # Style for the "aboutUs.html" page.
+    /account.css             # Style for the "account.html" page.
+    /adminOrder.css          # Style for the "adminOrder.html" page.
+    /adminStation.css        # Style for the "adminStation.html" page.
+    /adminWelcome.css        # Style for the "adminWelcome.html" page.
+    /calendar.css            # Style for the "createOrder.html" page, particularly for the delivery window.
+    /contactUs.css           # Style for the "contactUs.html" page.
+    /createOrder.css         # Style for the "createOrder.html" page.
+    /indexNavbar.css         # Style for the "indexNavbar.html" page within the "text" folder (For one of our navbars and mobile layout).
+    /login.css               # Style for the "login.html" page.
+    /orderHistory.css        # Style for the "orderHistory.html" page.
+    /stationInfo.css         # Style for the "stationInfo.html" page.
+    /style.css               # Style for the "navbar.html" page within the "text" folder (For the other navbar and mobile layout).
+    /welcome.html            # Style for the "welcome.html" page.
 ├── text                     # Folder for our two navbars, along with a notes file.
     /indexNavbar.html        # Our navbar for the lading pages - all pre-login pages (index.html, aboutUs.html, contactUs.html)
     /navbar.html             # Our navbar for once a dealer has logged into their account - all post-login pages.
     /stations.html           # A notes file containing details from real Scamp dealer stations.
-
-
-
 ```
-
-
