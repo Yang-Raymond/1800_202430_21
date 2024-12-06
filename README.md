@@ -51,9 +51,12 @@ Here are the steps for a dispatcher ...
 
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
-* User can enter whatever they want.
+* On the admin page, editing and creating stations have no restrictions on inputted fields.
 * The slideshow on the Welcome page has two white flashes while switching images. Afterwards, it works perfectly.
-* ...
+* On the create load page in firefox, selecting a trailer then refreshing the page allows the user to submit an order with 0 compartments
+* On the create load page with special request selected, selecting a time for the start of the delivery window limited by period (Ex. 2am to 6am being banned for a restriction of 7am - 7pm) will not count as restricted when special request is unchecked, allowing an order with restriced delivery window be submitted
+* On the create load page, there are varrious visual bugs associated with the calendar when submitting an order, clicking special request, or changing the date on the delivery window which may highlight a value red which intuitively should not be.
+* On the create load page with special request selected, selecting a new trailer will generate compartments with restricted fuels until special request is unchecked then rechecked.
 
 ## 6. Features for Future
 What we'd like to build in the future:
@@ -66,18 +69,27 @@ What we'd like to build in the future:
 ## 7. Contents of Folder
 Content of the project folder:
 
-```
  Top level of project folder: 
 ├── .gitignore               # Git ignore file.
 ├── index.html               # landing HTML file, this is what users see when you come to url - it is the Home page.
 └── README.md
 
+Firebase hosting files: 
+├── .firebase
+	/hosting..cache
+├── .firebaserc
+├── 404.html
+├── firebase.json
+├── firestore.indexes.json
+├── firestore.rules
+├── storage.rules
+
 It has the following subfolders and files:
 ├── .git                     # Folder for git repo.
 ├── images                   # Folder for all images and icons.
     /Account.jpeg            # https://media.licdn.com/dms/image/C5622AQFauv6ChJHeLg/feedshare-shrink_800/0/1656110853375?e=2147483647&v=beta&t=cnUShwznzhlhpg4ynkE67HQ97jUVRcfOEOudC02hDqU
-    /create-load-icon.png    # 
-    /order-history-icon.png  # 
+    /create-load-icon.png    # https://icons8.com/icon/uSWplRVhqqlS/create
+    /order-history-icon.png  # https://icons8.com/icon/61752/order-history
     /SCAMP-Mech.jpg          # https://scamptransport.com/wp-content/uploads/2022/05/3-980x567.jpg
     /Scamp-Station.jpg       # https://media.licdn.com/dms/image/v2/D5622AQEHUWHU_IUaSA/feedshare-shrink_800/feedshare-shrink_800/0/1730845658106?e=2147483647&v=beta&t=FKeP2qVE3Pijgzh5l-DTLFKzkxCIOjQWOHnIG0KnVoU
     /SCAMP-Tech-3.jpg        # https://scamptransport.com/wp-content/uploads/2022/05/18-3.png
@@ -85,8 +97,9 @@ It has the following subfolders and files:
     /ScampLogo.jpg           # https://scamptransport.com/wp-content/uploads/2022/06/cropped-scamp_transport_favicon-300x300.png
     /ScampOffice.jpg         # https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPY3-F63zdlThNH59NoNutYNagoxm5Ov4Dew&s
     /ScampTruck.jpg          # https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBejHY6INcJcCaWZ4hENrRMegF_3ZBzq57Pg&s
-    /station-info-icon.png   # 
-    /truckFront.png          # 
+    /station-info-icon.png   # https://icons8.com/icon/8712/gas-station"
+    /truckFront.png          # made in ms paint
+
 ├── pages                    # Folder for each viewable page.
     /aboutUs.html            # Briefly explains our services to prevent confusion as Scamp has three other websites.
     /adminOrder.html         # Shows a list of all orders - for dispatch to review, then either approve or reject.
@@ -98,6 +111,7 @@ It has the following subfolders and files:
     /orderHistory.html       # Allows users to view their past orders sorted by the order's status.
     /stationInfo.html        # Displays basic information for that particular station such as restrictions or documentation.
     /welcome.html            # Welcome page for dealers - they can navigate the navbar or select the "Create Load Here" button.
+
 ├── scripts                  # Folder for scripts.
     /adminOrder.js           # Script for the "adminOrder.html" page.
     /adminStation.js         # Script for the "adminStation.html" page.
@@ -113,6 +127,7 @@ It has the following subfolders and files:
     /stationInfo.js          # Script for the "stationInfo.html" page.
     /userVerification.js     # Script for the user's verification.
     /welcome.html            # Script for the "welcome.html" page.
+
 ├── styles                   # Folder for styles.
     /aboutUs.css             # Style for the "aboutUs.html" page.
     /adminOrder.css          # Style for the "adminOrder.html" page.
@@ -127,6 +142,7 @@ It has the following subfolders and files:
     /stationInfo.css         # Style for the "stationInfo.html" page.
     /style.css               # Style for the "navbar.html" page within the "text" folder (For the other navbar and mobile layout).
     /welcome.html            # Style for the "welcome.html" page.
+
 ├── text                     # Folder for our two navbars, along with a notes file.
     /indexNavbar.html        # Our navbar for the lading pages - all pre-login pages (index.html, aboutUs.html, contactUs.html)
     /navbar.html             # Our navbar for once a dealer has logged into their account - all post-login pages.
