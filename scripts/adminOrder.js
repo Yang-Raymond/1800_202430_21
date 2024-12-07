@@ -163,7 +163,7 @@ onAuthStateChanged(auth, async (user) => {
             let dd = date.getDate();
             let yyyy = date.getFullYear();
 
-            date = mm + '/' + dd + '/' + yyyy;
+            date = (mm + 1) + '/' + dd + '/' + yyyy;
             return date;
         }
 
