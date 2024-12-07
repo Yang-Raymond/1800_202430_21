@@ -1,6 +1,8 @@
 body{
     height: 100vh;
     align-content: center;
+    background-color: lightskyblue;
+    color: white;
 }
 
 .button-square-200 {

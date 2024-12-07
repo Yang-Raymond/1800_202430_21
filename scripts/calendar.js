@@ -516,7 +516,9 @@ async function initalizeWidget(originInput) {
         const options = {
             sanitize: false,
             content: content,
-            html: true
+            html: true,
+            placement : 'bottom',
+            fallbackPlacements: ['bottom', 'top', 'right', 'left']
         };
 
         const widget = new bootstrap.Popover(originInput, options)
@@ -581,8 +583,6 @@ async function initalizeWidget(originInput) {
             let validDateCheck = new Date(widget["_element"].value)
 
             if (validDateCheck.valueOf() && widget.checkIfRestricted(validDateCheck)) {
-                //console.log("invalid")
-                console.log(widget["_element"])
                 widget["_element"].setCustomValidity("Restricted field.");
             } else {
                 //console.log("valid")
@@ -696,7 +696,7 @@ async function initalizeWidget(originInput) {
         widget.checkDayRestrictions = function(date) {
             //check if date is out of the min/max
             if ((widget.max instanceof Date && new Date(date.setHours(0)) > widget.max)
-            || (widget.min instanceof Date && new Date(date.setHours(23)) < widget.min)) {
+            || (widget.min instanceof Date && new Date(date.setHours(23, 59)) < widget.min)) {
                 return true;
             } else {
             let done = false;
@@ -825,10 +825,9 @@ async function initalizeWidget(originInput) {
         //(IE if period is 6 and 7am is banned, times from 1-7 are restricted
         //but this function fails to check for that)
         widget.checkIfRestricted = function(date) {
-            console.log("checking", date)
             //check max
             if ((widget.max instanceof Date && date > widget.max)
-            || (widget.min instanceof Date  && date < widget.min)) {
+            || (widget.min instanceof Date  && new Date(date).setHours(23, 59) < widget.min)) {
                     return true
             } else {
                 //check restrictions
@@ -874,6 +873,11 @@ async function initalizeWidget(originInput) {
                 }    
             }
             return false;
+        }
+
+        widget.setPage = function(year, month) {
+            widget.currentView.year = year;
+            widget.currentView.month = month;
         }
         
         //will disable/enable the input field associated with the calendar
@@ -956,7 +960,7 @@ async function initalizeWidget(originInput) {
             widget.refreshInput()
         }
 
-        //FInds the nearest future restirction to a given date (not including drag or max)
+        //Finds the nearest future restirction to a given date (not including drag or max)
         widget.findNearestRestriction = function(date) {
             // return false;
             let restrictions = Object.values(widget.restrictions).flat()
@@ -1011,6 +1015,22 @@ async function initalizeWidget(originInput) {
             }
 
             return answer;
+        }
+
+        //Removes all restrictions from the calendar
+        widget.removeRestrictions = function() {
+
+            widget["restrictions"] = {
+                year:[],
+                month:[],
+                day:[],
+                hour:[]
+            }
+
+        widget.refreshMonthRestrictions()
+        widget.refreshCalendar()
+        widget.refreshTimeSelector()
+        widget.refreshInput()
         }
 
     //Set up event listeners for each button
@@ -1106,8 +1126,12 @@ async function initalizeWidget(originInput) {
         });   
 
         //Handles opening the widget
-        widget["_element"].addEventListener('show.bs.popover', async function() {      
-            
+        widget["_element"].addEventListener('show.bs.popover', async function() {   
+            widget.refreshCalendar()  
+            widget.refreshTimeSelector() 
+            widget.refreshMonthRestrictions()
+            widget.refreshInput()
+            //console.log(widget)
         })
 
 

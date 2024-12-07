@@ -25,12 +25,17 @@ function populateUserInfo() {
                     getDoc(currentUser)
                         .then(userDoc => {
                             //get the data fields of the user
-                            let restrictionExplain = userDoc.data().restrictionExplain;
+                            let stationNum = userDoc.data().username;
+                            let stationLocation = userDoc.data().address;
 
                             //if the data fields are not empty, then write them in to the form.
                             if (stationNum != null) {
-                                document.getElementById("restrictionExplain").innerHTML = restrictionExplain;
+                                document.getElementById("stationNumber").innerHTML = stationNum;
                             }
+                            if (stationLocation != null) {
+                                document.getElementById("stationAddress").innerHTML= stationLocation;
+                            }
+ 
                         })
                 } else {
                     // No user is signed in.

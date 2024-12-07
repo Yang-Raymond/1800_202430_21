@@ -1,3 +1,4 @@
+//Loads the navbar on the station pages
 function loadSkeleton() {
     fetch("../text/navbar.html")
         .then(
@@ -9,4 +10,4 @@ function loadSkeleton() {
 };
 
 loadSkeleton()
-console.log("Skeleton.js loaded")
+//console.log("Skeleton.js loaded")

@@ -159,7 +159,7 @@ onAuthStateChanged(auth, async (user) => {
         // https://gist.github.com/christoph-codes/bf7b6ce4dd5b10e3cf4ba59b571dfdc4
         function convertTimestamp(timestamp) {
             let date = timestamp.toDate();
-            let mm = date.getMonth();
+            let mm = +date.getMonth() + 1;
             let dd = date.getDate();
             let yyyy = date.getFullYear();
 

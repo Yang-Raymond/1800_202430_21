@@ -23,7 +23,7 @@ async function setUpFields(){
         trailerOption.innerText = key;
 
         // Disable restricted trailers
-        console.log(restrictions["trailer"])
+        // console.log(restrictions["trailer"])
         if (Object.values(restrictions["trailer"]).includes(key)) {
             trailerOption.disabled = true;
             trailerOption.classList.add("specialRequestDisabled");
@@ -53,15 +53,15 @@ async function setUpFields(){
     }
 
     //Set up delivery window to/from
-    let today = new Date()
-    today.setDate(today.getDate() + 1)
+    let fromMin = new Date()
+    fromMin.setDate(fromMin.getDate() + 1)
+    fromMin.setHours(fromMin.getHours() + 1)
 
     //add station restrictions to each calendar
     fromCalendar.updateRestrictions(Object.values(restrictions["time"]))
-    //toCalendar.updateRestrictions(Object.values(restrictions["time"]))
 
     //set the minimum date to 24 hours in the future and set the delivery window to 6 hours
-    fromCalendar.setMin(today)
+    fromCalendar.setMin(fromMin)
     fromCalendar.setPeriod(6)
  
     //Disable to calendar (for later)
@@ -81,6 +81,7 @@ async function setUpFields(){
             if (max instanceof Date) {
                 toCalendar.setMax(max)
             }
+            toCalendar.setPage(new Date(date).getFullYear(), new Date(date).getMonth() +1)
             
         } else {
             toCalendar.active(false)
@@ -108,7 +109,6 @@ function updateLoadingPattern(element) {
     let loadingDiv = document.getElementById("compartments")
     loadingDiv.innerHTML = ""
     let compartment = document.getElementById("compTemplate")
-    console.log(element.value, "\n", loadingDiv)
     for (let i = 1; i <= +data["trailerTypes"][element.value]["compartments"]; i++) {
         let currentCompartment = compartment.content.cloneNode(true);
         currentCompartment.querySelector(".volume").innerHTML = data["trailerTypes"][element.value]["volumes"][i - 1]
@@ -129,7 +129,6 @@ function updateCompartment(element) {
         optionStyle = `background: ${data["fuelTypes"][element.value]["colour"]};`
     }
 
-    console.log(element)
     let fuelText = element.parentNode.nextElementSibling;
     fuelText.innerHTML = `<span>${element.value}</span>`
     fuelText.setAttribute("style", optionStyle)
@@ -174,10 +173,13 @@ function resetForm() {
 
 function handleSpecialRequest(checkbox) {
     if (checkbox.checked) {
+        fromCalendar.removeRestrictions()
+        toCalendar.setMax()
         document.querySelectorAll(".specialRequestDisabled").forEach(function(cur) {
             cur.disabled = false
         })
     } else {
+        fromCalendar.updateRestrictions(Object.values(restrictions["time"]))
         document.querySelectorAll(".specialRequestDisabled").forEach(function(cur) {
             cur.disabled = true
         })
